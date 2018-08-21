@@ -16,7 +16,6 @@
 
 // interface header
 #include "RobotPlayer.h"
-#include "ServerLink.h"
 
 // common implementation headers
 #include "BZDBCache.h"
@@ -26,9 +25,7 @@
 #include "Intersect.h"
 #include "TargetingUtils.h"
 
-
 std::vector<BzfRegion*>* RobotPlayer::obstacleList = NULL;
-ServerLink      *sendToServer = NULL;
 
 RobotPlayer::RobotPlayer(const PlayerId& _id, const char* _name,
                          ServerLink* _server,
@@ -88,7 +85,6 @@ void RobotPlayer::projectPosition(const Player *targ,const float t,float &x,floa
 // 3. jump to 1., using projected position, loop until result is stable
 void RobotPlayer::getProjectedPosition(const Player *targ, float *projpos) const
 {
-    
     double myx = getPosition()[0];
     double myy = getPosition()[1];
     double hisx = targ->getPosition()[0];
@@ -116,7 +112,7 @@ void RobotPlayer::getProjectedPosition(const Player *targ, float *projpos) const
     projpos[0] = tx;
     projpos[1] = ty;
     projpos[2] = tz;
-   
+
     // projected pos in building -> use current pos
     if (World::getWorld()->inBuilding(projpos, 0.0f, BZDBCache::tankHeight))
     {
@@ -136,15 +132,11 @@ void            RobotPlayer::doUpdate(float dt)
     const float shotRadius = BZDB.eval(StateDatabase::BZDB_SHOTRADIUS);
 
     // fire shot if any available
-      timerForShot  -= dt;
+    timerForShot  -= dt;
     if (timerForShot < 0.0f)
         timerForShot = 0.0f;
 
     if (getFiringStatus() != Ready)
-        return;
-
-    //Turn off firing for red team
-    if (getTeam() == RedTeam)
         return;
 
     bool  shoot   = false;
@@ -197,10 +189,7 @@ void            RobotPlayer::doUpdate(float dt)
                                        getPosition()[2] - p->getPosition()[2]
                                       };
                     Ray ray(relpos, dir);
-
-                    //AI Fix reduce the potential TK issue
-                    //float impact = rayAtDistanceFromOrigin(ray, 5 * BZDBCache::tankRadius);
-                    float impact = rayAtDistanceFromOrigin(ray, 1 * BZDBCache::tankRadius);
+                    float impact = rayAtDistanceFromOrigin(ray, 5 * BZDBCache::tankRadius);
                     if (impact > 0 && impact < shotRange)
                     {
                         shoot=false;
@@ -234,8 +223,9 @@ void            RobotPlayer::doUpdateMotion(float dt)
         float tankAngVel = BZDB.eval(StateDatabase::BZDB_TANKANGVEL);
         float tankSpeed = BZDBCache::tankSpeed;
 
+
         // basically a clone of Roger's evasive code
-        for (int t = 0; t <= World::getWorld()->getCurMaxPlayers(); t++)
+        for (int t=0; t <= World::getWorld()->getCurMaxPlayers(); t++)
         {
             Player *p = 0;
             if (t < World::getWorld()->getCurMaxPlayers())
@@ -262,19 +252,19 @@ void            RobotPlayer::doUpdateMotion(float dt)
                 {
                     const float *shotVel = shot->getVelocity();
                     float shotAngle = atan2f(shotVel[1], shotVel[0]);
-                    float shotUnitVec[2] = { cosf(shotAngle), sinf(shotAngle) };
+                    float shotUnitVec[2] = {cosf(shotAngle), sinf(shotAngle)};
 
-                    float trueVec[2] = { (position[0] - shotPos[0]) / dist,(position[1] - shotPos[1]) / dist };
-                    float dotProd = trueVec[0] * shotUnitVec[0] + trueVec[1] * shotUnitVec[1];
+                    float trueVec[2] = {(position[0]-shotPos[0])/dist,(position[1]-shotPos[1])/dist};
+                    float dotProd = trueVec[0]*shotUnitVec[0]+trueVec[1]*shotUnitVec[1];
 
                     if (dotProd > 0.97f)
                     {
                         float rotation;
-                        float rotation1 = (float)((shotAngle + M_PI / 2.0) - azimuth);
+                        float rotation1 = (float)((shotAngle + M_PI/2.0) - azimuth);
                         if (rotation1 < -1.0f * M_PI) rotation1 += (float)(2.0 * M_PI);
                         if (rotation1 > 1.0f * M_PI) rotation1 -= (float)(2.0 * M_PI);
 
-                        float rotation2 = (float)((shotAngle - M_PI / 2.0) - azimuth);
+                        float rotation2 = (float)((shotAngle - M_PI/2.0) - azimuth);
                         if (rotation2 < -1.0f * M_PI) rotation2 += (float)(2.0 * M_PI);
                         if (rotation2 > 1.0f * M_PI) rotation2 -= (float)(2.0 * M_PI);
 
@@ -290,312 +280,60 @@ void            RobotPlayer::doUpdateMotion(float dt)
             }
         }
 
-        // when not evading, flock with center of mass
-        RemotePlayer *tempTank = 0;
-        float myTankX = 0;
-        float myTankY = 0;
-        float tempX = 0.;
-        float tempY = 0.;
-        float tempZ = 0.;
-        float centerX = 0.;
-        float centerY = 0.;
-        float centerZ = 0.;
-        float velocityX = 0.;
-        float velocityY = 0.;
-        float velocityZ = 0.;
-        float vTempX = 0.;
-        float vTempY = 0.;
-        float vTempZ = 0.;
-        float vector[2];
-        float distanceCenter;
-        float azimuthCenter;
-        float azimuthCenterDifference;
-        bool hasEnemyFlag = false;
-        bool hasRedFlag = false;
-        bool hasGreenFlag = false;
-        bool hasFlagRun = false;
-        
-        //Assume evenly distributed teams
-        int maxPlayers = (int) (World::getWorld()->getCurMaxPlayers())/2;
-
-
-   
-        if (!evading && dt > 0.0)
+        // when we are not evading, follow the path
+        if (!evading && dt > 0.0 && pathIndex < (int)path.size())
         {
+            float distance;
+            float v[2];
+            const float* endPoint = path[pathIndex].get();
+            // find how long it will take to get to next path segment
+            v[0] = endPoint[0] - position[0];
+            v[1] = endPoint[1] - position[1];
+            distance = hypotf(v[0], v[1]);
+            float tankRadius = BZDBCache::tankRadius;
+            // smooth path a little by turning early at corners, might get us stuck, though
+            if (distance <= 2.5f * tankRadius)
+                pathIndex++;
 
-            for (int t = 0; t <= maxPlayers; t++)
+            float segmentAzimuth = atan2f(v[1], v[0]);
+            float azimuthDiff = segmentAzimuth - azimuth;
+            if (azimuthDiff > M_PI) azimuthDiff -= (float)(2.0 * M_PI);
+            else if (azimuthDiff < -M_PI) azimuthDiff += (float)(2.0 * M_PI);
+            if (fabs(azimuthDiff) > 0.01f)
             {
-
-                tempTank = World::getWorld()->getPlayer(t);
-                if (World::getWorld()->getPlayer(t) != NULL)
-                {
-                    //Does anyone have a team flag?
-                    if (World::getWorld()->getPlayer(t)->getFlag() == Flags::GreenTeam || World::getWorld()->getPlayer(t)->getFlag() == Flags::RedTeam)
-                    {
-                        //Is the team flag on same team?
-                        if (World::getWorld()->getPlayer(t)->getTeam() != World::getWorld()->getPlayer(t)->getFlag()->flagTeam)
-                        {
-                            hasEnemyFlag = true;
-
-                            if (World::getWorld()->getPlayer(t)->getFlag() != Flags::GreenTeam)
-                                hasGreenFlag = true;
-                            if (World::getWorld()->getPlayer(t)->getFlag() != Flags::RedTeam)
-                                hasRedFlag = true;
-                        }
-                        else {
-                            hasEnemyFlag = false;
-                            if (World::getWorld()->getPlayer(t)->getFlag() == Flags::GreenTeam)
-                                hasGreenFlag = false;
-                            if (World::getWorld()->getPlayer(t)->getFlag() == Flags::RedTeam)
-                                hasRedFlag = false;
-                        }
-                    }
-                }
+                // drive backward when target is behind, try to stick to last direction
+                if (drivingForward)
+                    drivingForward = fabs(azimuthDiff) < M_PI/2*0.9 ? true : false;
+                else
+                    drivingForward = fabs(azimuthDiff) < M_PI/2*0.3 ? true : false;
+                setDesiredSpeed(drivingForward ? 1.0f : -1.0f);
+                // set desired turn speed
+                if (azimuthDiff >= dt * tankAngVel)
+                    setDesiredAngVel(1.0f);
+                else if (azimuthDiff <= -dt * tankAngVel)
+                    setDesiredAngVel(-1.0f);
+                else
+                    setDesiredAngVel(azimuthDiff / dt / tankAngVel);
             }
-
-            for (int t = 0; t <= maxPlayers; t++)
-            {
-                if (World::getWorld()->getPlayer(t) != NULL)
-                {
-
-                    //Check if tanks are on the same teamf
-                    if (World::getWorld()->getPlayer(t)->getTeam() == getTeam())
-                    {
-                        //Find the center of mass
-                        tempTank = World::getWorld()->getPlayer(t);
-                        tempX += tempTank->getPosition()[0];
-                        tempY += tempTank->getPosition()[1];
-                        tempZ += tempTank->getPosition()[2];
-
-                        //Find flock velocity
-                        vTempX += tempTank->getVelocity()[0];
-                        vTempY += tempTank->getVelocity()[1];
-                        vTempZ += tempTank->getVelocity()[2];
-
-
-                    }
-                }
-            }
-            centerX = (getPosition()[0] + tempX) / maxPlayers;
-            centerY = (getPosition()[1] + tempY) / maxPlayers;
-            centerZ = (getPosition()[2] + tempZ) / maxPlayers;
-
-            velocityX = (getVelocity()[0] + vTempX) / maxPlayers;
-            velocityY = (getVelocity()[1] + vTempY) / maxPlayers;
-            velocityZ = (getVelocity()[2] + vTempZ) / maxPlayers;
-
-            tempX = 0;
-            tempY = 0;
-            tempZ = 0;
-
-            vTempX = 0;
-            vTempY = 0;
-            vTempZ = 0;
-
-            //Check tank distance from center of mass
-            float centerDistance;
-            centerDistance = sqrtf(pow((centerX - getPosition()[0]), 2) + pow((centerY - getPosition()[1]), 2));
-            float radiusTank = BZDBCache::tankRadius;
-
-          
-
-        if (!evading && (centerDistance < 1 * radiusTank))
-            {
-                //Vector towards target
-                vector[0] = getPosition()[0] - centerX;
-                vector[1] = getPosition()[1] - centerY;
-                distanceCenter = hypotf(vector[0], vector[1]);
-                azimuthCenter = atan2f(vector[0], vector[1]);
-                azimuthCenterDifference = azimuthCenter - azimuth;
-
-                //Move tank away from center
-                if (azimuthCenterDifference > M_PI) azimuthCenterDifference -= (float)(2.0 * M_PI);
-                else if (azimuthCenterDifference < -M_PI) azimuthCenterDifference += (float)(2.0 * M_PI);
-                if (fabs(azimuthCenterDifference) > 0.01f)
-                {
-                    // drive backward when target is behind, try to stick to last direction
-                    if (drivingForward)
-                        drivingForward = fabs(azimuthCenterDifference) < M_PI / 2 * 0.9 ? true : false;
-                    else
-                        drivingForward = fabs(azimuthCenterDifference) < M_PI / 2 * 0.3 ? true : false;
-                    setDesiredSpeed(drivingForward ? 1.0f : -1.0f);
-                    // set desired turn speed
-                    if (azimuthCenterDifference >= dt * tankAngVel)
-                        setDesiredAngVel(-1.0f);
-                    else if (azimuthCenterDifference <= -dt * tankAngVel)
-                        setDesiredAngVel(1.0f);
-                    else
-                        setDesiredAngVel(azimuthCenterDifference / dt / tankAngVel);
-
-                }
-            }
-            else if (!evading && centerDistance >= 2 * radiusTank && centerDistance < 3*radiusTank)
-            {
-                //Vector towards target
-                vector[0] = getPosition()[0] - centerX;
-                vector[1] = getPosition()[1] - centerY;
-                distanceCenter = hypotf(vector[0], vector[1]);
-                azimuthCenter = atan2f(vector[0], vector[1]);
-                azimuthCenterDifference = azimuthCenter - azimuth;
-                //Move tank towards center point
-                if (azimuthCenterDifference < M_PI) azimuthCenterDifference -= (float)(2.0 * M_PI);
-                else if (azimuthCenterDifference > -M_PI) azimuthCenterDifference += (float)(2.0 * M_PI);
-                if (fabs(azimuthCenterDifference) > 0.01f)
-                {
-                    // drive backward when target is behind, try to stick to last direction
-                    if (drivingForward)
-                        drivingForward = fabs(azimuthCenterDifference) < M_PI / 2 * 0.9 ? true : false;
-                    else
-                        drivingForward = fabs(azimuthCenterDifference) < M_PI / 2 * 0.3 ? true : false;
-                    setDesiredSpeed(drivingForward ? -1.0f : 1.0f);
-                    // set desired turn speed
-                    if (azimuthCenterDifference >= dt * tankAngVel)
-                        setDesiredAngVel(1.0f);
-                    else if (azimuthCenterDifference <= -dt * tankAngVel)
-                        setDesiredAngVel(-1.0f);
-                    else
-                        setDesiredAngVel(azimuthCenterDifference / dt / tankAngVel);
-                }
-            }
-            // when we are not evading, and 4x the distance from other tanks follow the path
-            //   else if (!evading && dt > 0.0 && pathIndex < (int)path.size())
-            else if (centerDistance >= 3 * radiusTank && pathIndex < (int)path.size())
-            {
-                float distance;
-                float v[2];
-                const float* endPoint = path[pathIndex].get();
-
-                int i = findEnemyFlagIndex();
-                float* targetFlagPosition = World::getWorld()->getFlag(i).position;
-                const float* targetHomeBase = World::getWorld()->getBase(this->getTeam());
-
-                //Check tank distance from flag
-                float flagDistance;
-                flagDistance = sqrtf(pow((targetFlagPosition[0] - getPosition()[0]), 2) + pow((targetFlagPosition[1] - getPosition()[1]), 2));
-
-                //Set the endpoint to be flag position unless team flag in posession
-                TeamColor tankTeam = this->getTeam();
-
-
-                if (tankTeam == RedTeam)
-                {
-                    if (hasGreenFlag)
-                    {
-                        endPoint = targetHomeBase;
-                    }
-                    else
-                    {
-                        endPoint = targetFlagPosition;
-                    }
-                }
-
-                if (tankTeam == GreenTeam)
-                {
-                    if (hasRedFlag)
-                    {
-                        endPoint = targetHomeBase;
-                    }
-                    else
-                    {
-                        endPoint = targetFlagPosition;
-                    }
-                }
-                // find how long it will take to get to next path segment
-                v[0] = endPoint[0] - position[0];
-                v[1] = endPoint[1] - position[1];
-                distance = hypotf(v[0], v[1]);
-                float tankRadius = BZDBCache::tankRadius;
-                // smooth path a little by turning early at corners, might get us stuck, though
-                if (distance <= 2.5f * tankRadius)
-                    pathIndex++;
-
-                float segmentAzimuth = atan2f(v[1], v[0]);
-                float azimuthDiff = segmentAzimuth - azimuth;
-                if (azimuthDiff > M_PI) azimuthDiff -= (float)(2.0 * M_PI);
-                else if (azimuthDiff < -M_PI) azimuthDiff += (float)(2.0 * M_PI);
-                if (fabs(azimuthDiff) > 0.01f)
-                {
-                    // drive backward when target is behind, try to stick to last direction
-                    if (drivingForward)
-                        drivingForward = fabs(azimuthDiff) < M_PI / 2 * 0.9 ? true : false;
-                    else
-                        drivingForward = fabs(azimuthDiff) < M_PI / 2 * 0.3 ? true : false;
-                    setDesiredSpeed(drivingForward ? 1.0f : -1.0f);
-                    // set desired turn speed
-                    if (azimuthDiff >= dt * tankAngVel)
-                        setDesiredAngVel(1.0f);
-                    else if (azimuthDiff <= -dt * tankAngVel)
-                        setDesiredAngVel(-1.0f);
-                    else
-                        setDesiredAngVel(azimuthDiff / dt / tankAngVel);
-                }
-              
-            }
-            
             else
             {
-                
-                
-                float distance;
-                float v[2];
-                const float* endPoint = path[pathIndex].get();
-                const float* targetHomeBase = World::getWorld()->getBase(this->getTeam());
-                int i = findEnemyFlagIndex();
-                float* targetFlagPosition = World::getWorld()->getFlag(i).position;
-
-                //Send tank home
-                if (dt > 0.1)
+                drivingForward = true;
+                // tank doesn't turn while moving forward
+                setDesiredAngVel(0.0f);
+                // find how long it will take to get to next path segment
+                if (distance <= dt * tankSpeed)
                 {
-                    endPoint = targetHomeBase;
-                    // find how long it will take to get to next path segment
-                    v[0] = endPoint[0] - position[0];
-                    v[1] = endPoint[1] - position[1];
-                    distance = hypotf(v[0], v[1]);
-                    float tankRadius = BZDBCache::tankRadius;
-                    // smooth path a little by turning early at corners, might get us stuck, though
-                    //  if (distance <= 2.5f * tankRadius)
-                    //      pathIndex++;
-
-                    float segmentAzimuth = atan2f(v[1], v[0]);
-                    float azimuthDiff = segmentAzimuth - azimuth;
-                    if (azimuthDiff > M_PI) azimuthDiff -= (float)(2.0 * M_PI);
-                    else if (azimuthDiff < -M_PI) azimuthDiff += (float)(2.0 * M_PI);
-                    if (fabs(azimuthDiff) > 0.01f)
-                    {
-                        // drive backward when target is behind, try to stick to last direction
-                        if (drivingForward)
-                            drivingForward = fabs(azimuthDiff) < M_PI / 2 * 0.9 ? true : false;
-                        else
-                            drivingForward = fabs(azimuthDiff) < M_PI / 2 * 0.3 ? true : false;
-                        setDesiredSpeed(drivingForward ? 1.0f : -1.0f);
-                        // set desired turn speed
-                        if (azimuthDiff >= dt * tankAngVel)
-                            setDesiredAngVel(1.0f);
-                        else if (azimuthDiff <= -dt * tankAngVel)
-                            setDesiredAngVel(-1.0f);
-                        else
-                            setDesiredAngVel(azimuthDiff / dt / tankAngVel);
-                    }
+                    pathIndex++;
+                    // set desired speed
+                    setDesiredSpeed(distance / dt / tankSpeed);
                 }
                 else
-                {
-                    endPoint = targetFlagPosition;
-                    drivingForward = true;
-                    // tank doesn't turn while moving forward
-                    setDesiredAngVel(0.0f);
                     setDesiredSpeed(1.0f);
-
-                }
-
-                
             }
-            
-            
         }
     }
     LocalPlayer::doUpdateMotion(dt);
 }
-
 
 void            RobotPlayer::explodeTank()
 {
@@ -620,14 +358,13 @@ float           RobotPlayer::getTargetPriority(const
     // don't target teammates or myself
     if (!this->validTeamTarget(_target))
         return 0.0f;
-  
-    
+
     // go after closest player
     // FIXME -- this is a pretty stupid heuristic
     const float worldSize = BZDBCache::worldSize;
     const float* p1 = getPosition();
     const float* p2 = _target->getPosition();
-    
+
     float basePriority = 1.0f;
     // give bonus to non-paused player
     if (!_target->isPaused())
@@ -791,37 +528,6 @@ void            RobotPlayer::findPath(RegionPriorityQueue& queue,
         }
     }
 }
-
-//Find position of Team Flag and return flag index
-int RobotPlayer::findEnemyFlagIndex()
-{
-    int maxFlags = World::getWorld()->getMaxFlags();
-    int i = 0;
-    TeamColor myTeam = getTeam();
-   // float flagPosition[3];
-    do
-    {
-
-        //Is the flag a team flag?
-        if (World::getWorld()->getFlag(i).type->flagTeam)
-        {
-            if (World::getWorld()->getFlag(i).type->flagTeam != myTeam)
-            {
-               // flagPosition[0] = World::getWorld()->getFlag(i).position[0];
-               // flagPosition[1] = World::getWorld()->getFlag(i).position[1];
-               // flagPosition[2] = World::getWorld()->getFlag(i).position[2];
-               // return flagPosition;
-                return i;
-            }
-        }
-        i++;
-    } while (i <= maxFlags);
-    //return flagPosition;
-    return i;
-   
-}
-
-
 
 
 // Local Variables: ***
