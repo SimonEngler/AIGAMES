@@ -1,0 +1,710 @@
+<!--#exec cmd="header bzflag" -->
+<ul>
+</ul><H2>NAME </H2><ul>
+
+BZFlag - a tank battle game
+
+</ul><H2>SYNOPSIS </H2><ul>
+
+<b>bzflag</b> 
+[<b>-badwords </b><i>filterfile</i>]
+[<b>-config </b><i>filename</i>]
+[<b>-configdir </b><i>directoryname</i>]
+[<b>-d | -debug</b>]
+[<b>-date </b><i>mm/dd/yyyy</i>]
+[<b>-dir | -directory </b><i>directory</i>]
+[<b>-e | -echo</b>]
+[<b>-ea | -echoAnsi</b>]
+[<b>-h | -help | --help</b>]
+[<b>-latitude </b><i>latitude</i>]
+[<b>-list </b><i>list-server-url</i>]
+[<b>-locale </b><i>locale</i>]
+[<b>-longitude </b><i>longitude</i>]
+[<b>-m | -mute</b>]
+[<b>-motd </b><i>URL</i>]
+[<b>-multisample</b>]
+[<b>-nolist</b>]
+[<b>-nomotd</b>]
+[<b>-notime</b>]
+[<b>-solo </b><i>number-of-robots</i>]
+[<b>-team </b>{<i>automatic</i> | <i>red</i> | <i>green</i> | <i>blue</i> | <i>purple</i> | <i>rogue</i>}]
+[<b>-time </b><i>hh:mm:ss</i>]
+[<b>-v | -version | --version</b>]
+[<b>-view </b>{<i>normal</i> | <i>stereo</i> | <i>stacked</i> | <i>three</i> | <i>anaglyph</i>}]
+[<b>-window  </b><i>width</i><b>x</b><i>height</i>[{<b>+</b>|<b>-</b>}x{<b>+</b>|<b>-</b>}y]]
+[<b>-zbuffer </b>{<i>on</i> | <i>off</i>}]
+[[<i>callsign</i>[<i>:password</i>]<i>@</i>]<i>server</i>[<i>:port</i>]]
+
+</ul><H2>DESCRIPTION </H2><ul>
+
+<b>BZFlag</b> 
+is a 3D multi-player tank battle game that allows users
+to play against each other in a networked environment.
+There are five teams:  red, green, blue, purple and rogue
+(rogue tanks are black).  Destroying a player on another
+team scores a win, while being destroyed or destroying a
+teammate scores a loss.  Rogues have no teammates (not even
+other rogues), so they cannot shoot teammates and they do
+not have a team score.
+
+<p>
+There are three main styles of play:  capture-the-flag,
+free-for-all, and rabbit-hunt.  In capture-the-flag, each team (except rogues)
+has a team base and each team with at least one player has a team
+flag.  The object is to capture an enemy team's flag by bringing
+it to your team's base.  This destroys every player on the captured
+team, subtracts one from that team's score, and adds one to your
+team's score.  In free-for-all, there are no team flags or team
+bases.  The object is simply to get as high a score as possible.
+In rabbit-hunt, the lead player is chosen as the target for all
+other players. When the rabbit (target) is destroyed, the live player
+with the next highest score becomes the rabbit. The object is to
+remain the rabbit for as long as possible. The rabbit is marked as
+a white tank.
+
+</ul><H2>Joining a Game </H2><ul>
+
+
+<p>
+To get quickly started, select the "Join Game" menu in the BZFlag
+client using the arrow keys on your keyboard.  Choose the "Select a
+Server" link and pick one of the servers near the top of the menu.
+This should take you back to the "Join Game" menu where you should
+then provide a callsign.  Select the "Connect".  Within a few seconds
+you should be on that server ready to play.
+
+<p>
+BZFlag includes a global registration system that allows players to
+register a callsign that defines them uniquely on the BZFlag network.
+Some servers require registration for all users, some require it to
+obtain administrative abilities.  If you attempt to use a callsign
+that is already registered, you may be denied access to a server.  See
+https://forums.bzflag.org/ for details regarding callsign registration
+and to check on available names.  Once registered, you will be able to
+provide your password in the "Join Game" menu and have it used for
+authentication.  You are encouraged to register your callsign.
+
+<p>
+There are generally public BZFlag servers running around the clock all
+around the world, available over the Internet.  Similarly, private
+servers can be set up for running local network games.  See the bzfs
+manual page (bzfs.6) for details on starting a new server, public or
+private.
+
+</ul><H2>Options </H2><ul>
+
+<p><dl compact><dt><b>-badwords</b><i> filterFile</i>
+<dd>Specify a file containing bad words to be replaced with !@#$%^&amp;*
+characters when they appear in chat.
+<dt><b>-d or -debug</b>
+<dd>Adds some diagnostic output. Can be specified multiple times to increase
+verbosity.
+<dt><b>-dir or -directory</b><i> directory</i>
+<dd>Looks for data files in <i>directory</i> first.  This defaults to a
+directory named <i>data</i> in the current directory.  If not found
+there, the game looks for data files in the current directory, then
+in the default installation location <i>@INSTALL_DATA_DIR@</i>.
+<dt><b>-config</b> 
+<dd>Specify the configuration file to load. The name is relative to the
+default configuration directory. This is usually only used by developers.
+<dt><b>-configdir</b> 
+<dd>Specify the configuration directory to use. This will be the default config
+directory used by this instance of the game. This is really only needed
+if you can not use the default directory.
+<dt><b>-date</b><i> mm/dd/yyyy</i>
+<dd>Specifies the date for positioning celestial objects.  This option is
+available only when <b>bzflag</b> is compiled with debugging enabled.
+<dt><b>-e,</b> <b>-echo</b> 
+<dd>Copies all message window output to the shell on *nux and OSX, to
+stdout.txt on windows
+<dt><b>-ea,</b> <b>-echoAnsi</b> 
+<dd>Copies all message window output like -echo preserving the ANSI
+color coding on *nix, same as -echo on windows.
+<dt><b>-h,</b> <b>-help,</b> <b>--help</b> 
+<dd>Prints a concise list of the <b>bzflag</b> command line options.
+<dt><b>-latitude</b><i> latitude</i>
+<dd>Uses <i>latitude</i> when computing celestial object positions.
+<dt><b>-list</b><i> url</i>
+<dd>Look for list servers using <i>url</i>.  A built-in url is
+used by default (the same url is the default for <b>bzfs</b>).
+If <i>url</i> is <i>default</i> then the url is reset to the built-in
+url (the url is remembered across invocations of <b>bzflag</b>).
+list servers keep a list of <b>bzfs</b> servers accessible
+from the internet and are queried when using the Find Server menu.
+<dt><b>-locale</b><i> locale</i>
+<dd>Set the locale used to display messages, menus, hud alerts, etc.
+<dt><b>-longitude </b><i>longitude</i>
+<dd>Uses <i>longitude</i> when computing celestial object positions.
+<dt><b>-m,</b> <b>-mute</b> 
+<dd>Disables sound.
+<dt><b>-motd </b><i>URL</i>
+<dd>Specify an alternate URL for the message of the day displayed when
+<b>bzflag</b> starts.  https://www.bzflag.org/motd.php is the default.
+See <b>-nomotd</b>.
+<dt><b>-multisample</b> 
+<dd>Uses a multisample buffer for rendering.  If multisampling isn't
+available then the application will terminate.
+<dt><b>-nolist</b> 
+<dd>Disables list server querying.  See <b>-list</b>.
+<dt><b>-nomotd</b> 
+<dd>Disables queries for the message of the day when <b>bzflag</b> starts.
+<dt><b>-notime</b> 
+<dd>Removes a previously set fixed time for celestial object positions.
+See <b>-time</b>.
+<dt><b>-solo</b><i> number-of-robots</i>
+<dd>When you join a game, you'll also cause <i>number-of-robots</i> robots
+to join too.  This is an experimental option and the robots are
+extremely stupid players.  Robots are added to teams at random.
+<dt><b>-team</b><i> team-name</i>
+<dd>Chooses the player's team.  If there are no team positions available
+and the team-name is set to be automatic, the player will try to
+join as an observer.
+<dt><b>-time </b><i>hh:mm:ss</i>
+<dd>Specifies the local time used for positioning celestial objects, which will
+remain fixed rather than move through the sky as the day advances.
+Use <b>-notime</b> to undo this setting.
+<dt><b>-v,</b> <b>-version,</b> <b>--version</b> 
+<dd>Prints the version number of the executable.
+<dt><b>-view </b>{<i>normal</i> | <i>stereo</i> | <i>stacked</i> | <i>three</i> | <i>anaglyph</i>}
+<dd>Chooses one of the possible display options.  <i>Normal</i> will render a single
+view to the entire screen.  <i>Stereo</i> will try to allocate a stereo
+(in-a-window) capable buffer and then draw a single view in stereo.  Your
+system must support stereo-in-a-window buffers.  <i>Three</i> will render the
+front view to the upper right quadrant of the display, a left view to the lower
+left quadrant, and a right view to the lower right quadrant.  This is intended
+for systems capable of driving multiple monitors from various areas of the
+display surface, yielding a wrap around view. <i>stacked</i> will render the two
+right eye view on the upper half of the display and the left eye on the lower
+half. <i>anaglyph</i> supports red-cyan stereo viewing glasses. Note that
+setting an unsupported view option will often lead to BZFlag not running
+successfully. To correct this, run with -view normal.
+<dt><b>-window<i></b> <b>width</i><b>x</b><i>height</i></b> 
+<dd>Runs the application in a window instead of full screen.
+Specify the width and height of the window after the option.
+<dt><b>-zbuffer</b> {<i>on</i> | <i>off</i>}
+<dd>When <i>off</i> is chosen the game will not attempt to allocate a
+depth (z) buffer and will use a different rendering technique for
+hidden surface removal.  Some systems may be capable of using a
+higher screen resolution if a depth buffer isn't allocated.
+<dt>[<i>callsign</i>[<i>:password</i>]<i>@</i>]<i>server</i>[<i>:port</i>]
+<dd>Specifies the callsign you want, and the host running the <b>bzfs</b>
+server. Multiple independent games can be run on a single network, or
+even on different ports on a single computer. Which server and port you
+choose decides which game you enter.
+The callsign and the port are optional. If you don't specify a port the
+standard server port will be used, and if you don't specify a callsign the
+callsign used for the previous game is used.  If that cannot be found
+then <b>bzflag</b> will prompt for a callsign when joining a game.
+</dl>
+</ul><H2>Controls </H2><ul>
+
+Tanks are controlled by moving the mouse within the large yellow box
+in the main view.  When the mouse is inside the small yellow box,
+the tank is motionless.  The large box is the limit of the tank's
+speed.
+
+<p>
+Shots are fired by pressing the
+<i>R</i> <i>left mouse button.</i> 
+The type of shot fired depends on what flag the tank has.  Normal
+shots last about 3.5 seconds.  Reloading also takes 3.5 seconds for
+normal shots.
+
+<p>
+Pressing the
+<i>R</i> <i>middle mouse button</i> 
+drops a flag.  Nothing will happen if the tank has no flag or is
+not allowed to drop the flag for some reason (e.g. it's a bad flag).
+Flags are picked up by driving over them.  A dropped flag gets
+tossed straight up;  it falls to the ground in about 3 seconds.
+
+<p>
+Pressing the
+<i>R</i> <i>right mouse button</i> 
+identifies the closest player centered in the view.  If your tank
+has the guided missile super-flag, this will also lock the missile
+on target.  However, the target must be carefully centered for the
+missile to lock.
+
+<p>
+When the server allows jumping or if the tank has the jumping flag,
+the
+<i>R</i> <i>Tab</i> 
+key jumps.  Tanks can jump onto buildings, however there is no
+way to shoot downward (or upward) with a regular shot.  The guided
+missile and the shock wave are two ways of destroying a tank
+on or from a building.
+
+<p>
+The current radar range can be changed by pressing the
+<i>R</i> <i>1,</i> 
+<i>R</i> <i>2,</i> 
+or
+<i>R</i> <i>3</i> 
+keys above the alphabetic keys for low, medium, and long range,
+respectively.
+The
+<i>R</i> <i>f</i> 
+key toggles the flag help display, which describes the flag
+in the tank's possession.  Displaying help does
+<b>not</b> 
+pause the game.
+
+<p>
+The
+<i>R</i> <i>Pause</i> 
+key pauses and resumes play.  When paused, the tank cannot be
+destroyed nor can its shots destroy other players.  The reload
+countdown is suspended and the radar and view are blanked when
+paused.  A paused tank has a transparent black sphere surrounding
+it.  Since a paused tank is invulnerable a player could cheat by
+pausing just before being destroyed, so there's a brief delay before
+the pause takes effect.  This delay is long enough to make pausing
+effectively useless for cheating.  Pressing
+<i>R</i> <i>Pause</i> 
+before the pause takes effect cancels the pause request.
+
+<p>
+The
+<i>R</i> <i>Delete</i> 
+key initiates a self destruct sequence. You will see a countdown that
+can be stopped by pressing
+<i>R</i> <i>Delete</i> 
+once more. Otherwise, you tank will self destruct. This can be useful if
+your tank gets stuck and there is no other tank around to shoot you.
+
+<p>
+The list of players and scores is displayed when your tank is
+paused or dead.  Pressing the
+<i>R</i> <i>s</i> 
+key toggles the score display when alive and not paused.
+
+<p>
+The
+<i>R</i> <i>b</i> 
+key toggles binoculars, which gives a close up view of distant objects.
+The
+<i>R</i> <i>9</i> 
+key toggles Otto, the automatic pilot, on and off.
+<i>R</i> <i>t</i> 
+key toggles the frame rate display and the
+<i>R</i> <i>y</i> 
+key toggle the frame time display. The time of day can be changed with the
+<i>R</i> <i>plus</i> 
+and
+<i>R</i> <i>minus</i> 
+keys, which advance and reverse the time by 5 minutes, respectively.
+The time of day in the game is initialized to the system's clock.
+In addition, the latitude and longitude are used to calculate the
+positions of celestial objects.
+
+<p>
+The
+<i>R</i> <i>Esc</i> 
+key shows the game menu.  Use the
+<i>R</i> <i>Enter</i> 
+and arrow keys to navigate the menu and the
+<i>R</i> <i>Esc</i> 
+key to return to the previous menu or hide the main menu.
+The menus allow you to start a new server, join a game, leave a game
+and enter another, change the rendering options, change the display
+resolution, change the sound volume, remap the meanings of keys, browse
+online help, and quit the game.
+
+<p>
+The display resolution is not always available for changing.  If it
+is, use the
+<i>R</i> <i>t</i> 
+key to test a selected resolution;  it will be loaded for a few
+seconds and then the previous resolution restored.  Press the
+<i>R</i> <i>Enter</i> 
+key to permanently select a new resolution. When you quit the game,
+the resolution is restored to what it was before the game started.
+
+<p>
+Options are recorded between game sessions in the .bzf/&lt;version&gt;/config.cfg file
+in the user's home directory.  This file has a simple name/value pair format.
+This file is completely rewritten by the game after each session.
+
+<p>
+You can send typed messages to other players by pressing the
+<i>R</i> <i>m</i> 
+or
+<i>R</i> <i>n</i> 
+keys.  The
+<i>R</i> <i>m</i> 
+key will send a message to your teammates only.  Rogue players cannot
+send these messages.  The
+<i>R</i> <i>n</i> 
+key will send a message to all the other players.  After pressing the
+key, just type your message and press enter or Control-D.  To cancel
+a message, you can enter a blank message or press Delete, Escape, or
+Control-C.  Be careful with the Escape key;  pressing Escape once will
+cancel the message, pressing it again will show the main menu.  Backspace
+will delete the most recently typed character.  The Tab key doesn't add
+a tab to the message but instead causes the tank to jump (as usual).
+You can also send a direct message to a single player by pressing the
+<i>R</i> <i>,</i> 
+or
+<i>R</i> <i>.</i> 
+keys. The
+<i>R</i> <i>,</i> 
+key will send your message to your 'nemesis', i.e. the last player who
+killed you or was killed by you. The
+<i>R</i> <i>.</i> 
+key will send a private message to another player. You can choose the
+recipient by using the left and right arrow keys.
+<i>R</i> <i>o</i> 
+toggles the quick-admin interface. Use the arrow keys to select a
+command, and then fill in the necessary parameters
+
+</ul><H2>Scoring </H2><ul>
+
+An individual's score is the difference between that player's wins and
+losses.  A win is scored for each enemy tank destroyed.  A loss is
+scored for each teammate destroyed and for each time the player is
+destroyed.  The score sheet displays each player's score and the number
+of wins and losses.
+
+<p>
+A team's score is calculated differently depending on the game style.
+In the capture-the-flag style, the team score is the number of enemy
+flags captured minus the number of times the team's flag was captured.
+Capturing your own flag (by taking it onto an enemy base) counts as a
+loss.  In the free-for-all style, the team score is sum of the wins of
+all the players on the team minus the sum of the losses of all the
+players on the team. In the rabbit-hunt style, scoring is similar to
+free-for-all.
+
+<p>
+The score sheet also lists the number times you have destroyed or been
+destroyed by each other player under the <i>Kills</i> heading.  This
+lets you compare your one-on-one performance against other players.
+
+</ul><H2>Teleporters </H2><ul>
+
+The server can be configured to place teleporters in the game.
+A teleporter is a tall black transparent object that instantaneously
+moves any object (tanks and shots) passing through it to some other
+teleporter.  The teleporter connections are fixed for the entire
+game.  In the capture-the-flag style the connections are always
+the same.  In the free-for-all style the connections are random and
+reversible (going back through where you come out puts you back where
+you started).
+
+<p>
+Each side of a teleporter teleports independently of the other
+side.  However, it's possible for each side to go to the other.
+This is a through-teleporter and it's almost as if it weren't there.
+It's also possible for a side to teleport to itself.  This is a
+reverse-teleporter.  Shooting at a reverse teleporter is likely
+to be self-destructive.  Shooting a laser at a reverse teleporter
+is invariably fatal.
+
+</ul><H2>Radar </H2><ul>
+
+The radar is displayed on the left side of the control panel.  It
+provides a satellite view of the game.  Buildings and the outer wall
+are light blue.  Team bases are outlined squares in the team colors.
+Teleporters are short yellow lines.  Tanks are dots the in the tank's
+team color, except for rogues which are yellow.  The size of a tank's
+dot is a rough indication of the tank's altitude: higher tanks have
+larger dots.  Flags are small crosses.  Team flags have the team color
+while super-flags are white.  Shots are small white dots (except laser
+beams which are line segments and shock waves which are circles).
+
+<p>
+The tank always appears in the center of the radar and the radar
+display rotates with the tank so that forward is always up.  There's
+a small tick mark indicating forward.  The left and right extremes
+of the current view are represented by a yellow V whose tip is at
+the center of the radar.  North is indicated by the letter N.
+
+</ul><H2>Heads Up Display </H2><ul>
+
+The heads-up-display, or HUD, has several displays.  First, there are
+two boxes in the center of the view.  As explained above, these
+delimit the ranges for the mouse.  These boxes are yellow when you
+have no flag.  Otherwise they take the color of the flag you're
+holding (white for superflags).
+
+<p>
+Above the larger box is a heading tape showing your current heading.
+North is 0, east is 90, etc.  If jumping is allowed, an altitude tape
+appears to the right of the larger box.
+
+<p>
+Small colored diamonds or arrows may appear on the heading tape.  An
+arrow pointing left means that a particular flag is to your left, an
+arrow pointing right means that the flag is to your right, and a
+diamond indicates the heading to the flag by its position on the
+heading tape.  In capture-the-flag mode a marker in your team's color
+is always present, showing you the direction to your team's flag.  A
+yellow marker shows the way to the antidote flag (when you have a bad
+flag and antidote flags are enabled).
+
+<p>
+At the top of the HUD are several text readouts.  At the very top
+on the left is your callsign and score, in your team's color.  At the
+very top on the right is the name of the flag you're holding (or nothing
+if you have no flag).  In the center at the top is your current status:
+ready, dead, sealed, zoned, or reloading. If you have a bad flag and
+shaking time is enabled and your status is ready, the status displays
+how much time is left before the bad flag is shaken.  When reloading,
+the time until you're reloaded is displayed.  A tank is sealed when it
+has the oscillation overthruster flag and any part of the tank is inside
+a building. A tank is zoned when it has the phantom zone flag and has
+passed through a teleporter.  When there's a time limit on the game,
+the time left in the game is displayed to the left of the status.
+
+</ul><H2>Flags </H2><ul>
+
+Team flags are supplied by the server in the capture-the-flag
+style game.  While at least one player is on a team, that team's
+flag is in the game.  When captured, the flag is returned to
+the team's base.  If the flag is dropped in a Bad Place, it is
+moved to a safety position.  Bad Places are:  on top of a building
+or on an enemy team base.  The flag can be dropped on a team base
+only by a player from a third team;  for example, when a blue
+player drops the red flag on the green base.
+
+<p>
+A team flag is captured when a tank takes an enemy flag onto its
+base or when a tank takes its flag onto an enemy base (even if
+there's no one playing on that team).  You must be on the ground
+to capture a flag.
+
+<p>
+The server can be configured to supply a fixed or random set of
+super-flags.  These flags are white and come in many flavors.
+However, you cannot tell what a super-flag is until it's picked
+up.  There are two broad categories of super-flags:  good and bad.
+Good super-flags may be dropped and will remain for up to 4 possessions.
+Bad super-flags are sticky -- in general, they cannot be dropped.  The
+server may provide a yellow antidote flag.  Driving over it will release
+the bad flag.  The server may also allow a timeout and/or a number of wins
+to shake the flag.  Scoring the required number of wins, surviving the
+required amount of time or being destroyed will automatically drop the flag.
+Bad flags disappear after the first possession.
+
+<p>
+Here is a brief description of each good superflag with the flag's code
+in parentheses:
+<p><dl compact><dt><b>High</b> <b>Speed</b> <b>(V)</b> 
+<dd>Boosts top speed by 50%.
+<dt><b>Quick</b> <b>Turn</b> <b>(QT)</b> 
+<dd>Boosts turn rate by 50%.
+<dt><b>Agility</b> <b>(A)</b> 
+<dd>Improves a tank's dodging capabilities.
+<dt><b>Oscillation</b> <b>Overthruster</b> <b>(OO)</b> 
+<dd>Let's the tank go through buildings.  You cannot back up in or into
+a building, nor can you shoot while inside.
+<dt><b>Rapid</b> <b>Fire</b> <b>(F)</b> 
+<dd>Increases shot speed and decreases range and reload delay.
+<dt><b>Machine</b> <b>Gun</b> <b>(MG)</b> 
+<dd>Increases shot speed and dramatically decreases range and reload delay.
+<dt><b>Guided</b> <b>Missile</b> <b>(GM)</b> 
+<dd>Shots guide themselves when locked on.  The missile can be retargeted at
+any time during its flight (with the right mouse button).  This allows
+the player some control over the missile's steering.
+<dt><b>Laser</b> <b>(L)</b> 
+<dd>Shoots a laser, with effectively infinite speed and range.  Just point
+and shoot.  The binoculars are handy for lining up distant targets.
+The downside (you knew it was coming) is that the reload time is doubled.
+<dt><b>Ricochet</b> <b>(R)</b> 
+<dd>Shots reflect off walls.  It is exceptionally easy to kill yourself with
+this flag.
+<dt><b>Super</b> <b>Bullet</b> <b>(SB)</b> 
+<dd>Shots can go through buildings (possibly destroying a tank with the
+oscillation overthruster flag) and can also destroy (phantom) zoned
+tanks.
+<dt><b>Stealth</b> <b>(ST)</b> 
+<dd>Tank becomes invisible on radar but is still visible out-the-window.
+<dt><b>Cloaking</b> <b>(CL)</b> 
+<dd>Tank becomes invisible out-the-window but is still visible on radar.
+<dt><b>Invisible</b> <b>Bullet</b> <b>(IB)</b> 
+<dd>Shots are invisible on radar (except your own).  They are visible
+out-the-window.  Sort of stealth for shots.
+<dt><b>Tiny</b> <b>(T)</b> 
+<dd>Tank becomes much smaller and harder to hit.
+<dt><b>Narrow</b> <b>(N)</b> 
+<dd>Tank becomes paper thin.  It's very hard (but not impossible) to hit
+a narrow tank from the front or back.  However, the tank is as
+long as usual so hitting it from the side has normal difficulty.
+<dt><b>Shield</b> <b>(SH)</b> 
+<dd>Getting shot while in possession of this flag simply drops the flag
+(instead of destroying the tank).  Since the flag may not disappear
+you may want to wait around for it to fall to the ground so you can
+grab it again, but, be warned, the shield flag flies for an extra
+long time (longer than the normal reload time).
+<dt><b>Steamroller</b> <b>(SR)</b> 
+<dd>Tank can destroy other tanks by driving over them (but you must get
+quite close).
+<dt><b>Shock</b> <b>Wave</b> <b>(SW)</b> 
+<dd>Tank doesn't fire shells.  Instead it sends out a shock wave in all
+directions.  Any tank caught in the wave is destroyed (including
+tanks on or in buildings).
+<dt><b>Phantom</b> <b>Zone</b> <b>(PZ)</b> 
+<dd>Driving through a teleporter phantom zones the tank.  A zoned tank
+cannot shoot, but can drive through buildings and cannot be destroyed
+except by a Super Bullet or a Shock Wave (or if the team's flag
+is captured).
+<dt><b>Genocide</b> <b>(G)</b> 
+<dd>Destroying any tank on a team destroys every player on that team.
+<dt><b>Jumping</b> <b>(JP)</b> 
+<dd>Allows the tank to jump.  You cannot steer while in the air.
+<dt><b>Identify</b> <b>(ID)</b> 
+<dd>Displays the identity of the closest flag in the vicinity.
+<dt><b>Masquerade</b> <b>(MQ)</b> 
+<dd>You tank looks like a teammate when viewed out of the window.
+Bullets, radar and targeting reveal your true identity.
+<dt><b>Burrow</b> <b>{BU}</b> 
+<dd>You tank burrows into the ground up to your muzzle, making you
+impervious to normal shots, as they sail above you. However
+your tank controls are sluggish, and anyone, no matter what flag
+they have, can crush you like.
+<dt><b>Seer</b> <b>(SE)</b> 
+<dd>See Stealthed, Cloaked and Masqueraded tanks as normal, as well as Invisible Bullets.
+<dt><b>Thief</b> <b>(TH)</b> 
+<dd>Tank is small and fast, when you shoot an opponent, he is not killed,
+but instead, you steal his flag.
+<dt><b>Useless</b> <b>(US)</b> 
+<dd>It's useless!
+<dt><b>Wings</b> <b>(WG)</b> 
+<dd>Tank can drive around in the air, and may be able to jump multiple times.
+This can be useful when jumping
+or falling.
+</dl>
+<p>
+A brief description of each bad superflag with the flag's code
+in parentheses:
+<p><dl compact><dt><b>Colorblindness</b> <b>(CB)</b> 
+<dd>Prevents tank from seeing any team information about other tanks.
+You have to be careful to avoid shooting teammates.
+<dt><b>Obesity</b> <b>(O)</b> 
+<dd>The tank becomes very large and easy to hit.  It's so big that it
+can't fit through teleporters.
+<dt><b>Left</b> <b>Turn</b> <b>Only</b> <b>(&lt;-)</b> 
+<dd>Prevents the tank from turning right.
+<dt><b>Right</b> <b>Turn</b> <b>Only</b> <b>(-&gt;)</b> 
+<dd>Prevents the tank from turning left.
+<dt><b>Forward</b> <b>Only</b> <b>(FO)</b> 
+<dd>Prevents the tank from going backwards.
+<dt><b>Reverse</b> <b>Only</b> <b>(RO)</b> 
+<dd>Prevents the tank from going forward.
+<dt><b>Momentum</b> <b>(M)</b> 
+<dd>Gives the tank a lot of inertia.
+<dt><b>Blindness</b> <b>(B)</b> 
+<dd>Blanks the out-the-window view.  The radar still works.  It is
+effectively impossible to detect any tank with Stealth;  shooting
+a Stealth with Blindness is the stuff legends are made of.
+<dt><b>Jamming</b> <b>(JM)</b> 
+<dd>Disables the radar but you can still see.
+<dt><b>Wide</b> <b>Angle</b> <b>(WA)</b> 
+<dd>Gives the tank a fish eye lens that's rather disorienting.
+<dt><b>No</b> <b>Jumping</b> <b>(NJ)</b> 
+<dd>Tank is not allowed to jump.
+<dt><b>Trigger</b> <b>Happy</b> <b>(TR)</b> 
+<dd>Tank can't stop shooting.  Watch out for that ricochet.
+<dt><b>Reverse</b> <b>Controls</b> <b>(RC)</b> 
+<dd>Tank driving controls are reversed from their usual behavior.
+</dl>
+</ul><H2>Observing </H2><ul>
+
+If a server is full or if you just want to watch a battle without interfering
+in it, you can use the observer mode. To join a server as an observer, select
+<i>R</i> <i>Observer</i> 
+as your tank's team. The maximum number of observers can be
+restricted by the server admin, so you might still not be able to join a
+full server.
+
+<p>
+When in observer mode, you can freely roam the world. Using the
+arrow keys you can rotate the camera in every direction. Holding shift and
+using the arrow keys moves the camera left, right, forward or back. Pressing
+the up or down arrow while holding the
+<i>R</i> <i>ALT</i> 
+key will change the camera's altitude. The
+<i>R</i> <i>F9</i> 
+and
+<i>R</i> <i>F10</i> 
+keys change the camera's focal lengths, giving a zoom effect. The
+<i>R</i> <i>F11</i> 
+key will reset the zoom. Pressing
+<i>R</i> <i>l</i> 
+lets you toggle the display of tank labels.
+
+<p>
+Repeatedly pressing
+<i>R</i> <i>F8</i> 
+cycles through different roaming modes: <i>free</i>, <i>tracking</i>,
+<i>following</i>, <i>first person (driving with)</i> and <i>tracking team flag</i>.
+In <i>tracking</i> mode, the camera will automatically look at a tank. You can cycle through
+available tanks with the
+<i>R</i> <i>F6</i> 
+and
+<i>R</i> <i>F7</i> 
+keys. In <i>follow</i> mode, the camera is positioned right behind the
+targeted tank, whereas you actually look from within the tank when using
+<i>first person</i> mode. The last mode, <i>track team flag</i> is only available in capture-the-flag games and
+will track the team flags. Again, use
+<i>R</i> <i>F6</i> 
+and
+<i>R</i> <i>F7</i> 
+to choose which flag to track. One special option that can be used with <i>follow</i>, <i>tracking</i>,
+and <i>first person</i> modes is that you can choose to do it with the winning tank.
+This is selected by cycling through the tanks until you see the winner option. In this mode,
+you will always be engaged with whoever has the best score (and is alive).
+The default is <i>drive with winner</i> mode.
+
+</ul><H2>User Commands </H2><ul>
+
+The following commands can be executed by sending a message to all and using these strings as the message
+<p><dl compact><dt>/bind <i>key</i> <i>press</i> <i>action</i>
+<dd>Bind a <i>key</i> press to an <i>action</i>. <i>press</i> can be <b>up</b>, <b>down</b> or <b>both</b>
+<dt>/cmds
+<dd>Show a list of all client and server commands
+<dt>/debug [<i>level</i>]
+<dd>Show or set the debug level to <i>level</i>
+<dt>/diff
+<dd>List all BZDB server variables that are not set to the default value
+<dt>/dumpvars
+<dd>Dump a list of all local variables and their values to the standard output
+<dt>/forceradar
+<dd>Force the radar to be displayed (only works for observers)
+<dt>/highlight <i>pattern</i>
+<dd>Highlight all messages containing <i>pattern</i> on the console
+<dt>/localset <i>variable</i> [<i>value</i>]
+<dd>Read a local variable or set it to <i>value</i>
+<dt>/quit
+<dd>Exit the game
+<dt>/retexture
+<dd>Reload the textures of the game
+<dt>/roampos {reset|send|<i>angle</i>|<i>x</i> <i>y</i> <i>z</i> [<i>theta</i> [<i>phi</i> [<i>zoom</i>]]]}
+<dd>Manipulate the observer camera (only useful in Roaming and Tracking modes). Without arguments, it shows
+a usage message and the current camera location. <b>reset</b> resets the camera's location to the center
+of the map and <b>send</b> sends information about the camera to the server. <i>angle</i> moves the camera
+outside the map at a certain angle, looking towards its center. <i>x</i>, <i>y</i> and <i>z</i>
+are used to set the camera's location, <i>theta</i> defines the camera's horizontal angle, <i>phi</i> defines
+its vertical angle and <i>zoom</i> sets the camera's zoom level. All angles are defined in degrees.
+<dt>/savemsgs [-s] [-t]
+<dd>Save all messages to a file in your config directory. If <b>-s</b> is provided, coloring data are stripped.
+If <b>-t</b> is provided, timestamps are added to the messages.
+<dt>/saveworld [-g] [-m] [-o] <i>filename</i>
+<dd>Save the current world to <i>filename</i>. Specify <b>-g</b> to prevent the creation of groups, <b>-m</b> to
+save some primitives as meshes and <b>-o</b> to create a WaveFront OBJ file instead of a BZW one.
+<dt>/silence <i>playerName</i>
+<dd>Do not display any message coming from player with <i>playerName</i> name
+<dt>/unsilence <i>playerName</i>
+<dd>Reshow messages coming from player with <i>playerName</i> name
+</dl>
+</ul><H2>FILES </H2><ul>
+
+<p><dl compact><dt>~/.bzf/&lt;version&gt;/config.cfg
+<dd>Stores options between game sessions.
+</dl>
+</ul><H2>SEE ALSO </H2><ul>
+
+bzadmin(6), bzfs(6), bzw(5)
+</ul>
+<!--#exec cmd="trailer" -->

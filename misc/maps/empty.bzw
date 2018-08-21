@@ -1,0 +1,38 @@
+world  # simple world containing nothing
+ name Empty World
+ size 200.0
+end
+options
+-set _skyColor blue
+#-set _wingsJumpCount 10
+-set _explodeTime 0
+#-set _wallHeight 200
+-autoTeam
+#-sl GM 30 -sl L 30 -sl SW 30 -sl G 10
+#+f V{2} +f QT{2} +f OO{3} +f F{3} +f MG +f GM{4} +f L{3} +f SB{3} +f IB{2} +f ST{4} +f T{3} +f N{2} +f SH{2} +f SR{3} +f SW{3} +f PZ{2} +f G{2} +f ID{2} +f CL{3} +f MQ{3} +f SE{2} +f TH{2} +f BU{2} +f WG{5} +f A{2}
+-f bad
+-c
+-j
+#-ms 5
+-mp 0,7,7,0,0,7
+-srvmsg "Keep it clean and fun! No cheating, rejoining, or teamkilling! Thanks!"
+-srvmsg "Map: empty field"
+end
+base
+ name Base1
+ position 0 190 0
+ rotation 0
+ size 10 10 0
+ color 1
+ oncap SW
+end
+base
+ name Base2
+ position 0 -190 0
+ rotation 0
+ size 10 10 0
+ color 2
+ oncap SW
+end
+ 
+

@@ -1,0 +1,1079 @@
+<!--#exec cmd="header bzfs" -->
+<ul>
+</ul><H2>NAME </H2><ul>
+
+bzfs - BZFlag game server
+
+</ul><H2>SYNOPSIS </H2><ul>
+
+<b>bzfs</b> 
+[<b>-a </b><i>linear</i> <i>angular</i>]
+[<b>-adminlagannounce </b><i>milliseconds</i>]
+[<b>-admsg </b><i>message</i>]
+[<b>-advertise </b><i>groupname</i>[<i>,groupname</i>]...]
+[<b>-autoTeam</b>]
+[<b>-b</b>]
+[<b>-badwords </b><i>badwordfile</i>]
+[<b>-ban </b><i>ip</i>[<i>,ip</i>]...]
+[<b>-banfile </b><i>filename</i>]
+[<b>-c</b>]
+[<b>-cache </b><i>worldCacheURL</i>]
+[<b>-cacheout </b><i>filename</i>]
+[<b>-conf </b><i>configfile</i>]
+[<b>-cr]
+[</b><b>-d</b>]
+[<b>-density </b><i>num</i>]
+[<b>-disableBots</b>]
+[<b>+f </b>{<i>good</i> | <i>bad</i> | <i>team | </i> | <i>flag-id</i>}[<i>{count}</i>]]
+[<b>-f </b>{<i>good</i> | <i>bad</i> | <i>flag-id</i>}]
+[<b>-fb</b>]
+[<b>-filterCallsigns</b>]
+[<b>-filterChat</b>]
+[<b>-filterSimple</b>]
+[<b>-g</b>]
+[<b>-gndtex </b><i>texture-name</i>]
+[<b>-groupdb </b><i>file</i>]
+[<b>-h</b>]
+[<b>-handicap</b>]
+[<b>-help</b>]
+[<b>-helpmsg </b><i>file</i> <i>name</i>]
+[<b>-i </b><i>interface</i>]
+[<b>-j</b>]
+[<b>-jitterdrop </b><i>warn-count</i>]
+[<b>-jitterwarn </b><i>milliseconds</i>]
+[<b>-lagannounce </b><i>milliseconds</i>]
+[<b>-lagdrop </b><i>warn-count</i>]
+[<b>-lagwarn </b><i>milliseconds</i>]
+[<b>-loadplugin </b><i>name</i>[<i>,options</i>]]
+[<b>-masterBanURL </b><i>URL</i>]
+[<b>-maxidle </b><i>seconds</i>]
+[<b>-mp
+</b>{<i>count</i>~ | ~[<i>rogue-count</i>]<b>,~</b>[<i>red-count</i>]<b>,~</b>[<i>green-count</i>]<b>,~</b>[<i>blue-count</i>]<b>,~</b>[<i>purple-count</i>]<b>,~</b>[<i>observer-count</i>]}]
+[<b>-mps </b><i>max-score</i>]
+[<b>-ms </b><i>shots</i>]
+[<b>-mts </b><i>max-score</i>]
+[<b>-noMasterBanlist</b>]
+[<b>-noradar</b>]
+[<b>-noTeamKills</b>]
+[<b>-offa</b>]
+[<b>-p </b><i>port</i>]
+[<b>-packetlossdrop </b><i>warn-count</i>]
+[<b>-packetlosswarn </b><i>percent</i>]
+[<b>-passwd </b><i>password</i>]
+[<b>-pidfile </b><i>filename</i>]
+[<b>-poll </b><i>variable=value</i>]
+[<b>-printscore</b>]
+[<b>-publictitle </b><i>description</i>]
+[<b>-publicaddr </b><i>address</i>[<i>:port</i>]]
+[<b>-publiclist </b><i>url</i>]
+[<b>-publickey </b><i>key</i>]
+[<b>-q</b>]
+[<b>+r</b>]
+[<b>-rabbit </b>[<b>score</b> | <b>killer</b> | <b>random</b>]]
+[<b>-recbuf </b><i>size</i>]
+[<b>-recbufonly</b>]
+[<b>-recdir </b><i>directory</i>]
+[<b>-replay</b>]
+[<b>-reportfile </b><i>filename</i>]
+[<b>-reportpipe </b><i>command</i>]
+[<b>+s </b><i>flag-count</i>]
+[<b>-s </b><i>flag-count</i>]
+[<b>-sa</b>]
+[<b>-sb</b>]
+[<b>-set </b><i>name value</i>]
+[<b>-setforced </b><i>name value</i>]
+[<b>-sl </b><i>id num</i>]
+[<b>-spamtime </b><i>time</i>]
+[<b>-spamwarn </b><i>warnLimit</i>]
+[<b>-speedtol </b><i>factor</i>]
+[<b>-srvmsg </b><i>message</i>]
+[<b>-st </b><i>time</i>]
+[<b>-sw </b><i>count</i>]
+[<b>-synclocation</b>]
+[<b>-synctime</b>]
+[<b>-t</b>]
+[<b>-tftimeout </b><i>time-limit</i>]
+[<b>-time </b>{<i>time-limit</i> | <i>ending-time</i>}]
+[<b>-timemanual</b>]
+[<b>-tk</b>]
+[<b>-tkannounce]
+[</b><b>-tkkr </b><i>percent</i>]
+[<b>-ts </b>[<i>micros</i>]]
+[<b>-UPnP</b>]
+[<b>-userdb </b><i>file</i>]
+[<b>-vars </b><i>file</i>]
+[<b>-version</b>]
+[<b>-world </b><i>world-file</i>]
+[<b>-worldsize </b><i>world size</i>]
+
+<p>
+</ul><H2>DESCRIPTION </H2><ul>
+
+<b>Bzfs</b> is the server for <b>BZFlag</b>,
+and it must be running to play.  It can be run on any system on the
+network (including a player's system or one without graphics).
+Terminating the server terminates the game in progress.
+
+<p>
+</ul><H2>OPTIONS </H2><ul>
+
+<p><dl compact><dt><b>-a </b><i>linear angular</i>
+<dd>Sets the maximum linear and angular accelerations.
+The units are somewhat arbitrary so you'll have to experiment to find
+suitable values. Positive values will set limits to the acceleration
+and lower they are, greater is the inertia.
+Zero or negative values disable acceleration limits.
+<dt><b>-adminlagannounce </b><i>milliseconds</i>
+<dd>Announce players that lag more than <i>milliseconds</i> to admins.
+<dt><b>-admsg </b><i>message</i>
+<dd>Define a message which will be broadcast to all players every 15 minutes.
+This option can be used multiple times to define a multiline message.
+<dt><b>-advertise</b> <b><i>groupname,groupname,...</i></b> 
+<dd>Allows control of who can see this server on the server list.
+Use: <b>-advertise NONE</b> to make a private server (no one will see the
+server, but global logins can be used). The default, if -advertise is not
+specified, is to allow everyone to see the server.
+Otherwise, your server will only be listed to members of
+the groups which you specify, eg: <b>-advertise JOE,BOB</b>.
+<dt><b>-autoTeam</b> 
+<dd>Automatically assign players to teams when they connect so that there
+are an equal number of players on all available teams.  Players are
+placed on teams that have the fewest players; otherwise they will be
+placed on the weakest team.  Weakest team is the team with the lowest
+combined kill ratio.
+<dt><b>-b</b> 
+<dd>When <b>-c</b> is supplied, this option randomly rotates the buildings.
+<dt><b>-badwords </b><i>badwordfile</i>
+<dd>Specify a file that contains bad words that will be used when either
+<b>-filterCallsigns</b> or <b>-filterChat</b> is enabled.
+<dt><b>-ban</b> <b><i>ip</i>[,<i>ip</i>]...</b> 
+<dd>Prohibits connections from the listed IP addresses. Trailing 255 bytes are
+treated as mask bytes.
+<dt><b>-banfile </b><i>filename</i>
+<dd>Specifies the name of a file where bzfs will store the banlist. It will
+load the banlist from this file when it starts (if the file exists),
+and write the banlist back to the file when someone gets banned or unbanned.
+If this option isn't given the banlist will not be saved.
+<dt><b>-c</b> 
+<dd>Enables the capture-the-flag style game. By default this allocates one team flag per team.
+This can be modified see +f team. By default, the free-for-all style is used.
+<dt><b>-cache </b><i>worldCacheURL</i>
+<dd>Specifies the URL for the world cache file. This is a binary file that clients
+will attempt to download before getting the world from the bzfs server.
+<dt><b>-cacheout </b><i>filename</i>
+<dd>Save the currently specified world into a binary cache file and exit.
+<dt><b>-conf </b><i>configfilename</i>
+<dd>Specifies the name of a configuration file to be used to set all of the
+bzfs options, rather than setting them on the command line.
+<dt><b>-cr</b> 
+<dd>Enables the capture-the-flag style game with random map.  You can
+optionally specify a building density by providing a number (default
+is 5).  One team flag per team is provided, but more can be added thru +f team.
+By default, the free-for-all style is used.
+<dt><b>-d</b> 
+<dd>Increase debugging level. If more -d is given, more debugging info is obtained.
+<dt><b>-density </b><i>num</i>
+<dd>Specify density for buildings, i.e. the higher the integer number, the more
+buildings you will get. This applies to automatically generated maps only.
+<dt><b>-disableBots</b> 
+<dd>Disallow clients from using the ROGER autopilot or from using robots.
+<dt><b>+f</b> {<i>good</i> | <i>bad</i> | <i>team</i><i>flag-id</i>}[<i>{count}</i>]
+<dd>Forces the existence of the given flag.  If specified multiple times
+for the same <i>flag-id</i>, then that many flags will appear.  The
+<i>good</i> argument is equivalent to specifying <b>+f</b> once for
+each kind of good flag. Same goes for the <i>bad</i> argument.  The
+<i>team</i> argument adds a team flag to each team,
+assuming that the game style is capture the flag. The optional
+<i>{count}</i> parameter allows the specification of multiple flags of the
+same type. Note that the curly braces are required.
+<dt><b>-f</b> {<i>good</i> | <i>bad</i> | <i>flag-id</i>}
+<dd>Disallows random flags of the given type.  Required flags given by the
+<b>+f</b> option are still provided.  The <i>bad</i> argument is equivalent
+to specifying <b>-f</b> once for each kind of bad flag.  Same goes for
+<b>good</b>, but you probably do not want to do that.
+</dl><br>
+An example of running a server with 40 to 50 flags except genocide would
+be "+s 40 -s 50 -f G".  Similarly, "+f good{40} +f bad{10} -f G{40}" would
+give you exactly 40 good flags except genocide and 10 of each bad flag.
+<p><dl compact><dt><b>-fb</b> 
+<dd>Allow flags on box buildings.
+<dt><b>-filterCallsigns</b> 
+<dd>Turn on the filtering of callsigns and mottos.  Callsigns and
+mottos are compared against bad words provided via <b>-badwords</b>.
+<dt><b>-filterChat</b> 
+<dd>Turn on the filtering of chat messages.  Messages that contain words listed via
+a <b>-badwords</b> file are replaced with !@#$%^&amp;* characters.
+<dt><b>-filterSimple</b> 
+<dd>By default, all filtering is aggressive, matching much more than what is
+strictly listed in a <b>-badwords</b> file for convenience.  Providing
+this option will make the <b>-filterCallsigns</b> and <b>-filterChat</b>
+comparisons exact match only.
+<dt><b>-g</b> 
+<dd>Quit after serving one game.
+<dt><b>-gndtex </b><i>texture-name</i>
+<dd>Specify the name of the ground texture.
+<dt><b>-groupdb </b><i>file</i>
+<dd>Load groups from file
+<dt><b>-h</b> 
+<dd>Buildings are given random heights.
+<dt><b>-handicap</b> 
+<dd>Players are given a handicap advantage based on their ability in
+relation to the other players. Handicapped players will have faster
+tanks and shots. The handicap is determined by the player's score in
+relation to other players.
+<dt><b>-help</b> 
+<dd>Shows a help page and lists all the valid flag id's.
+<dt><b>-helpmsg </b><i>file</i> <i>name</i>
+<dd>Provide a message accessible by /help <i>name</i>, which sends no more
+than the first 50 lines of <i>file</i> to the player.
+<dt><b>-i </b><i>interface</i>
+<dd>Server will listen for and respond to ``pings'' (sent via broadcast)
+on the given interface.  Clients use this to find active servers on the
+network. This is the TCP/UDP/IP address the server will listen on.
+<dt><b>-j</b> 
+<dd>Allows jumping.
+<dt><b>-jitterdrop </b><i>warn-count</i>
+<dd>Kicks players after <i>warn-count</i> jitter warnings.
+<dt><b>-jitterwarn </b><i>milliseconds</i>
+<dd>Send warnings to players that jitter more than <i>milliseconds</i>.
+<dt><b>-lagannounce </b><i>milliseconds</i>
+<dd>Announce players that lag more than <i>milliseconds</i> in public.
+<dt><b>-lagdrop </b><i>warn-count</i>
+<dd>Kicks players after <i>warn-count</i> lag warnings.
+<dt><b>-lagwarn </b><i>milliseconds</i>
+<dd>Send warnings to players that lag more than <i>milliseconds</i>.
+<dt><b>-loadplugin </b><i>name</i>[<i>,options</i>]
+<dd>Load the specified plugin. <i>name</i> can either be the name of
+the plugin, or a path to its library file. Optionally, you can
+provide any options the plugin requires.
+<dt><b>-masterBanURL </b><i>URL</i>
+<dd>Specify alternate URLs for the master ban file to be pulled from.
+This argument may be provided multiple times.
+<dt><b>-maxidle </b><i>seconds</i>
+<dd>Kick players that did not play longer than <i>seconds</i>. Pausing players are
+not kicked. If a player uttered a word recently, he will be kicked after
+thrice the given time.
+<dt><b>-mp</b> {<i>count</i> | [<i>rogue</i>]<b>,</b>[<i>red</i>]<b>,</b>[<i>green</i>]<b>,</b>[<i>blue</i>]<b>,</b>[<i>purple</i>]<b>,</b>[<i>observer</i>]}
+<dd>Sets the maximum number of players, total or per team.  A single value sets
+the total number of players allowed.  Five comma separated values set the
+maximum for each team.  If a count is left blank then no limit is set for
+that team, except for the limit on the total number of players.  Both forms
+may be provided.  For rabbit hunt, the "rogue" value sets the total number
+of non-observer player, and all other values must be zero.
+<dt><b>-mps </b><i>max-score</i>
+<dd>Sets a maximum score for individual players.  The first player to reach
+this score is declared the winner and the game is over.
+<dt><b>-ms </b><i>shots</i>
+<dd>Allows up to <i>shots</i> simultaneous shots for each player.
+This is 1 by default.
+<dt><b>-mts </b><i>max-score</i>
+<dd>Sets a maximum score for teams.  The first team to reach this score is
+declared the winner and the game is over.
+<dt><b>-noMasterBanlist</b> 
+<dd>Server will not attempt to load the master ban list from the internet.
+<dt><b>-noradar</b> 
+<dd>Disable the use of the radar.
+<dt><b>-noTeamKills</b> 
+<dd>Players on the same team are immune to each other's shots. Rogue is excepted.
+<dt><b>-offa</b> 
+<dd>Enables the Open-Free-for-All style game. This is a teamless mode, similar to
+the classic deathmatch in other games.
+<dt><b>-p </b><i>port</i>
+<dd>Listen for game connections on <i>port</i> instead of the default port.
+Use <b>-help</b> to print the default port, or use <b>-d</b> debug printing.
+<dt><b>-packetlossdrop </b><i>warn-count</i>
+<dd>Kicks players after <i>warn-count</i> packetloss warnings.
+<dt><b>-packetlosswarn </b><i>percent</i>
+<dd>Send warnings to players that have more more than <i>percent</i> loss.
+<dt><b>-passwd </b><i>password</i>
+<dd>Specify a server administrator password for use in remote administration
+such as /kick, /ban, /mute, etc.  messages.
+<dt><b>-pidfile </b><i>filename</i>
+<dd>Specify a file where the server will write its process ID so it may be used for
+remote administration.
+<dt><b>-poll </b><i>variable=value</i>
+<dd>Configure several aspects of the in-game polling system
+<ul><dt><b>banTime</b>
+<dd>default number of minutes player should be banned (unspecified, the  default is 300)
+<dt><b>vetoTime</b>
+<dd>max seconds authorized user has to abort poll (default is 20)
+<dt><b>votePercentage</b>
+<dd>percentage of players required to affirm a poll (unspecified, the default is 50.1%)
+<dt><b>voteRepeatTime</b>
+<dd>minimum seconds required before a player may request
+another vote (default is 300)
+<dt><b>votesRequired</b>
+<dd>minimum number of additional votes required to make a
+vote valid (default is 2)
+<dt><b>voteTime</b>
+<dd>maximum amount of time player has to vote, in seconds (default is 60)
+</ul><dt><b>-printscore</b> 
+<dd>Write score to stdout whenever it changes
+<dt><b>-publictitle </b><i>description</i>
+<dd>Advertise this server on the internet with the given <i>description</i>.
+By default, a server will respond to broadcast queries, allowing clients
+to find servers running on the standard port on the local subnet.
+The <b>-publictitle</b> option causes the server to register itself with
+a list server, which clients can query to get a list of <b>bzfs</b> servers.
+<dt><b>-publicaddr </b><i>address</i>[:<i>port</i>]
+<dd>Advertise this server with the given <i>address</i> and <i>port</i>.
+Normally a server advertises itself at the local address and port.
+Some servers are not accessible from the internet at this address
+(for example servers behind a firewall using Network Address
+Translation).  Use this option to specify the address and/or port
+that internet users should use to access this server.
+<dt><b>-publiclist </b><i>url</i>
+<dd>Advertise this server on the list servers listed at <i>url</i>.
+Only has an effect when used with <b>-publictitle</b> and/or <b>-publicaddr</b>.
+A built-in url is used by default.  The <b>BZFlag</b> clients use the
+same built-in url so, by default, clients will see public servers
+automatically.  This argument may be provided multiple times to
+publicize a server to multiple list servers.
+<dt><b>-publickey </b><i>key</i>
+<dd>Advertise this server on the list server(s) using the specified key.
+Only has an effect when used with <b>-publictitle</b> and/or <b>-publicaddr</b>.
+<dt><b>-q</b> 
+<dd>If specified, the server will not listen for nor respond to ``pings''.
+<b>BZFlag</b> sends out these pings to give the user a list of
+available servers.  This effectively makes the server private,
+especially if the <b>-p</b> option is also used.
+<dt><b>+r</b> 
+<dd>Makes most shots ricochet.
+Super bullets, shock waves, and guided missiles do not.
+<dt><b>-rabbit</b> [<i>score</i> | <i>killer</i> | <i>random</i>]
+<dd>Enables the rabbit-hunt style game.  By default, the free-for-all
+style is used.  You must specify the algorithm used to pick a new
+rabbit when the old one dies.  The <i>score</i> algorithm uses a modified
+wins/(wins+losses) score and picks the top scoring player to be the new
+rabbit.  The <i>killer</i> algorithm specifies a reverse tag game where
+whomever kills the rabbit becomes the new rabbit.  The <i>random</i>
+algorithm randomly picks a new rabbit without regard to score.  (The
+<i>score</i> algorithm is the original behavior.)
+<dt><b>-recbuf</b> <b><i>size</i></b> 
+<dd>Start with the recording buffer active, with the specified size (in megabytes).
+<dt><b>-recbufonly</b> 
+<dd>Disable recording straight to files
+<dt><b>-recdir</b> <b><i>directory</i></b> 
+<dd>Specify the directory for record and replay files.
+<dt><b>-replay</b> 
+<dd>Start the server in replay mode.
+<dt><b>-reportfile</b> <b><i>filename</i></b> 
+<dd>Write messages to the server admin written using the <b>/report</b> command to
+this file. If neither <b>-reportfile</b> or <b>-reportpipe</b> is used the
+<b>/report</b> command will be disabled.
+<dt><b>-reportpipe</b> <b><i>command</i></b> 
+<dd>Pipe messages to the server admin written using the <b>/report</b> command to
+this program or shell command. See <b>-reportfile</b>.
+<dt><b>+s </b><i>num-flags</i>
+<dd>The server will have an extra <i>num-flags</i> random super flags available
+at all times.  The <b>-f</b> option can be used to restrict which types of
+flags will be added.  Required flags given by the <b>+f</b> option are not
+included in the <i>num-flags</i> total.
+<dt><b>-s </b><i>num-flags</i>
+<dd>The server will have up to <i>num-flags</i> random super flags available at
+any time.  The <b>-f</b> option can be used to restrict which types of flags
+will be added.  Required flags given by the <b>+f</b> option are not included
+in the <i>num-flags</i> total.
+<dt><b>-sa</b> 
+<dd>Antidote flags are provided for players with bad flags.
+<dt><b>-sb</b> 
+<dd>Allow spawns on box buildings.
+<dt><b>-set</b> <b><i>name</b> <b>value</i></b> 
+<dd>Set BZDB variable <i>name</i> to <i>value</i>.
+<dt><b>-setforced</b> <b><i>name</b> <b>value</i></b> 
+<dd>Set BZDB variable <i>name</i> to <i>value</i>, even if the variable does not exist.
+<dt><b>-sl </b><i>id num</i>
+<dd>Restrict flag <i>id</i> to <i>num</i> shots.
+<dt><b>-spamtime </b><i>time</i>
+<dd>Minimum time between player chat messages that are alike.
+<dt><b>-spamwarn </b><i>warnLimit</i>
+<dd>Number of warnings a player/spammer gets, who  violates -spamtime.
+<dt><b>-speedtol </b><i>factor</i>
+<dd>Override the default speed auto kick factor. The factor should not be less then 1.0. The factor is a multiplier.
+<dt><b>-srvmsg </b><i>message</i>
+<dd>Define a server welcome message. This option can be used multiple times
+to define a multiline message.
+<dt><b>-st </b><i>time</i>
+<dd>Bad flags are automatically dropped after <i>time</i> seconds.
+<dt><b>-sw </b><i>count</i>
+<dd>Bad flags are automatically dropped after <i>count</i> wins.  Capturing
+a team flag does not count as a win.
+<dt><b>-synclocation</b> 
+<dd>Forces all clients to use the same location (longitude and latitude).
+<dt><b>-synctime</b> 
+<dd>Forces all clients to use the same time of day.  The current time is
+determined by the server's clock.  This disables the + and - keys on
+the clients.
+<dt><b>-t</b> 
+<dd>Adds teleporters to the game.
+<dt><b>-tftimeout </b><i>time-limit</i>
+<dd>If the last player in a team leaves while someone else is carrying the team
+flag, the team flag will not reset until it is captured, or until the player
+drops it and it is left alone for some time. This option specifies the number
+of seconds that the flag should be left alone before it is reset. The
+default value is 30.
+<dt><b>-time </b>{<i>time-limit</i> | <i>ending-time</i>}
+<dd>Sets a time limit on the game to <i>time-limit</i> or <i>ending-time</i>. The game will be
+stopped <i>time-limit</i> seconds after the first player connects, or at <i>ending-time</i>,
+whichever is given. The <i>ending-time</i> should be given in hh:mm:ss format, but does not
+need minute and second arguments. If only hour is given, it must end in ':'. Each
+unspecified argument is set to 0.
+<dt><b>-timemanual</b>
+<dd>When using <b>-time</b>, the countdown will start when the first player
+joins. With <b>-timemanual</b>, the countdown has to be started manually
+using the <i>/countdown</i> command. This is useful for matches.
+<dt><b>-tk</b> 
+<dd>Changes the default behavior where a player dies when he kills a teammate.
+When using this option, he will just get a -1 score penalty for the kill but
+not be killed in game.
+<dt><b>-tkannounce</b> 
+<dd>Announce teamkills to the admin channel.
+<dt><b>-tkkr </b><i>percent</i>
+<dd>Kicks players whose team killing to normal kill ratio is greater than
+<i>percent</i> [1-100]. A start up grace period is given to players.
+<dt><b>-ts </b>[<i>micros</i>]
+<dd>Include timestamp information in DEBUG output   useful for logging.
+If <i>micros</i> is specified, microseconds will be added to the timestamp.
+<dt><b>-UPnP</b>
+<dd>If enabled during build, bzfs try to communicate with the Gateway to set Port
+Forwarding and to supply information not specified with -i (local interface)
+and -publicaddr
+<dt><b>-userdb </b><i>file</i>
+<dd>Load group associations from file
+<dt><b>-vars </b><i>file</i>
+<dd>Loads values for game configurable variables from <i>file</i>. Entries are
+one per line in the form: <b>set variable value</b>. For a list of variables
+that are configurable, in the BZFlag client, send a message with
+<i>/set</i> as the text.
+<dt><b>-version</b> 
+<dd>Prints the version number of the executable.
+<dt><b>-world </b><i>world-file</i>
+<dd>Reads a specific BZFlag <b>.bzw</b> world layout file for the game map.
+<dt><b>-worldsize </b><i>world-size</i>
+<dd>Changes the size for random maps
+</dl>
+</ul><H2>Notes </H2><ul>
+
+The server uses nearly zero CPU time when nobody is playing, and even
+during a game the server uses very little CPU, so it's not a burden on
+the system to leave one running and it won't interfere with a player
+using the same system (except on Windows 95, which <i>really</i>
+sucks at multitasking).  The server will continue to run until
+terminated.  If a game is in progress when the server goes down,
+all players will be kicked off and the game will be aborted without
+warning.  The server resets itself when all players have quit.  All
+players must quit to reset the server when a game is over (because of
+a score or time limit).
+
+<p>
+The following game styles are recommended starting points.
+<ul><p><dl compact><dt><b>-c</b> [<b>-b</b>]
+<dd>Basic capture-the-flag game.  It teaches teamwork and dogfighting skills.
+<dt><b>-s -t</b>
+<dd>Free-for-all with superflags and teleporters.  Teaches players how to use
+superflags and teleporters for maximum effect.  You may want to allow
+players to drop bad flags with any of -sa, -st, and -sw.
+</ul></dl>
+<p>
+Notice that the maximum number of shots for these styles is one.  Having
+low shot counts can greatly increase general playability and learning speed.
+However, this is not always true of every game style or game world, and a skilled
+player will learn to deal with a variety of shot counts.  Single shot games
+have additional disadvantage in WAN games where lag/jitter can cause unfair
+advantage.  Single shot, non-Jump games will teach valuable lessons in dodging,
+however, and are excellent starting points for the beginner.
+
+</ul><H2>Networking </H2><ul>
+
+Communication between the server and clients (i.e. between <b>bzfs</b> and
+<b>bzflag</b>) during a game is via TCP and UDP.  Use the <b>-help</b> option
+to get
+the server's default port.  If there's a firewall between the server and
+client, the firewall must accept connections from the client to this port
+and forward them to the server.
+
+<p>
+Clients can search for servers by sending broadcast UDP
+packets.  But they must be on the same local area network for this to work.
+Clients can also find servers
+advertised using <i>-publictitle</i> by querying list servers.
+
+<p>
+Game information is relayed through the server. Some communication between
+clients, such as position and orientation information, is normally sent via UDP
+packets.  Other data, like flag grab and kill messages, are sent to the server
+via TCP. The server then turns around and broadcasts these packets  to all
+players. Since being in a game implies connection to the server, all players
+are guaranteed to get all messages sent via TCP.  But the UDP
+packets may be discarded.  If other players can see your tank in the game but
+it never appears to move and shots go through it, chances are high that your
+UDP connection is not working.
+
+</ul><H2>Worlds </H2><ul>
+
+BZFlag worlds come in two varieties, randomly generated ones, and
+human designed ones. By default, bzfs uses randomly generated world
+unless you specify the -world command line or configuration file
+option. The world file specified by the -world option is a text based
+file that contains a list of world objects. This file can be created
+using programs found on github, or can be hand edited.  See the bzw(5)
+manual page for more details.
+
+<p>
+<p>
+</ul><H2>GENERAL SERVER COMMANDS </H2><ul>
+
+<p><dl compact><dt><b>/clientquery</b> <b>[<i>callsign</i>]</b> 
+<dd>Retrieve client version info from all users, or just CALLSIGN if given. Example:
+<pre>
+/clientquery MrApathyCream
+<br>MrApathyCream: Version: BZFlag 1.11.6-20040729-gnu-linux-SDL
+<br>
+<p><br><dt><b>/date,</b> <b>/time</b> 
+<br><dd>Responds with the current server local time. /date and /time are exactly the same. Example:
+<br>Tuesday September 08 06:45:54 2004
+<br>
+<p><br><dt><b>/flaghistory</b> 
+<br><dd>Lists what flags players have grabbed in the past. Example:
+<br>MrApathyCream: (&lt;-) (-&gt;) (O) (CB) (M) (B) (JM) (WA)
+<br>Gerbol: (L) (GM) (L) (GM) (CL) (ST) (GM) (L)
+<br>captain_macgyver: (SB) (SW)
+<br>
+<p><br><dt><b>/idlestats</b> 
+<br><dd>Displays the idle time in seconds for each player. A player is idle when
+<br>he is dead and has not respawned yet. Example:
+<br>MrApathyCream: 0s
+<br>Gerbol: 80s
+<br>captain_macgyver: 13s
+<br>
+<p><br><dt><b>/lagstats</b> 
+<br><dd>Lists network delays, jitter and number of lost resp. out of order packets by player. Example:
+<br>MrApathyCream 335 +- 10ms
+<br>Gerbol 210 +- 3ms
+<br>captain_macgyver 155 +- 0ms  12% lost/ooo
+<br>
+<p><br><dt><b>/me</b> <b><i>action</i></b> 
+<br><dd>
+<p><br>This command displays an "action" that is conveyed to another player.  It allows
+<br>for a little more expressivity in the game.  For example: "/me is hunting wabbits"
+<br>turns into a message like "TimRiker is hunting wabbits" that gets displayed
+<br>differently to other players.
+<br>
+<p><br><dt><b>/msg</b> <b><i>callsign</i></b> <b><i>message</i></b> 
+<br><dd>
+<p><br>This command allows a player to send a message to another player.  Similar to using
+<br>the "," and "." message keys in the game and then selecting your recipient, this
+<br>will send some message to particular player.  The quotes are optional.
+<br>
+<p><br><dt><b>/part</b> <b>[<i>message</i>]</b> 
+<br><dd>Leave the server with a goodbye message (similar to IRC's /part)
+<br>/part Gotta go! bye everyone!
+<br>
+<p><br><dt><b>/password</b> <b><i>password</i></b> 
+<br><dd>Attempt to gain administrator status Example:
+<br>/password supersecretpassword
+<br>You are now an administrator!
+<br>
+<p><br><dt><b>/poll</b> <b>{{<i>ban</i></b> <b>|</b> <b><i>kick</i>}</b> <b><i>callsign</i></b> <b>|</b> <b>vote</b> <b>{<i>yes</i></b> <b>|</b> <b><i>no</i>}</b> <b>|</b> <b>veto}</b> 
+<br><dd>Interact and make requests of the bzflag voting system via the /poll command.
+<br>The ban and kick subcommands request a vote to respectively ban or kick some
+<br>player.  The playername is expected as the next argument.  The vote and veto
+<br>commands behave identical to the /vote and /veto command counterparts,
+<br>expecting the same arguments in following.  By default, you must be registered
+<br>to request or vote on a poll, and an admin to veto.
+<br>
+<p><br><dt><b>/quit</b> <b>[<i>message</i>]</b> 
+<br><dd>Quit the game with a goodbye message (similar to IRC's /quit)
+<br>/quit Gotta go! bye everyone!
+<br>
+<p><br><dt><b>/report</b> <b><i>message</i></b> 
+<br><dd>Write a message to the server administrator. Example:
+<br>/report I like this map!
+<br>
+<p><br><dt><b>/uptime</b> 
+<br><dd>Prints server's current running time in days, hours, mins and secs.
+<br>
+<p><br><dt><b>/vote</b> <b>{<i>yes</i></b> <b>|</b> <b><i>no</i>}</b> 
+<br><dd>If there is a poll active, this command will place a vote in favor or in
+<br>opposition to the poll.  Multiple languages are supported as a vote argument
+<br>in addition to "yes" and "no".  By default, you must be registered to vote on
+<br>a poll.
+<br>
+<p><br>
+<p><br></dl>
+</ul><H2>SERVER ADMINISTRATIVE COMMANDS </H2><ul>
+
+</pre>
+<p><dl compact><dt><b>/ban</b> <b>{<i>ip</i></b> <b>|</b> <b><i>ipList</i></b> <b>|</b> <b><i>#slot</i></b> <b>|</b> <b><i>Player Name</i></b> <b>|</b> <b><i>playerName</i>}</b> <b><i>duration</i></b> <b><i>reason</i></b> 
+<dd>
+<p>Ban players using the specified IPs for certain length of time
+from using this server.
+&lt;duration&gt; can be:
+    'short' or 'default' for the default ban time
+    'forever' or 'max' for infinite bans
+    a time in the format &lt;weeks&gt;W&lt;days&gt;D&lt;hours&gt;H&lt;minutes&gt;M
+    just a number of minutes
+
+<p>Examples:
+<pre>
+/ban 35.23.43.66 2 cheating
+<br>bans player with specific ip for 2 minutes
+<br>/ban 35.23.*.*,47.23.17.* 0 Cheaters
+<br>bans all ips in this range forever
+<br>/ban 36.37.2.8 2h30m "ShootMe" was abusing players
+<br>bans specific ip for 2.5 hours with given reason
+<br>/ban #5 60m Rejoining
+<br>bans player using slot 5 for 60 minutes with given reason
+<br>/ban "Tanker" max cheating
+<br>bans the player Tanker forever because cheating
+<br>
+<p><br>Note: Slots numbers are only displayed in admins clients.
+<br>Duration and reason are required.
+<br>
+<p><br><dt><b>/banlist</b> 
+<br><dd>List all of the IPs currently banned from this server. Example:
+<br>/banlist
+<br>IP Ban List
+<br>------------
+<br>35.23.43.66 (2 minutes) banned by Tankmaster
+<br>    reason: Cheaters
+<br>47.23.17.* banned by Tankslave
+<br>
+<p><br><dt><b>/checkip</b> <b><i>ip</i></b> 
+<br><dd>Check whether the IP is banned and print the corresponding rule. This does not
+<br>cover hostbans. Example:
+<br>/checkip 35.23.43.66
+<br>35.23.43.66 is banned:
+<br>35.23.43.66 banned by Tankmaster
+<br>    reason: Cheaters
+<br>
+<p><br><dt><b>/countdown</b> <b>[<i>seconds</i>]</b> 
+<br><dd>Starts the countdown sequence for a timed game.  The countdown
+<br>sequence length can optionally be specified in seconds.  Examples:
+<br>/countdown
+<br>/countdown 3
+<br>
+<p><br><dt><b>/flag</b> <b>reset</b> <b>{<i>all</i>|<i>unused</i>|<i>team</i>|<i>FlagId</i>}</b> 
+<br><dd>Repositions flags. If <i>unused</i> is specified, flags carried
+<br>by tanks are not affected. Using the <i>team</i> option only
+<br>resets team flags, whereas specifying a flag id (such as GM) only
+<br>repositions flags of this type. If <i>noteam</i> is specified,
+<br>team flags will not be reset. Examples:
+<br>/flag reset unused noteam
+<br>/flag reset G
+<br>
+<p><br><dt><b>/flag</b> <b>show</b> 
+<br><dd>Shows all flags with information. Example:
+<br>0: p:-1 r:1 g:1 1:V s:1 p:159.1x43.2x0.0
+<br>1: p:2 r:1 g:1 1:SW s:1 p:209.1x143.2x10.0
+<br>2: p:-1 r:1 g:3 1:L s:1 p:-29.1x301.2x0.0
+<br>
+<p><br><dt><b>/flag</b> <b>up</b> 
+<br><dd>Removes all flags from the game
+<br>
+<p><br><dt><b>/gameover</b> 
+<br><dd>Ends the current game
+<br>
+<p><br><dt><b>/handicap</b> 
+<br><dd>Shows the handicap boost percentage for every player
+<br>
+<p><br><dt><b>/hostban</b> <b><i>hostpattern</i></b> <b><i>duration</i></b> <b><i>reason</i></b> 
+<br><dd>Ban players using the specified hostnames for a certain length of time from using this server.
+<br>Example:
+<br>/hostban *.foo.com 2 cheating
+<br>bans all players from foo.com for 2 minutes
+<br>
+<p><br><dt><b>/hostbanlist</b> 
+<br><dd>List all of the host patterns currently banned from this server.
+<br>
+<p><br><dt><b>/jitterwarn</b> <b>[<i>time</i>]</b> 
+<br><dd>Change the maximum allowed jitter time. Example:
+<br>/jitterwarn 50
+<br>
+<p><br><dt><b>/jitterdrop</b> <b>[<i>count</i>]</b> 
+<br><dd>Change the number of jitter warnings given before a player is kicked. Example:
+<br>/jitterdrop 3
+<br>
+<p><br><dt><b>/kick</b> <b>{<i>Player Name</i></b> <b>|</b> <b><i>playerName</i></b> <b>|</b> <b><i>#slot</i>}</b> <b><i>reason</i></b> 
+<br><dd>Kick a player off the server. Example:
+<br>/kick Gerbol
+<br>You were kicked off the server by MrApathyCream
+<br>
+<p><br>/kick #1 Team killing
+<br>Kick the player using slot 1 because Team Killing
+<br>
+<p><br>Note: Slots numbers are only displayed in admins clients.
+<br>A reason is required
+<br>
+<p><br><dt><b>/kill</b> <b>{<i>Player Name</i></b> <b>|</b> <b><i>playerName</i></b> <b>|</b> <b><i>#slot</i>}</b> <b>[<i>reason</i>]</b> 
+<br><dd>Kill a player just like when shooting. Example:
+<br>/kill Gerbol
+<br>kill the player named Gerbol
+<br>
+<p><br>/kill #4 teamkilling
+<br>Kill the player using slot 4 because teamkilling
+<br>
+<p><br><dt><b>/lagwarn</b> <b>[<i>time</i>]</b> 
+<br><dd>Change the maximum allowed lag time. Example:
+<br>/lagwarn 300
+<br>
+<p><br><dt><b>/lagdrop</b> <b>[<i>count</i>]</b> 
+<br><dd>Change the number of lag warnings given before a player is kicked. Example:
+<br>/lagdrop 3
+<br>
+<p><br><dt><b>/modcount</b> <b>[<i>seconds</i>]</b> 
+<br><dd>Change the time on the clock by the specified number of seconds. Example:
+<br>/modcount +320
+<br>
+<p><br><dt><b>/mute</b> <b>{<i>#slot</i></b> <b>|</b> <b><i>callsign</i>}</b> 
+<br><dd>Allows a server admin to remove the ability for a player to communicate with
+<br>other players. Once muted the player may only talk to admins on the server.
+<br>This command removes the TALK permission that is enabled by default for all
+<br>players. (disabling TALK by default would let you run a "silent" server)
+<br>
+<p><br><dt><b>/packetlosswarn</b> <b>[<i>time</i>]</b> 
+<br><dd>Change the maximum allowed packetloss. Example:
+<br>/packetloss 1
+<br>
+<p><br><dt><b>/packetlossdrop</b> <b>[<i>count</i>]</b> 
+<br><dd>Change the number of packetloss warnings given before a player is kicked. Example:
+<br>/packetloss 3
+<br>
+<p><br><dt><b>/playerlist</b> 
+<br><dd>List player names and IP addresses. Example:
+<br>/playerlist
+<br>[0]MrApathyCream: 35.23.65.44:4808 udp id
+<br>[1]Gerbol: 130.123.1.55:4909 udp id
+<br>[2]captain_macgyver: 15.32.122.51:3201 udp id
+<br>
+<p><br><dt><b>/record</b> <b>file</b> <b><i>filename</i></b> 
+<br><dd>Start recording directly to a file
+<br>
+<p><br><dt><b>/record</b> <b>list</b> 
+<br><dd>List all files in the recordings directory
+<br>
+<p><br><dt><b>/record</b> <b>rate</b> <b><i>seconds</i></b> 
+<br><dd>Set the time between game state updates stored in the recording. This will affect
+<br>the granularity of the 'skips' you can do while replaying a file. It will also
+<br>make the recording files bigger if it is set to a faster update rate.
+<br>
+<p><br><dt><b>/record</b> <b>save</b> <b><i>filename</i></b> <b>[<i>seconds</i>]</b> 
+<br><dd>Save the recording buffer into a file. If seconds is specified, then only save
+<br>that many previous seconds into the file.
+<br>
+<p><br><dt><b>/record</b> <b>size</b> <b><i>megabytes</i></b> 
+<br><dd>Set the size of the recording memory buffer
+<br>
+<p><br><dt><b>/record</b> <b>start</b> 
+<br><dd>Start recording into the memory buffer
+<br>
+<p><br><dt><b>/record</b> <b>stats</b> 
+<br><dd>Display the statistics for the current recording (file or buffered)
+<br>
+<p><br><dt><b>/record</b> <b>stop</b> 
+<br><dd>Stop recording into the memory buffer
+<br>
+<p><br><dt><b>/replay</b> <b>list</b> 
+<br><dd>List all files in the recordings directory
+<br>
+<p><br><dt><b>/replay</b> <b>load</b> <b>{<i>filename</i></b> <b>|</b> <b><i>#index</i>}</b> 
+<br><dd>Load the specified recording file by name, or by index
+<br>(same indices as produced by the 'replay list' command)
+<br>
+<p><br><dt><b>/replay</b> <b>loop</b> 
+<br><dd>Start looping the recording. This will oftentimes require that all players connected
+<br>to the server rejoin  (to reload the map, etc...)
+<br>
+<p><br><dt><b>/replay</b> <b>play</b> 
+<br><dd>Start playing the recording. This will oftentimes require that all players connected
+<br>to the server rejoin  (to reload the map, etc...)
+<br>
+<p><br><dt><b>/replay</b> <b>skip</b> <b>[{<i>+</i></b> <b>|</b> <b><i>-</i>}</b> <b><i>seconds</i>]</b> 
+<br><dd>If seconds is specified, then skip that amount of time in the recording.
+<br>Otherwise, skip forwards until there is activity.
+<br>
+<p><br><dt><b>/replay</b> <b>stats</b> 
+<br><dd>Show the current replay status (filename, position, etc...)
+<br>
+<br>
+<p><br><dt><b>/say</b> <b><i>message</i></b> 
+<br><dd>Generate a public message sent by the server. Example:
+<br>/say This is a servermessage
+<br>
+<p><br><dt><b>/sendhelp</b> <b>{<i>Player name</i></b> <b>|</b> <b><i>playerName</i></b> <b>|</b> <b><i>#slot</i>}</b> <b><i>help</b> <b>page</i></b> 
+<br><dd>Send the specified help page to a user
+<br>/sendhelp register "Foo"
+<br>Send the the help page 'register' to the player Foo
+<br>
+<p><br><dt><b>/shutdownserver</b> 
+<br><dd>Stop serving BZFlag on this server
+<br>
+<p><br><dt><b>/superkill</b> 
+<br><dd>Kick all players off the server
+<br>
+<p><br><dt><b>/unmute</b> <b>{<i>#slot</i></b> <b>|</b> <b><i>callsign</i>}</b> 
+<br><dd>Allows a server admin to restore the TALK permission to a previously muted
+<br>player.
+<br>
+<p><br><dt><b>/veto</b> 
+<br><dd>If there is a poll active, this will cancel the poll.  By default, you must be
+<br>an admin to veto a poll.
+<br>
+<p><br><dt><b>/viewreports</b> 
+<br><dd>View the server's report file.
+<br>
+<br>
+<p><br>
+<p><br></dl>
+</ul><H2>USER MANAGEMENT </H2><ul>
+
+</pre>Generally, you start with empty files for the user and password
+databases.  These are maintained by the server, and modifiable through
+server commands.  Users in turn belong to groups.  Groups are
+generally customized to perhaps allow administrative control to
+trusted users.
+
+<p>There are both local and global groups, i.e. groups that are available
+across the entire BZFlag network.  In setting up a server, you may
+want to specify global groups that will allow already well known and
+trusted users to police your server and help maintain control against
+cheaters and abuse.
+
+<p>The server will automatically create three groups: EVERYONE, VERIFIED,
+and LOCAL.ADMIN.  EVERYONE  has  ACTIONMESSAGE, ADMINMESSAGESEND,
+CLIENTQUERY, DATE, FLAGHISTORY, IDLESTATS, LAGSTATS, PRIVATEMESSAGE,
+SHOWMOTTO, SPAWN and TALK by default. VERIFIED has LISTPLUGINS, POLL,
+POLLKICK, POLLBAN, POLLKICK, POLLSET, POLLFLAGRESET, REPORT and VOTE.
+The LOCAL.ADMIN group has almost every permission possible (similar to
+granting admin powers via /password).
+
+<p>Once the server is running, users can register their callsigns and
+admins can set their group memberships. Users can use any command that
+their permissions allow. Every user, registered or not, is part of the
+EVERYONE group. When a user identifies, they become part of the
+VERIFIED group.
+
+<p>In addition, there are global groups available that persist
+network-wide.  Users that register their callsigns on the BZFlag
+website at https://forums.bzflag.org/ have the ability to globally
+authenticate by providing a password from within the client.  When
+they authenticate, bzfs will ask the list server if they belong to any
+of the groups listed in your group database file that are not prefixed
+with "LOCAL.".  If they are a member of a group in question, then they
+are granted the permissions you specify for that group.
+
+<p>A group database file is set up to contain the specific local and
+global groups you care to have on your server in addition to default groups
+and exactly which permissions are granted by each.  These files are laid out
+with one line per group, using the following format:
+
+<p>GROUP_NAME: [*Group] [ +| -| !]perm1 [ +| -| !]perm2 ... permN
+
+<p>
+<p>*Group: inherit permissions from existing group "Group"
+<br>
+
+<p>+perm: add perm to this group
+<br>
+
+<p>-perm: remove perm from this group
+<br>
+
+<p>!perm: forbid perm for this group. makes perm inaccessible whether it's granted
+from another group or not
+
+<p>If no operator is given with a permission it is handled like +perm. A group
+line for a previously existing group adds to already granted permissions. That
+way you can spread a group's definition over several lines:
+
+<p>GROUP_NAME: +perm1 +perm2
+<br>
+GROUP_NAME: +perm3 +perm4 -perm5
+
+<p>Group names cannot have spaces, quotes, or other special characters in
+them.  This would be a sample line defining a "cop" group:
+
+<p>COPS: +KICK +SHORTBAN +BANLIST
+
+<p>Now a group USERADMIN with all permissions granted to COPS plus some additional
+could look like this:
+
+<p>USERADMIN: *COPS +BAN +UNBAN
+
+<p>Probably you want to define customized permissions for the default
+group "VERIFIED" instead of those automatically assigned by the server:
+
+<p>VERIFIED: -ALL +perm1 +perm2 ...
+
+<p>Or you want to disable the /poll command entirely?
+
+<p>EVERYONE: !POLL
+
+<p>To distinguish between a group that is local and one that is global,
+use the "LOCAL." prefix as part of the group name, e.g.:
+
+<p>LOCAL.OPERATOR: BANLIST
+
+<p>
+<p>The available permissions are as follows:
+
+<p>
+<p>ACTIONMESSAGE	/me
+<br>
+ADMINMESSAGERECEIVE	player receives messages sent to admin channel
+<br>
+ADMINMESSAGESEND	player may send messages on the admin channel
+<br>
+ALL	<b>all</b> permissions available
+<br>
+ANTIBAN	player is immune to /ban
+<br>
+ANTIKICK	player is immune to /kick
+<br>
+ANTIKILL	player is immune to /kill
+<br>
+ANTIPOLL	player is immune to /poll
+<br>
+ANTIPOLLBAN	player is immune to /poll ban
+<br>
+ANTIPOLLKICK	player is immune to /poll kick
+<br>
+ANTIPOLLKILL	player is immune to /poll kill
+<br>
+BAN	/ban /hostban
+<br>
+BANLIST	/banlist /hostbanlist
+<br>
+CLIENTQUERY	/clientquery
+<br>
+COUNTDOWN	/countdown
+<br>
+ENDGAME	/gameover
+<br>
+FLAGHISTORY	/flaghistory
+<br>
+FLAGMASTER	/flag
+<br>
+FLAGMOD	/flag reset /flag show /flag history
+<br>
+HIDEADMIN	player doesn't show the @ sign
+<br>
+IDLESTATS	/idlestats
+<br>
+INFO	not implemented
+<br>
+JITTERWARN	/jitterwarn /jitterdrop
+<br>
+KICK	/kick
+<br>
+LAGSTATS	/lagstats
+<br>
+LAGWARN	/lagwarn /lagdrop
+<br>
+LISTPERMS	not implemented
+<br>
+LISTPLUGINS	/listplugins
+<br>
+MASTERBAN	/masterban
+<br>
+MODCOUNT	/modcount
+<br>
+MUTE	/mute
+<br>
+PACKETLOSSWARN	/packetlosswarn /packetlossdrop
+<br>
+PLAYERLIST	/playerlist
+<br>
+PLUGINS	/listplugins /loadplugin /unloadplugin
+<br>
+POLL	/poll
+<br>
+POLLBAN	/poll ban
+<br>
+POLLFLAGRESET	/poll flagreset
+<br>
+POLLKICK	/poll kick
+<br>
+POLLSET	/poll set
+<br>
+PRIVATEMESSAGE	/msg
+<br>
+RECORD	/record
+<br>
+REJOIN	allows instant rejoin, regardless of _rejoinTime
+<br>
+REMOVEPERMS	/removegroup
+<br>
+REPLAY	/replay
+<br>
+REPORT	/report
+<br>
+REQUIREIDENTIFY	user must use global registration
+<br>
+SAY	/say
+<br>
+SENDHELP	/sendhelp
+<br>
+SETALL	use of all set/remove commands
+<br>
+SETPERMS	/setgroup
+<br>
+SETPASSWORD	not implemented
+<br>
+SETVAR	/set /reset
+<br>
+SHORTBAN	/ban (with a limited duration)
+<br>
+SHOWADMIN	player shows an @ regardless of having 'shortban' perm
+<br>
+SHOWMOTTO	player is allowed to display their motto on the scoreboard
+<br>
+SHOWOTHERS	/showgroup /showperms (on others)
+<br>
+SHUTDOWNSERVER	/shutdownserver
+<br>
+SPAWN	join game as a player. observers don't need this flag.
+<br>
+SUPERKILL	/superkill
+<br>
+TALK	allows all players to send messages
+<br>
+UNBAN	/unban /hostunban
+<br>
+UNMUTE	/unmute
+<br>
+VETO	/veto
+<br>
+VOTE	/vote
+
+<p><p><dl compact><dt><b>/grouplist</b> 
+<dd>Lists the available user groups
+
+<p><dt><b>/groupperms</b> 
+<dd>Lists the permissions for each group
+
+<p><dt><b>/masterban</b> <b>{<i>flush</i></b> <b>|</b> <b><i>reload</i>}</b> 
+<dd>Forces the server to flush any bans from the master server. If reload is specified
+instead of flush, also reloads bans from the the internet. Local bans are unaffected.
+This command requires the UNBAN permission.
+
+<p><dt><b>/reload</b> 
+<dd>Reloads the user, group, and password files (for synchronization between
+multiple servers on the same machine)
+
+<p><dt><b>/removegroup</b> <b><i>callsign</i></b> <b><i>group</i></b> 
+<dd>Remove a user from a group
+
+<p><dt><b>/setgroup</b> <b><i>callsign</i></b> <b><i>group</i></b> 
+<dd>Add a user to a group
+
+<p><dt><b>/showgroup</b> <b><i>callsign</i></b> 
+<dd>Lists the groups that a registered user is a member of
+
+<p>
+<p></dl>
+</ul><H2>SEE ALSO </H2><ul>
+
+bzflag(6), bzadmin(6), bzw(5)
+</ul>
+<!--#exec cmd="trailer" -->

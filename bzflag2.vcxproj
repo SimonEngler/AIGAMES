@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{494BC12F-7934-4F84-8F65-6D1A5DB92FBB}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\simon\OneDrive\Documents\Visual Studio 2017\bzflag-dependencies\output-debug-x86; C:\Users\simon\OneDrive\Documents\Visual Studio 2017\bzflag-dependencies\output-release-x86;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>C:\Users\simon\OneDrive\Documents\Visual Studio 2017\bzflag-dependencies\output-debug-x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\simon\OneDrive\Documents\Visual Studio 2017\bzflag-dependencies\output-debug-x86; C:\Users\simon\OneDrive\Documents\Visual Studio 2017\bzflag-dependencies\output-release-x86;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="misc\3ds2bzw.cxx" />
+    <ClCompile Include="misc\man2html.c" />
+    <ClCompile Include="misc\rrlog.cxx" />
+    <ClCompile Include="misc\Template.cxx" />
+    <ClCompile Include="plugins\airspawn\airspawn.cpp" />
+    <ClCompile Include="plugins\autoflagreset\autoFlagReset.cpp" />
+    <ClCompile Include="plugins\bzfscron\bzfscron.cpp" />
+    <ClCompile Include="plugins\bzfscron\CronJob.cpp" />
+    <ClCompile Include="plugins\chathistory\chathistory.cpp" />
+    <ClCompile Include="plugins\customflagsample\customflagsample.cpp" />
+    <ClCompile Include="plugins\custompolltypesample\customPollTypeSample.cpp" />
+    <ClCompile Include="plugins\customzonesample\CustomZoneSample.cpp" />
+    <ClCompile Include="plugins\fairctf\fairCTF.cpp" />
+    <ClCompile Include="plugins\fastmap\fastmap.cpp" />
+    <ClCompile Include="plugins\flagstay\flagStay.cpp" />
+    <ClCompile Include="plugins\holdtheflag\HoldTheFlag.cpp" />
+    <ClCompile Include="plugins\keepaway\keepaway.cpp" />
+    <ClCompile Include="plugins\killall\killall.cpp" />
+    <ClCompile Include="plugins\koth\koth.cpp" />
+    <ClCompile Include="plugins\logdetail\logDetail.cpp" />
+    <ClCompile Include="plugins\nagware\nagware.cpp" />
+    <ClCompile Include="plugins\phoenix\Phoenix.cpp" />
+    <ClCompile Include="plugins\playhistorytracker\playHistoryTracker.cpp" />
+    <ClCompile Include="plugins\plugin_utils\plugin_config.cpp" />
+    <ClCompile Include="plugins\plugin_utils\plugin_files.cpp" />
+    <ClCompile Include="plugins\plugin_utils\plugin_groups.cpp" />
+    <ClCompile Include="plugins\plugin_utils\plugin_utils.cpp" />
+    <ClCompile Include="plugins\pushstats\pushstats.cpp" />
+    <ClCompile Include="plugins\rabbittimer\rabbitTimer.cpp" />
+    <ClCompile Include="plugins\rabidrabbit\rabidRabbit.cpp" />
+    <ClCompile Include="plugins\recordmatch\recordmatch.cpp" />
+    <ClCompile Include="plugins\regflag\regFlag.cpp" />
+    <ClCompile Include="plugins\roguegenocide\RogueGenocide.cpp" />
+    <ClCompile Include="plugins\sample_plugin\SAMPLE_PLUGIN.cpp" />
+    <ClCompile Include="plugins\servercontrol\serverControl.cpp" />
+    <ClCompile Include="plugins\serversideplayersample\playerHandler.cpp" />
+    <ClCompile Include="plugins\serversideplayersample\serverSidePlayerSample.cpp" />
+    <ClCompile Include="plugins\shockwavedeath\shockwaveDeath.cpp" />
+    <ClCompile Include="plugins\superuser\superUser.cpp" />
+    <ClCompile Include="plugins\teamflagreset\teamflagreset.cpp" />
+    <ClCompile Include="plugins\thiefcontrol\thiefControl.cpp" />
+    <ClCompile Include="plugins\timedctf\timedctf.cpp" />
+    <ClCompile Include="plugins\timelimit\TimeLimit.cpp" />
+    <ClCompile Include="plugins\wwzones\wwzones.cpp" />
+    <ClCompile Include="src\3d\FontManager.cxx" />
+    <ClCompile Include="src\3d\ImageFont.cxx" />
+    <ClCompile Include="src\3d\TextureFont.cxx" />
+    <ClCompile Include="src\3d\TextureManager.cxx" />
+    <ClCompile Include="src\bzadmin\bzadmin.cxx" />
+    <ClCompile Include="src\bzadmin\BZAdminClient.cxx" />
+    <ClCompile Include="src\bzadmin\BZAdminUI.cxx" />
+    <ClCompile Include="src\bzadmin\CursesMenu.cxx" />
+    <ClCompile Include="src\bzadmin\CursesUI.cxx" />
+    <ClCompile Include="src\bzadmin\OptionParser.cxx" />
+    <ClCompile Include="src\bzadmin\ServerLink.cxx" />
+    <ClCompile Include="src\bzadmin\StdBothUI.cxx" />
+    <ClCompile Include="src\bzadmin\StdInUI.cxx" />
+    <ClCompile Include="src\bzadmin\StdOutUI.cxx" />
+    <ClCompile Include="src\bzadmin\UIMap.cxx" />
+    <ClCompile Include="src\bzflag\ActionBinding.cxx" />
+    <ClCompile Include="src\bzflag\AudioMenu.cxx" />
+    <ClCompile Include="src\bzflag\AutoPilot.cxx" />
+    <ClCompile Include="src\bzflag\BackgroundRenderer.cxx" />
+    <ClCompile Include="src\bzflag\BaseLocalPlayer.cxx" />
+    <ClCompile Include="src\bzflag\bzflag.cxx" />
+    <ClCompile Include="src\bzflag\CacheMenu.cxx" />
+    <ClCompile Include="src\bzflag\callbacks.cxx" />
+    <ClCompile Include="src\bzflag\clientCommands.cxx" />
+    <ClCompile Include="src\bzflag\clientConfig.cxx" />
+    <ClCompile Include="src\bzflag\CommandsImplementation.cxx" />
+    <ClCompile Include="src\bzflag\ComposeDefaultKey.cxx" />
+    <ClCompile Include="src\bzflag\ControlPanel.cxx" />
+    <ClCompile Include="src\bzflag\daylight.cxx" />
+    <ClCompile Include="src\bzflag\defaultBZDB.cxx" />
+    <ClCompile Include="src\bzflag\DisplayMenu.cxx" />
+    <ClCompile Include="src\bzflag\Downloads.cxx" />
+    <ClCompile Include="src\bzflag\EffectsMenu.cxx" />
+    <ClCompile Include="src\bzflag\effectsRenderer.cxx" />
+    <ClCompile Include="src\bzflag\EntryZone.cxx" />
+    <ClCompile Include="src\bzflag\FlashClock.cxx" />
+    <ClCompile Include="src\bzflag\ForceFeedback.cxx" />
+    <ClCompile Include="src\bzflag\FormatMenu.cxx" />
+    <ClCompile Include="src\bzflag\GuidedMissleStrategy.cxx" />
+    <ClCompile Include="src\bzflag\GUIOptionsMenu.cxx" />
+    <ClCompile Include="src\bzflag\HelpMenu.cxx" />
+    <ClCompile Include="src\bzflag\HUDDialog.cxx" />
+    <ClCompile Include="src\bzflag\HUDDialogStack.cxx" />
+    <ClCompile Include="src\bzflag\HUDRenderer.cxx" />
+    <ClCompile Include="src\bzflag\HUDui.cxx" />
+    <ClCompile Include="src\bzflag\HUDuiControl.cxx" />
+    <ClCompile Include="src\bzflag\HUDuiDefaultKey.cxx" />
+    <ClCompile Include="src\bzflag\HUDuiLabel.cxx" />
+    <ClCompile Include="src\bzflag\HUDuiList.cxx" />
+    <ClCompile Include="src\bzflag\HUDuiTextureLabel.cxx" />
+    <ClCompile Include="src\bzflag\HUDuiTypeIn.cxx" />
+    <ClCompile Include="src\bzflag\InputMenu.cxx" />
+    <ClCompile Include="src\bzflag\JoinMenu.cxx" />
+    <ClCompile Include="src\bzflag\KeyboardMapMenu.cxx" />
+    <ClCompile Include="src\bzflag\LocalCommand.cxx" />
+    <ClCompile Include="src\bzflag\LocalPlayer.cxx" />
+    <ClCompile Include="src\bzflag\MainMenu.cxx" />
+    <ClCompile Include="src\bzflag\MainWindow.cxx" />
+    <ClCompile Include="src\bzflag\MenuDefaultKey.cxx" />
+    <ClCompile Include="src\bzflag\motd.cxx" />
+    <ClCompile Include="src\bzflag\NewVersionMenu.cxx" />
+    <ClCompile Include="src\bzflag\OptionsMenu.cxx" />
+    <ClCompile Include="src\bzflag\Plan.cxx" />
+    <ClCompile Include="src\bzflag\Player.cxx" />
+    <ClCompile Include="src\bzflag\playing.cxx" />
+    <ClCompile Include="src\bzflag\QuickKeysMenu.cxx" />
+    <ClCompile Include="src\bzflag\QuitMenu.cxx" />
+    <ClCompile Include="src\bzflag\RadarRenderer.cxx" />
+    <ClCompile Include="src\bzflag\Region.cxx" />
+    <ClCompile Include="src\bzflag\RegionPriorityQueue.cxx" />
+    <ClCompile Include="src\bzflag\RemotePlayer.cxx" />
+    <ClCompile Include="src\bzflag\Roaming.cxx" />
+    <ClCompile Include="src\bzflag\RobotPlayer.cxx" />
+    <ClCompile Include="src\bzflag\RoofTops.cxx" />
+    <ClCompile Include="src\bzflag\Roster.cxx" />
+    <ClCompile Include="src\bzflag\SaveWorldMenu.cxx" />
+    <ClCompile Include="src\bzflag\SceneBuilder.cxx" />
+    <ClCompile Include="src\bzflag\SceneRenderer.cxx" />
+    <ClCompile Include="src\bzflag\ScoreboardRenderer.cxx" />
+    <ClCompile Include="src\bzflag\SegmentedShotStrategy.cxx" />
+    <ClCompile Include="src\bzflag\ServerCommandKey.cxx" />
+    <ClCompile Include="src\bzflag\ServerLink.cxx" />
+    <ClCompile Include="src\bzflag\ServerListFilter.cxx" />
+    <ClCompile Include="src\bzflag\ServerListFilterHelpMenu.cxx" />
+    <ClCompile Include="src\bzflag\ServerListFilterMenu.cxx" />
+    <ClCompile Include="src\bzflag\ServerMenu.cxx" />
+    <ClCompile Include="src\bzflag\ServerStartMenu.cxx" />
+    <ClCompile Include="src\bzflag\ShockWaveStrategy.cxx" />
+    <ClCompile Include="src\bzflag\ShotPath.cxx" />
+    <ClCompile Include="src\bzflag\ShotPathSegment.cxx" />
+    <ClCompile Include="src\bzflag\ShotStatistics.cxx" />
+    <ClCompile Include="src\bzflag\ShotStats.cxx" />
+    <ClCompile Include="src\bzflag\ShotStatsDefaultKey.cxx" />
+    <ClCompile Include="src\bzflag\ShotStrategy.cxx" />
+    <ClCompile Include="src\bzflag\SilenceDefaultKey.cxx" />
+    <ClCompile Include="src\bzflag\sound.cxx" />
+    <ClCompile Include="src\bzflag\stars.cxx" />
+    <ClCompile Include="src\bzflag\TargetingUtils.cxx" />
+    <ClCompile Include="src\bzflag\TrackMarks.cxx" />
+    <ClCompile Include="src\bzflag\Weapon.cxx" />
+    <ClCompile Include="src\bzflag\WeatherRenderer.cxx" />
+    <ClCompile Include="src\bzflag\World.cxx" />
+    <ClCompile Include="src\bzflag\WorldBuilder.cxx" />
+    <ClCompile Include="src\bzflag\WorldPlayer.cxx" />
+    <ClCompile Include="src\bzfs\AccessControlList.cxx" />
+    <ClCompile Include="src\bzfs\Authentication.cxx" />
+    <ClCompile Include="src\bzfs\BanCommands.cxx" />
+    <ClCompile Include="src\bzfs\base64.cxx" />
+    <ClCompile Include="src\bzfs\bzfs.cxx" />
+    <ClCompile Include="src\bzfs\bzfsAPI.cxx" />
+    <ClCompile Include="src\bzfs\bzfsHTTPAPI.cxx" />
+    <ClCompile Include="src\bzfs\bzfsPlugins.cxx" />
+    <ClCompile Include="src\bzfs\BZWError.cxx" />
+    <ClCompile Include="src\bzfs\BZWReader.cxx" />
+    <ClCompile Include="src\bzfs\CmdLineOptions.cxx" />
+    <ClCompile Include="src\bzfs\commands.cxx" />
+    <ClCompile Include="src\bzfs\CustomArc.cxx" />
+    <ClCompile Include="src\bzfs\CustomBase.cxx" />
+    <ClCompile Include="src\bzfs\CustomBox.cxx" />
+    <ClCompile Include="src\bzfs\CustomCone.cxx" />
+    <ClCompile Include="src\bzfs\CustomDynamicColor.cxx" />
+    <ClCompile Include="src\bzfs\CustomGate.cxx" />
+    <ClCompile Include="src\bzfs\CustomGroup.cxx" />
+    <ClCompile Include="src\bzfs\CustomLink.cxx" />
+    <ClCompile Include="src\bzfs\CustomMaterial.cxx" />
+    <ClCompile Include="src\bzfs\CustomMesh.cxx" />
+    <ClCompile Include="src\bzfs\CustomMeshFace.cxx" />
+    <ClCompile Include="src\bzfs\CustomMeshTransform.cxx" />
+    <ClCompile Include="src\bzfs\CustomPhysicsDriver.cxx" />
+    <ClCompile Include="src\bzfs\CustomPyramid.cxx" />
+    <ClCompile Include="src\bzfs\CustomSphere.cxx" />
+    <ClCompile Include="src\bzfs\CustomTetra.cxx" />
+    <ClCompile Include="src\bzfs\CustomTextureMatrix.cxx" />
+    <ClCompile Include="src\bzfs\CustomWaterLevel.cxx" />
+    <ClCompile Include="src\bzfs\CustomWeapon.cxx" />
+    <ClCompile Include="src\bzfs\CustomWorld.cxx" />
+    <ClCompile Include="src\bzfs\CustomZone.cxx" />
+    <ClCompile Include="src\bzfs\DropGeometry.cxx" />
+    <ClCompile Include="src\bzfs\EntryZones.cxx" />
+    <ClCompile Include="src\bzfs\Filter.cxx" />
+    <ClCompile Include="src\bzfs\FlagHistory.cxx" />
+    <ClCompile Include="src\bzfs\FlagInfo.cxx" />
+    <ClCompile Include="src\bzfs\GameKeeper.cxx" />
+    <ClCompile Include="src\bzfs\ListServerConnection.cxx" />
+    <ClCompile Include="src\bzfs\MasterBanList.cxx" />
+    <ClCompile Include="src\bzfs\ParseMaterial.cxx" />
+    <ClCompile Include="src\bzfs\Permissions.cxx" />
+    <ClCompile Include="src\bzfs\RandomSpawnPolicy.cxx" />
+    <ClCompile Include="src\bzfs\RecordReplay.cxx" />
+    <ClCompile Include="src\bzfs\RejoinList.cxx" />
+    <ClCompile Include="src\bzfs\Score.cxx" />
+    <ClCompile Include="src\bzfs\ServerCommand.cxx" />
+    <ClCompile Include="src\bzfs\ServerSidePlayer.cxx" />
+    <ClCompile Include="src\bzfs\ShotManager.cxx" />
+    <ClCompile Include="src\bzfs\SpawnPolicy.cxx" />
+    <ClCompile Include="src\bzfs\SpawnPosition.cxx" />
+    <ClCompile Include="src\bzfs\TeamBases.cxx" />
+    <ClCompile Include="src\bzfs\VotingArbiter.cxx" />
+    <ClCompile Include="src\bzfs\WorldEventManager.cxx" />
+    <ClCompile Include="src\bzfs\WorldFileLocation.cxx" />
+    <ClCompile Include="src\bzfs\WorldFileObject.cxx" />
+    <ClCompile Include="src\bzfs\WorldFileObstacle.cxx" />
+    <ClCompile Include="src\bzfs\WorldGenerators.cxx" />
+    <ClCompile Include="src\bzfs\WorldInfo.cxx" />
+    <ClCompile Include="src\bzfs\WorldWeapons.cxx" />
+    <ClCompile Include="src\common\AccessList.cxx" />
+    <ClCompile Include="src\common\AutoCompleter.cxx" />
+    <ClCompile Include="src\common\Bundle.cxx" />
+    <ClCompile Include="src\common\BundleMgr.cxx" />
+    <ClCompile Include="src\common\BZDBCache.cxx" />
+    <ClCompile Include="src\common\BZDBLocal.cxx" />
+    <ClCompile Include="src\common\bzfio.cxx" />
+    <ClCompile Include="src\common\bzglob.cxx" />
+    <ClCompile Include="src\common\BzPNG.cxx" />
+    <ClCompile Include="src\common\bzsignal.cxx" />
+    <ClCompile Include="src\common\bz_Locale.cxx" />
+    <ClCompile Include="src\common\CommandManager.cxx" />
+    <ClCompile Include="src\common\ConfigFileManager.cxx" />
+    <ClCompile Include="src\common\Country.cxx" />
+    <ClCompile Include="src\common\cURLManager.cxx" />
+    <ClCompile Include="src\common\ErrorHandler.cxx" />
+    <ClCompile Include="src\common\FileManager.cxx" />
+    <ClCompile Include="src\common\Flag.cxx" />
+    <ClCompile Include="src\common\GameTime.cxx" />
+    <ClCompile Include="src\common\global.cxx" />
+    <ClCompile Include="src\common\KeyManager.cxx" />
+    <ClCompile Include="src\common\Language.cxx" />
+    <ClCompile Include="src\common\md5.cxx" />
+    <ClCompile Include="src\common\messages.cxx" />
+    <ClCompile Include="src\common\OSFile.cxx" />
+    <ClCompile Include="src\common\ParseColor.cxx" />
+    <ClCompile Include="src\common\PlayerState.cxx" />
+    <ClCompile Include="src\common\ShotUpdate.cxx" />
+    <ClCompile Include="src\common\StateDatabase.cxx" />
+    <ClCompile Include="src\common\Team.cxx" />
+    <ClCompile Include="src\common\TextChunkManager.cxx" />
+    <ClCompile Include="src\common\TextUtils.cxx" />
+    <ClCompile Include="src\common\TimeBomb.cxx" />
+    <ClCompile Include="src\common\TimeKeeper.cxx" />
+    <ClCompile Include="src\common\VotingBooth.cxx" />
+    <ClCompile Include="src\common\WordFilter.cxx" />
+    <ClCompile Include="src\date\buildDate.cxx" />
+    <ClCompile Include="src\game\BzMaterial.cxx" />
+    <ClCompile Include="src\game\CacheManager.cxx" />
+    <ClCompile Include="src\game\CollisionManager.cxx" />
+    <ClCompile Include="src\game\CommandsStandard.cxx" />
+    <ClCompile Include="src\game\DirectoryNames.cxx" />
+    <ClCompile Include="src\game\DynamicColor.cxx" />
+    <ClCompile Include="src\game\Frustum.cxx" />
+    <ClCompile Include="src\game\Intersect.cxx" />
+    <ClCompile Include="src\game\LagInfo.cxx" />
+    <ClCompile Include="src\game\LinkManager.cxx" />
+    <ClCompile Include="src\game\MeshTransform.cxx" />
+    <ClCompile Include="src\game\MsgStrings.cxx" />
+    <ClCompile Include="src\game\NetHandler.cxx" />
+    <ClCompile Include="src\game\PhysicsDriver.cxx" />
+    <ClCompile Include="src\game\PlayerInfo.cxx" />
+    <ClCompile Include="src\game\Ray.cxx" />
+    <ClCompile Include="src\game\ServerItem.cxx" />
+    <ClCompile Include="src\game\ServerList.cxx" />
+    <ClCompile Include="src\game\ServerListCache.cxx" />
+    <ClCompile Include="src\game\StartupInfo.cxx" />
+    <ClCompile Include="src\game\TextureMatrix.cxx" />
+    <ClCompile Include="src\geometry\AnimatedTreads.cxx" />
+    <ClCompile Include="src\geometry\BillboardSceneNode.cxx" />
+    <ClCompile Include="src\geometry\BoltSceneNode.cxx" />
+    <ClCompile Include="src\geometry\EighthDBaseSceneNode.cxx" />
+    <ClCompile Include="src\geometry\EighthDBoxSceneNode.cxx" />
+    <ClCompile Include="src\geometry\EighthDimSceneNode.cxx" />
+    <ClCompile Include="src\geometry\EighthDimShellNode.cxx" />
+    <ClCompile Include="src\geometry\EighthDPyrSceneNode.cxx" />
+    <ClCompile Include="src\geometry\FlagSceneNode.cxx" />
+    <ClCompile Include="src\geometry\FlagWarpSceneNode.cxx" />
+    <ClCompile Include="src\geometry\LaserSceneNode.cxx" />
+    <ClCompile Include="src\geometry\MeshDrawMgr.cxx" />
+    <ClCompile Include="src\geometry\MeshFragSceneNode.cxx" />
+    <ClCompile Include="src\geometry\MeshPolySceneNode.cxx" />
+    <ClCompile Include="src\geometry\MeshRenderNode.cxx" />
+    <ClCompile Include="src\geometry\MeshSceneNode.cxx" />
+    <ClCompile Include="src\geometry\models\tank\high_barrel.cxx" />
+    <ClCompile Include="src\geometry\models\tank\high_body.cxx" />
+    <ClCompile Include="src\geometry\models\tank\high_ltread.cxx" />
+    <ClCompile Include="src\geometry\models\tank\high_rtread.cxx" />
+    <ClCompile Include="src\geometry\models\tank\high_turret.cxx" />
+    <ClCompile Include="src\geometry\models\tank\low_barrel.cxx" />
+    <ClCompile Include="src\geometry\models\tank\low_body.cxx" />
+    <ClCompile Include="src\geometry\models\tank\low_ltread.cxx" />
+    <ClCompile Include="src\geometry\models\tank\low_rtread.cxx" />
+    <ClCompile Include="src\geometry\models\tank\low_turret.cxx" />
+    <ClCompile Include="src\geometry\models\tank\medium_barrel.cxx" />
+    <ClCompile Include="src\geometry\models\tank\medium_body.cxx" />
+    <ClCompile Include="src\geometry\models\tank\medium_ltread.cxx" />
+    <ClCompile Include="src\geometry\models\tank\medium_rtread.cxx" />
+    <ClCompile Include="src\geometry\models\tank\medium_turret.cxx" />
+    <ClCompile Include="src\geometry\OccluderSceneNode.cxx" />
+    <ClCompile Include="src\geometry\PolyWallSceneNode.cxx" />
+    <ClCompile Include="src\geometry\QuadWallSceneNode.cxx" />
+    <ClCompile Include="src\geometry\SceneNode.cxx" />
+    <ClCompile Include="src\geometry\SphereSceneNode.cxx" />
+    <ClCompile Include="src\geometry\TankGeometryMgr.cxx" />
+    <ClCompile Include="src\geometry\TankSceneNode.cxx" />
+    <ClCompile Include="src\geometry\TriWallSceneNode.cxx" />
+    <ClCompile Include="src\geometry\ViewFrustum.cxx" />
+    <ClCompile Include="src\geometry\WallSceneNode.cxx" />
+    <ClCompile Include="src\mediafile\AudioFile.cxx" />
+    <ClCompile Include="src\mediafile\ImageFile.cxx" />
+    <ClCompile Include="src\mediafile\MediaFile.cxx" />
+    <ClCompile Include="src\mediafile\OggAudioFile.cxx" />
+    <ClCompile Include="src\mediafile\PNGImageFile.cxx" />
+    <ClCompile Include="src\mediafile\SGIImageFile.cxx" />
+    <ClCompile Include="src\mediafile\WaveAudioFile.cxx" />
+    <ClCompile Include="src\net\Address.cxx" />
+    <ClCompile Include="src\net\AresHandler.cxx" />
+    <ClCompile Include="src\net\multicast.cxx" />
+    <ClCompile Include="src\net\network.cxx" />
+    <ClCompile Include="src\net\Pack.cxx" />
+    <ClCompile Include="src\net\Ping.cxx" />
+    <ClCompile Include="src\obstacle\ArcObstacle.cxx" />
+    <ClCompile Include="src\obstacle\BaseBuilding.cxx" />
+    <ClCompile Include="src\obstacle\BaseSceneNodeGenerator.cxx" />
+    <ClCompile Include="src\obstacle\BoxBuilding.cxx" />
+    <ClCompile Include="src\obstacle\BoxSceneNodeGenerator.cxx" />
+    <ClCompile Include="src\obstacle\ConeObstacle.cxx" />
+    <ClCompile Include="src\obstacle\EmptySceneNodeGenerator.cxx" />
+    <ClCompile Include="src\obstacle\MeshDrawInfo.cxx" />
+    <ClCompile Include="src\obstacle\MeshFace.cxx" />
+    <ClCompile Include="src\obstacle\MeshObstacle.cxx" />
+    <ClCompile Include="src\obstacle\MeshSceneNodeGenerator.cxx" />
+    <ClCompile Include="src\obstacle\Obstacle.cxx" />
+    <ClCompile Include="src\obstacle\ObstacleList.cxx" />
+    <ClCompile Include="src\obstacle\ObstacleMgr.cxx" />
+    <ClCompile Include="src\obstacle\ObstacleModifier.cxx" />
+    <ClCompile Include="src\obstacle\ObstacleSceneNodeGenerator.cxx" />
+    <ClCompile Include="src\obstacle\PyramidBuilding.cxx" />
+    <ClCompile Include="src\obstacle\PyramidSceneNodeGenerator.cxx" />
+    <ClCompile Include="src\obstacle\SphereObstacle.cxx" />
+    <ClCompile Include="src\obstacle\Teleporter.cxx" />
+    <ClCompile Include="src\obstacle\TeleporterSceneNodeGenerator.cxx" />
+    <ClCompile Include="src\obstacle\TetraBuilding.cxx" />
+    <ClCompile Include="src\obstacle\Triangulate.cxx" />
+    <ClCompile Include="src\obstacle\WallObstacle.cxx" />
+    <ClCompile Include="src\obstacle\WallSceneNodeGenerator.cxx" />
+    <ClCompile Include="src\ogl\GLCollect.cxx" />
+    <ClCompile Include="src\ogl\OpenGLFramebuffer.cxx" />
+    <ClCompile Include="src\ogl\OpenGLGState.cxx" />
+    <ClCompile Include="src\ogl\OpenGLLight.cxx" />
+    <ClCompile Include="src\ogl\OpenGLMaterial.cxx" />
+    <ClCompile Include="src\ogl\OpenGLTexture.cxx" />
+    <ClCompile Include="src\ogl\OpenGLUtils.cxx" />
+    <ClCompile Include="src\ogl\RenderNode.cxx" />
+    <ClCompile Include="src\platform\BeOSDisplay.cxx" />
+    <ClCompile Include="src\platform\BeOSMedia.cxx" />
+    <ClCompile Include="src\platform\BeOSPlatformFactory.cxx" />
+    <ClCompile Include="src\platform\BeOSVisual.cxx" />
+    <ClCompile Include="src\platform\BeOSWindow.cxx" />
+    <ClCompile Include="src\platform\BeOSWindow2.cxx" />
+    <ClCompile Include="src\platform\BzfDisplay.cxx" />
+    <ClCompile Include="src\platform\BzfJoystick.cxx" />
+    <ClCompile Include="src\platform\BzfMedia.cxx" />
+    <ClCompile Include="src\platform\BzfVisual.cxx" />
+    <ClCompile Include="src\platform\BzfWindow.cxx" />
+    <ClCompile Include="src\platform\DXJoystick.cxx" />
+    <ClCompile Include="src\platform\EvdevJoystick.cxx" />
+    <ClCompile Include="src\platform\LinuxDisplay.cxx" />
+    <ClCompile Include="src\platform\LinuxMedia.cxx" />
+    <ClCompile Include="src\platform\LinuxPlatformFactory.cxx" />
+    <ClCompile Include="src\platform\MacDataPath.cxx" />
+    <ClCompile Include="src\platform\NewMedia.cxx" />
+    <ClCompile Include="src\platform\PlatformFactory.cxx" />
+    <ClCompile Include="src\platform\SDL2Display.cxx" />
+    <ClCompile Include="src\platform\SDL2Visual.cxx" />
+    <ClCompile Include="src\platform\SDL2Window.cxx" />
+    <ClCompile Include="src\platform\SDLDisplay.cxx" />
+    <ClCompile Include="src\platform\SDLJoystick.cxx" />
+    <ClCompile Include="src\platform\SDLMedia.cxx" />
+    <ClCompile Include="src\platform\SDLPlatformFactory.cxx" />
+    <ClCompile Include="src\platform\SGIDisplay.cxx" />
+    <ClCompile Include="src\platform\SGIMedia.cxx" />
+    <ClCompile Include="src\platform\SGIPlatformFactory.cxx" />
+    <ClCompile Include="src\platform\SolarisMedia.cxx" />
+    <ClCompile Include="src\platform\SolarisPlatformFactory.cxx" />
+    <ClCompile Include="src\platform\USBJoystick.cxx" />
+    <ClCompile Include="src\platform\wave.cxx" />
+    <ClCompile Include="src\platform\WinDisplay.cxx" />
+    <ClCompile Include="src\platform\WinJoystick.cxx" />
+    <ClCompile Include="src\platform\WinMedia.cxx" />
+    <ClCompile Include="src\platform\WinPlatformFactory.cxx" />
+    <ClCompile Include="src\platform\WinVisual.cxx" />
+    <ClCompile Include="src\platform\WinWindow.cxx" />
+    <ClCompile Include="src\platform\XDisplay.cxx" />
+    <ClCompile Include="src\platform\XIJoystick.cxx" />
+    <ClCompile Include="src\platform\XVisual.cxx" />
+    <ClCompile Include="src\platform\XWindow.cxx" />
+    <ClCompile Include="src\scene\BSPSceneDatabase.cxx" />
+    <ClCompile Include="src\scene\Occluder.cxx" />
+    <ClCompile Include="src\scene\Octree.cxx" />
+    <ClCompile Include="src\scene\SceneDatabase.cxx" />
+    <ClCompile Include="src\scene\ZSceneDatabase.cxx" />
+    <ClCompile Include="tools\bzwtransform\bzwTransform.cxx" />
+    <ClCompile Include="tools\modeltool\modeltool.cxx" />
+    <ClCompile Include="tools\modeltool\Q3BSP.cxx" />
+    <ClCompile Include="tools\modeltool\SimpleTextUtils.cxx" />
+    <ClCompile Include="tools\modeltool\wavefrontOBJ.cxx" />
+    <ClCompile Include="tools\texttool2\TextTool2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\AccessList.h" />
+    <ClInclude Include="include\Address.h" />
+    <ClInclude Include="include\AnsiCodes.h" />
+    <ClInclude Include="include\ArcObstacle.h" />
+    <ClInclude Include="include\AresHandler.h" />
+    <ClInclude Include="include\AutoCompleter.h" />
+    <ClInclude Include="include\BaseBuilding.h" />
+    <ClInclude Include="include\BaseResources.h" />
+    <ClInclude Include="include\BaseSceneNodeGenerator.h" />
+    <ClInclude Include="include\BillboardSceneNode.h" />
+    <ClInclude Include="include\BoltSceneNode.h" />
+    <ClInclude Include="include\BoxBuilding.h" />
+    <ClInclude Include="include\BoxSceneNodeGenerator.h" />
+    <ClInclude Include="include\BSPSceneDatabase.h" />
+    <ClInclude Include="include\Bundle.h" />
+    <ClInclude Include="include\BundleMgr.h" />
+    <ClInclude Include="include\BZDBCache.h" />
+    <ClInclude Include="include\BZDBLocal.h" />
+    <ClInclude Include="include\BzfDisplay.h" />
+    <ClInclude Include="include\BzfEvent.h" />
+    <ClInclude Include="include\bzfgl.h" />
+    <ClInclude Include="include\bzfio.h" />
+    <ClInclude Include="include\BzfJoystick.h" />
+    <ClInclude Include="include\BzfMedia.h" />
+    <ClInclude Include="include\bzfsAPI.h" />
+    <ClInclude Include="include\bzfSDL.h" />
+    <ClInclude Include="include\bzfsHTTPAPI.h" />
+    <ClInclude Include="include\BzfVisual.h" />
+    <ClInclude Include="include\BzfWindow.h" />
+    <ClInclude Include="include\bzglob.h" />
+    <ClInclude Include="include\BzMaterial.h" />
+    <ClInclude Include="include\BzPNG.h" />
+    <ClInclude Include="include\bzsignal.h" />
+    <ClInclude Include="include\bz_Locale.h" />
+    <ClInclude Include="include\CacheManager.h" />
+    <ClInclude Include="include\CallbackList.h" />
+    <ClInclude Include="include\CollisionManager.h" />
+    <ClInclude Include="include\CommandManager.h" />
+    <ClInclude Include="include\CommandsStandard.h" />
+    <ClInclude Include="include\common.h" />
+    <ClInclude Include="include\ConeObstacle.h" />
+    <ClInclude Include="include\ConfigFileManager.h" />
+    <ClInclude Include="include\Country.h" />
+    <ClInclude Include="include\cURLManager.h" />
+    <ClInclude Include="include\DirectoryNames.h" />
+    <ClInclude Include="include\DynamicColor.h" />
+    <ClInclude Include="include\EighthDBaseSceneNode.h" />
+    <ClInclude Include="include\EighthDBoxSceneNode.h" />
+    <ClInclude Include="include\EighthDimSceneNode.h" />
+    <ClInclude Include="include\EighthDimShellNode.h" />
+    <ClInclude Include="include\EighthDPyrSceneNode.h" />
+    <ClInclude Include="include\EmptySceneNodeGenerator.h" />
+    <ClInclude Include="include\ErrorHandler.h" />
+    <ClInclude Include="include\Extents.h" />
+    <ClInclude Include="include\FileManager.h" />
+    <ClInclude Include="include\Flag.h" />
+    <ClInclude Include="include\FlagSceneNode.h" />
+    <ClInclude Include="include\FlagWarpSceneNode.h" />
+    <ClInclude Include="include\FontManager.h" />
+    <ClInclude Include="include\Frustum.h" />
+    <ClInclude Include="include\GameTime.h" />
+    <ClInclude Include="include\GLCollect.h" />
+    <ClInclude Include="include\global.h" />
+    <ClInclude Include="include\Intersect.h" />
+    <ClInclude Include="include\KeyManager.h" />
+    <ClInclude Include="include\LagInfo.h" />
+    <ClInclude Include="include\Language.h" />
+    <ClInclude Include="include\LaserSceneNode.h" />
+    <ClInclude Include="include\LinkManager.h" />
+    <ClInclude Include="include\ListServer.h" />
+    <ClInclude Include="include\md5.h" />
+    <ClInclude Include="include\MediaFile.h" />
+    <ClInclude Include="include\MeshDrawInfo.h" />
+    <ClInclude Include="include\MeshDrawMgr.h" />
+    <ClInclude Include="include\MeshFace.h" />
+    <ClInclude Include="include\MeshFragSceneNode.h" />
+    <ClInclude Include="include\MeshObstacle.h" />
+    <ClInclude Include="include\MeshPolySceneNode.h" />
+    <ClInclude Include="include\MeshSceneNode.h" />
+    <ClInclude Include="include\MeshSceneNodeGenerator.h" />
+    <ClInclude Include="include\MeshTransform.h" />
+    <ClInclude Include="include\messages.h" />
+    <ClInclude Include="include\MsgStrings.h" />
+    <ClInclude Include="include\multicast.h" />
+    <ClInclude Include="include\NetHandler.h" />
+    <ClInclude Include="include\network.h" />
+    <ClInclude Include="include\Obstacle.h" />
+    <ClInclude Include="include\ObstacleList.h" />
+    <ClInclude Include="include\ObstacleMgr.h" />
+    <ClInclude Include="include\ObstacleModifier.h" />
+    <ClInclude Include="include\ObstacleSceneNodeGenerator.h" />
+    <ClInclude Include="include\OccluderSceneNode.h" />
+    <ClInclude Include="include\OpenGLFramebuffer.h" />
+    <ClInclude Include="include\OpenGLGState.h" />
+    <ClInclude Include="include\OpenGLLight.h" />
+    <ClInclude Include="include\OpenGLMaterial.h" />
+    <ClInclude Include="include\OpenGLTexture.h" />
+    <ClInclude Include="include\OpenGLUtils.h" />
+    <ClInclude Include="include\OSFile.h" />
+    <ClInclude Include="include\Pack.h" />
+    <ClInclude Include="include\ParseColor.h" />
+    <ClInclude Include="include\PhysicsDriver.h" />
+    <ClInclude Include="include\Ping.h" />
+    <ClInclude Include="include\PlatformFactory.h" />
+    <ClInclude Include="include\PlayerInfo.h" />
+    <ClInclude Include="include\PlayerState.h" />
+    <ClInclude Include="include\PolyWallSceneNode.h" />
+    <ClInclude Include="include\Protocol.h" />
+    <ClInclude Include="include\PyramidBuilding.h" />
+    <ClInclude Include="include\PyramidSceneNodeGenerator.h" />
+    <ClInclude Include="include\QuadWallSceneNode.h" />
+    <ClInclude Include="include\Ray.h" />
+    <ClInclude Include="include\RenderNode.h" />
+    <ClInclude Include="include\SceneDatabase.h" />
+    <ClInclude Include="include\SceneNode.h" />
+    <ClInclude Include="include\SceneRenderer.h" />
+    <ClInclude Include="include\ServerItem.h" />
+    <ClInclude Include="include\ServerList.h" />
+    <ClInclude Include="include\ServerListCache.h" />
+    <ClInclude Include="include\ShotSceneNode.h" />
+    <ClInclude Include="include\ShotUpdate.h" />
+    <ClInclude Include="include\Singleton.h" />
+    <ClInclude Include="include\SphereObstacle.h" />
+    <ClInclude Include="include\SphereSceneNode.h" />
+    <ClInclude Include="include\StartupInfo.h" />
+    <ClInclude Include="include\StateDatabase.h" />
+    <ClInclude Include="include\TankGeometryMgr.h" />
+    <ClInclude Include="include\TankSceneNode.h" />
+    <ClInclude Include="include\Team.h" />
+    <ClInclude Include="include\Teleporter.h" />
+    <ClInclude Include="include\TeleporterSceneNodeGenerator.h" />
+    <ClInclude Include="include\TetraBuilding.h" />
+    <ClInclude Include="include\TextChunkManager.h" />
+    <ClInclude Include="include\TextureManager.h" />
+    <ClInclude Include="include\TextureMatrix.h" />
+    <ClInclude Include="include\TextUtils.h" />
+    <ClInclude Include="include\TimeBomb.h" />
+    <ClInclude Include="include\TimeKeeper.h" />
+    <ClInclude Include="include\TriWallSceneNode.h" />
+    <ClInclude Include="include\vectors.h" />
+    <ClInclude Include="include\vectors_old.h" />
+    <ClInclude Include="include\version.h" />
+    <ClInclude Include="include\ViewFrustum.h" />
+    <ClInclude Include="include\VotingBooth.h" />
+    <ClInclude Include="include\WallObstacle.h" />
+    <ClInclude Include="include\WallSceneNode.h" />
+    <ClInclude Include="include\WallSceneNodeGenerator.h" />
+    <ClInclude Include="include\win32.h" />
+    <ClInclude Include="include\WordFilter.h" />
+    <ClInclude Include="include\WorldEventManager.h" />
+    <ClInclude Include="include\ZSceneDatabase.h" />
+    <ClInclude Include="misc\Template.h" />
+    <ClInclude Include="msvc\build\config.h" />
+    <ClInclude Include="msvc\resource.h" />
+    <ClInclude Include="plugins\bzfscron\CronJob.h" />
+    <ClInclude Include="plugins\plugin_utils\plugin_config.h" />
+    <ClInclude Include="plugins\plugin_utils\plugin_files.h" />
+    <ClInclude Include="plugins\plugin_utils\plugin_groups.h" />
+    <ClInclude Include="plugins\plugin_utils\plugin_utils.h" />
+    <ClInclude Include="plugins\serversideplayersample\playerHandler.h" />
+    <ClInclude Include="src\3d\ImageFont.h" />
+    <ClInclude Include="src\3d\TextureFont.h" />
+    <ClInclude Include="src\bzadmin\BZAdminClient.h" />
+    <ClInclude Include="src\bzadmin\BZAdminUI.h" />
+    <ClInclude Include="src\bzadmin\colors.h" />
+    <ClInclude Include="src\bzadmin\CursesMenu.h" />
+    <ClInclude Include="src\bzadmin\CursesUI.h" />
+    <ClInclude Include="src\bzadmin\curses_wrapper.h" />
+    <ClInclude Include="src\bzadmin\OptionParser.h" />
+    <ClInclude Include="src\bzadmin\PlayerInfo.h" />
+    <ClInclude Include="src\bzadmin\ServerLink.h" />
+    <ClInclude Include="src\bzadmin\StdBothUI.h" />
+    <ClInclude Include="src\bzadmin\StdInUI.h" />
+    <ClInclude Include="src\bzadmin\StdOutUI.h" />
+    <ClInclude Include="src\bzadmin\UIMap.h" />
+    <ClInclude Include="src\bzflag\ActionBinding.h" />
+    <ClInclude Include="src\bzflag\AudioMenu.h" />
+    <ClInclude Include="src\bzflag\AutoPilot.h" />
+    <ClInclude Include="src\bzflag\BackgroundRenderer.h" />
+    <ClInclude Include="src\bzflag\BaseLocalPlayer.h" />
+    <ClInclude Include="src\bzflag\bzflag.h" />
+    <ClInclude Include="src\bzflag\CacheMenu.h" />
+    <ClInclude Include="src\bzflag\callbacks.h" />
+    <ClInclude Include="src\bzflag\clientConfig.h" />
+    <ClInclude Include="src\bzflag\commands.h" />
+    <ClInclude Include="src\bzflag\ComposeDefaultKey.h" />
+    <ClInclude Include="src\bzflag\ControlPanel.h" />
+    <ClInclude Include="src\bzflag\daylight.h" />
+    <ClInclude Include="src\bzflag\defaultBZDB.h" />
+    <ClInclude Include="src\bzflag\DisplayMenu.h" />
+    <ClInclude Include="src\bzflag\Downloads.h" />
+    <ClInclude Include="src\bzflag\EffectsMenu.h" />
+    <ClInclude Include="src\bzflag\effectsRenderer.h" />
+    <ClInclude Include="src\bzflag\EntryZone.h" />
+    <ClInclude Include="src\bzflag\FlashClock.h" />
+    <ClInclude Include="src\bzflag\ForceFeedback.h" />
+    <ClInclude Include="src\bzflag\FormatMenu.h" />
+    <ClInclude Include="src\bzflag\GuidedMissleStrategy.h" />
+    <ClInclude Include="src\bzflag\GUIOptionsMenu.h" />
+    <ClInclude Include="src\bzflag\HelpMenu.h" />
+    <ClInclude Include="src\bzflag\HUDDialog.h" />
+    <ClInclude Include="src\bzflag\HUDDialogStack.h" />
+    <ClInclude Include="src\bzflag\HUDRenderer.h" />
+    <ClInclude Include="src\bzflag\HUDui.h" />
+    <ClInclude Include="src\bzflag\HUDuiControl.h" />
+    <ClInclude Include="src\bzflag\HUDuiDefaultKey.h" />
+    <ClInclude Include="src\bzflag\HUDuiLabel.h" />
+    <ClInclude Include="src\bzflag\HUDuiList.h" />
+    <ClInclude Include="src\bzflag\HUDuiTextureLabel.h" />
+    <ClInclude Include="src\bzflag\HUDuiTypeIn.h" />
+    <ClInclude Include="src\bzflag\InputMenu.h" />
+    <ClInclude Include="src\bzflag\JoinMenu.h" />
+    <ClInclude Include="src\bzflag\KeyboardMapMenu.h" />
+    <ClInclude Include="src\bzflag\LocalCommand.h" />
+    <ClInclude Include="src\bzflag\LocalPlayer.h" />
+    <ClInclude Include="src\bzflag\MainMenu.h" />
+    <ClInclude Include="src\bzflag\MainWindow.h" />
+    <ClInclude Include="src\bzflag\MenuDefaultKey.h" />
+    <ClInclude Include="src\bzflag\motd.h" />
+    <ClInclude Include="src\bzflag\NewVersionMenu.h" />
+    <ClInclude Include="src\bzflag\OptionsMenu.h" />
+    <ClInclude Include="src\bzflag\Plan.h" />
+    <ClInclude Include="src\bzflag\Player.h" />
+    <ClInclude Include="src\bzflag\playing.h" />
+    <ClInclude Include="src\bzflag\QuickKeysMenu.h" />
+    <ClInclude Include="src\bzflag\QuitMenu.h" />
+    <ClInclude Include="src\bzflag\RadarRenderer.h" />
+    <ClInclude Include="src\bzflag\Region.h" />
+    <ClInclude Include="src\bzflag\RegionPriorityQueue.h" />
+    <ClInclude Include="src\bzflag\RemotePlayer.h" />
+    <ClInclude Include="src\bzflag\Roaming.h" />
+    <ClInclude Include="src\bzflag\RobotPlayer.h" />
+    <ClInclude Include="src\bzflag\RoofTops.h" />
+    <ClInclude Include="src\bzflag\Roster.h" />
+    <ClInclude Include="src\bzflag\SaveWorldMenu.h" />
+    <ClInclude Include="src\bzflag\SceneBuilder.h" />
+    <ClInclude Include="src\bzflag\ScoreboardRenderer.h" />
+    <ClInclude Include="src\bzflag\SegmentedShotStrategy.h" />
+    <ClInclude Include="src\bzflag\ServerCommandKey.h" />
+    <ClInclude Include="src\bzflag\ServerLink.h" />
+    <ClInclude Include="src\bzflag\ServerListFilter.h" />
+    <ClInclude Include="src\bzflag\ServerListFilterHelpMenu.h" />
+    <ClInclude Include="src\bzflag\ServerListFilterMenu.h" />
+    <ClInclude Include="src\bzflag\ServerMenu.h" />
+    <ClInclude Include="src\bzflag\ServerStartMenu.h" />
+    <ClInclude Include="src\bzflag\ShockWaveStrategy.h" />
+    <ClInclude Include="src\bzflag\ShotPath.h" />
+    <ClInclude Include="src\bzflag\ShotPathSegment.h" />
+    <ClInclude Include="src\bzflag\ShotStatistics.h" />
+    <ClInclude Include="src\bzflag\ShotStats.h" />
+    <ClInclude Include="src\bzflag\ShotStatsDefaultKey.h" />
+    <ClInclude Include="src\bzflag\ShotStrategy.h" />
+    <ClInclude Include="src\bzflag\SilenceDefaultKey.h" />
+    <ClInclude Include="src\bzflag\sound.h" />
+    <ClInclude Include="src\bzflag\stars.h" />
+    <ClInclude Include="src\bzflag\TargetingUtils.h" />
+    <ClInclude Include="src\bzflag\TrackMarks.h" />
+    <ClInclude Include="src\bzflag\Weapon.h" />
+    <ClInclude Include="src\bzflag\WeatherRenderer.h" />
+    <ClInclude Include="src\bzflag\World.h" />
+    <ClInclude Include="src\bzflag\WorldBuilder.h" />
+    <ClInclude Include="src\bzflag\WorldPlayer.h" />
+    <ClInclude Include="src\bzfs\AccessControlList.h" />
+    <ClInclude Include="src\bzfs\Authentication.h" />
+    <ClInclude Include="src\bzfs\base64.h" />
+    <ClInclude Include="src\bzfs\bzfs.h" />
+    <ClInclude Include="src\bzfs\bzfsPlugins.h" />
+    <ClInclude Include="src\bzfs\BZWError.h" />
+    <ClInclude Include="src\bzfs\BZWReader.h" />
+    <ClInclude Include="src\bzfs\CmdLineOptions.h" />
+    <ClInclude Include="src\bzfs\commands.h" />
+    <ClInclude Include="src\bzfs\CustomArc.h" />
+    <ClInclude Include="src\bzfs\CustomBase.h" />
+    <ClInclude Include="src\bzfs\CustomBox.h" />
+    <ClInclude Include="src\bzfs\CustomCone.h" />
+    <ClInclude Include="src\bzfs\CustomDynamicColor.h" />
+    <ClInclude Include="src\bzfs\CustomGate.h" />
+    <ClInclude Include="src\bzfs\CustomGroup.h" />
+    <ClInclude Include="src\bzfs\CustomLink.h" />
+    <ClInclude Include="src\bzfs\CustomMaterial.h" />
+    <ClInclude Include="src\bzfs\CustomMesh.h" />
+    <ClInclude Include="src\bzfs\CustomMeshFace.h" />
+    <ClInclude Include="src\bzfs\CustomMeshTransform.h" />
+    <ClInclude Include="src\bzfs\CustomPhysicsDriver.h" />
+    <ClInclude Include="src\bzfs\CustomPyramid.h" />
+    <ClInclude Include="src\bzfs\CustomSphere.h" />
+    <ClInclude Include="src\bzfs\CustomTetra.h" />
+    <ClInclude Include="src\bzfs\CustomTextureMatrix.h" />
+    <ClInclude Include="src\bzfs\CustomWaterLevel.h" />
+    <ClInclude Include="src\bzfs\CustomWeapon.h" />
+    <ClInclude Include="src\bzfs\CustomWorld.h" />
+    <ClInclude Include="src\bzfs\CustomZone.h" />
+    <ClInclude Include="src\bzfs\DropGeometry.h" />
+    <ClInclude Include="src\bzfs\EntryZones.h" />
+    <ClInclude Include="src\bzfs\Filter.h" />
+    <ClInclude Include="src\bzfs\FlagHistory.h" />
+    <ClInclude Include="src\bzfs\FlagInfo.h" />
+    <ClInclude Include="src\bzfs\GameKeeper.h" />
+    <ClInclude Include="src\bzfs\ListServerConnection.h" />
+    <ClInclude Include="src\bzfs\MasterBanList.h" />
+    <ClInclude Include="src\bzfs\PackVars.h" />
+    <ClInclude Include="src\bzfs\ParseMaterial.h" />
+    <ClInclude Include="src\bzfs\Permissions.h" />
+    <ClInclude Include="src\bzfs\RandomSpawnPolicy.h" />
+    <ClInclude Include="src\bzfs\RecordReplay.h" />
+    <ClInclude Include="src\bzfs\RejoinList.h" />
+    <ClInclude Include="src\bzfs\Score.h" />
+    <ClInclude Include="src\bzfs\ServerCommand.h" />
+    <ClInclude Include="src\bzfs\ShotManager.h" />
+    <ClInclude Include="src\bzfs\SpawnPolicy.h" />
+    <ClInclude Include="src\bzfs\SpawnPosition.h" />
+    <ClInclude Include="src\bzfs\TeamBases.h" />
+    <ClInclude Include="src\bzfs\VotingArbiter.h" />
+    <ClInclude Include="src\bzfs\WorldFileLocation.h" />
+    <ClInclude Include="src\bzfs\WorldFileObject.h" />
+    <ClInclude Include="src\bzfs\WorldFileObstacle.h" />
+    <ClInclude Include="src\bzfs\WorldGenerators.h" />
+    <ClInclude Include="src\bzfs\WorldInfo.h" />
+    <ClInclude Include="src\bzfs\WorldWeapons.h" />
+    <ClInclude Include="src\geometry\MeshRenderNode.h" />
+    <ClInclude Include="src\mediafile\AudioFile.h" />
+    <ClInclude Include="src\mediafile\ImageFile.h" />
+    <ClInclude Include="src\mediafile\OggAudioFile.h" />
+    <ClInclude Include="src\mediafile\PNGImageFile.h" />
+    <ClInclude Include="src\mediafile\SGIImageFile.h" />
+    <ClInclude Include="src\mediafile\WaveAudioFile.h" />
+    <ClInclude Include="src\obstacle\MeshUtils.h" />
+    <ClInclude Include="src\obstacle\Triangulate.h" />
+    <ClInclude Include="src\platform\BeOSDisplay.h" />
+    <ClInclude Include="src\platform\BeOSMedia.h" />
+    <ClInclude Include="src\platform\BeOSPlatformFactory.h" />
+    <ClInclude Include="src\platform\BeOSVisual.h" />
+    <ClInclude Include="src\platform\BeOSWindow.h" />
+    <ClInclude Include="src\platform\DXJoystick.h" />
+    <ClInclude Include="src\platform\EvdevJoystick.h" />
+    <ClInclude Include="src\platform\LinuxDisplay.h" />
+    <ClInclude Include="src\platform\LinuxMedia.h" />
+    <ClInclude Include="src\platform\LinuxPlatformFactory.h" />
+    <ClInclude Include="src\platform\NewMedia.h" />
+    <ClInclude Include="src\platform\SDL2Display.h" />
+    <ClInclude Include="src\platform\SDL2Visual.h" />
+    <ClInclude Include="src\platform\SDL2Window.h" />
+    <ClInclude Include="src\platform\SDLDisplay.h" />
+    <ClInclude Include="src\platform\SDLJoystick.h" />
+    <ClInclude Include="src\platform\SDLMain.h" />
+    <ClInclude Include="src\platform\SDLMedia.h" />
+    <ClInclude Include="src\platform\SDLPlatformFactory.h" />
+    <ClInclude Include="src\platform\SGIDisplay.h" />
+    <ClInclude Include="src\platform\SGIMedia.h" />
+    <ClInclude Include="src\platform\SGIPlatformFactory.h" />
+    <ClInclude Include="src\platform\SolarisMedia.h" />
+    <ClInclude Include="src\platform\SolarisPlatformFactory.h" />
+    <ClInclude Include="src\platform\USBJoystick.h" />
+    <ClInclude Include="src\platform\wave.h" />
+    <ClInclude Include="src\platform\WinDisplay.h" />
+    <ClInclude Include="src\platform\WinJoystick.h" />
+    <ClInclude Include="src\platform\WinMedia.h" />
+    <ClInclude Include="src\platform\WinPlatformFactory.h" />
+    <ClInclude Include="src\platform\WinVisual.h" />
+    <ClInclude Include="src\platform\WinWindow.h" />
+    <ClInclude Include="src\platform\XDisplay.h" />
+    <ClInclude Include="src\platform\XIJoystick.h" />
+    <ClInclude Include="src\platform\XVisual.h" />
+    <ClInclude Include="src\platform\XWindow.h" />
+    <ClInclude Include="src\scene\Occluder.h" />
+    <ClInclude Include="src\scene\Octree.h" />
+    <ClInclude Include="tools\modeltool\model.h" />
+    <ClInclude Include="tools\modeltool\Q3BSP.h" />
+    <ClInclude Include="tools\modeltool\SimpleTextUtils.h" />
+    <ClInclude Include="tools\modeltool\wavefrontOBJ.h" />
+    <ClInclude Include="xcode\config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="msvc\bzflag.rc" />
+    <ResourceCompile Include="msvc\Version.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

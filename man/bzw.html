@@ -1,0 +1,1506 @@
+<!--#exec cmd="header bzw" -->
+<ul>
+</ul><H2>NAME </H2><ul>
+
+bzw - BZFlag world file format
+
+</ul><H2>DESCRIPTION </H2><ul>
+
+The BZFlag world file format describes a world environment that is
+used by the BZFlag game server, bzfs.
+<i>X</i> <i>BZW file format</i> 
+
+<p>
+The BZFlag world file format describes and environment that includes
+the game map, physical world attributes, and automatic world weapons.
+The map may contain a variety of "obstacles" like buildings, pyramids,
+and meshes.  These obstacles make up the world that the BZFlag tanks
+will drive around in.  Map attributes may be set to create worlds of
+various sizes, the default size is 800x800.
+<p><dl compact><dt>Here is small example world:
+</dl>
+<p>
+<dd># simple world containing a box, pyramid, and mesh
+<br>
+<b>world</b> 
+<br>
+<b>  name</b> Simple World
+<br>
+<b>  size</b> 100.0
+<br>
+<b>end</b> 
+<br>
+<b>box</b> 
+<br>
+<b>  position</b> -20 -20 0
+<br>
+<b>  size</b> 10 20 10
+<br>
+<b>end</b> 
+<br>
+<b>pyramid</b> 
+<br>
+<b>  position</b> 20 20 0
+<br>
+<b>  size</b> 10 10 20
+<br>
+<b>end</b> 
+<br>
+<b>mesh</b> 
+<br>
+<b>  vertex</b> -10 0 0
+<br>
+<b>  vertex</b> 10 0 0
+<br>
+<b>  vertex</b> 0 10 0
+<br>
+<b>  face</b>
+<br>
+<b>    vertices</b> 0 1 2
+<br>
+<b>  endface</b>
+<br>
+<b>end</b> 
+<br>
+
+<p>
+The .bzw file is a plain text file with a relatively simple file
+format.  The format of this text file consists of any number of
+objects listed in any order (except that physics, textureMatrix,
+dynamicColor, and material must come before they are referenced)
+separated by newlines and grouped into blocks of types. The list of
+world types consists of:
+<br>
+<b>world</b> 
+<br>
+<b>options</b> 
+<br>
+<b>waterLevel</b> 
+<br>
+<b>dynamicColor</b> 
+<br>
+<b>textureMatrix</b> 
+<br>
+<b>transform</b> 
+<br>
+<b>material</b> 
+<br>
+<b>physics</b> 
+<br>
+<b>define</b> 
+<br>
+<b>group</b> 
+<br>
+<b>mesh</b> 
+<br>
+<b>meshbox</b> 
+<br>
+<b>meshpyr</b> 
+<br>
+<b>arc</b> 
+<br>
+<b>cone</b> 
+<br>
+<b>sphere</b> 
+<br>
+<b>tetra</b> 
+<br>
+<b>box</b> 
+<br>
+<b>pyramid</b> 
+<br>
+<b>link</b> 
+<br>
+<b>teleporter</b> 
+<br>
+<b>base</b> 
+<br>
+<b>weapon</b> 
+<br>
+<b>zone</b> 
+<br>
+
+<p>Each object is described by placing the type on one line, the word
+<i>end</i> on a following line, and a list of attributes for that
+object, one per line, in between. The exceptions to the rule are
+<i>define</i> and <i>face</i>, which are concluded with <i>enddef</i> and
+<i>endface</i>.  Attributes may be listed in any order. Attributes have
+default values, and if that is good enough, the attribute need not be
+listed.
+
+<p>Words are always specified in lowercase. Line comments can be
+specified by placing a # sign at the start of the line.
+
+<p>For documentation purposes, you can tag each object by adding a name
+attribute. There is no set limit to the number of times you may use
+any of the objects except for the world, options, and waterLevel
+objects, they can only be specified once. The options object contains
+command line arguments that are used to configure the server's game
+mode, but can not contain server specific options such as -p, -passwd,
+and -conf.
+
+<p><br>
+In the following examples, the values are the defaults.
+
+<p><b>The</b> <b>World</b> <b>object</b> 
+<br>
+Header for the world.
+
+<p><b>world</b>
+<br>
+<b>  name</b> example_world
+<br>
+<b>  size</b> 400.0
+<br>
+<b>  flagHeight</b> 10.0
+<br>
+<b>end</b>
+<br>
+
+<p><b>The</b> <b>Options</b> <b>object</b> 
+<br>
+A world file interface for setting command line options for BZFS.
+
+<p><b>options</b>
+<br>
+  -set _tankSpeed 36
+<br>
+  -j +r -ms 3
+<br>
+  +f GM{5} +f SW{5}
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Water</b> <b>Level</b> <b>object</b> 
+<br>
+Sets how high the water is, in a matter of units.
+
+<p><b>waterLevel</b>
+<br>
+<b>  name</b> example_waterlevel
+<br>
+<b>  height</b> -1.0 # anything below 0 turns it off
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Group</b> <b>Definition</b> <b>object</b> 
+<br>
+Defines a group, which may include other group instances
+<br>
+This does not place any objects into the world, a group instance
+must be used to generate world objects from a group definition.
+
+<p><b>define</b> &lt;example_groupdef&gt;
+<br>
+  # You can add any object to a group definition,
+<br>
+  # except for the following types:
+<br>
+  #   textureMatrix
+<br>
+  #   dynamicColor
+<br>
+  #   material
+<br>
+  #   physics
+<br>
+  #   links
+<br>
+  #   weapon
+<br>
+  #   zone
+<br>
+<b>enddef</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Group</b> <b>Instantiation</b> <b>object</b> 
+<br>
+Instantiates a group, and possibly modifies subobjects
+
+<p><b>group</b> &lt;example_groupdef&gt;  # a valid group definition reference
+<br>
+<b>  shift</b> 0 0 0          # (<b>repeatable</b>)
+<br>
+<b>  scale</b> 1 1 1          # (<b>repeatable</b>)
+<br>
+<b>  shear</b> 0 0 0          # (<b>repeatable</b>)
+<br>
+<b>  spin</b> angle nx ny nz  # (<b>repeatable</b>)
+<br>
+                       # angle degrees about vector n
+<br>
+<b>  team</b> 0        # change all base colors within group
+<br>
+<b>  tint</b> 1 1 1 1  # hierarchically tints objects within this group
+<br>
+<b>  drivethrough</b>  # make all subobjects drivethrough
+<br>
+<b>  shootthrough</b>  # make all subobjects shootthrough
+<br>
+<b>  ricochet </b>     # make all subobjects ricochet
+<b>  phydrv</b> example_phydrv     # reassign any valid physics drivers
+<br>
+<b>  matref</b> example_material # set material properties
+
+<p>                            # (except for the color)
+<br>
+<b> matswap</b> oldMat newMat #replace a given material in the instance
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Dynamic</b> <b>Color</b> <b>object</b> 
+
+<p><b>dynamicColor</b>
+<br>
+<b>  name</b> example_dyncol
+<br>
+  # there are 4 channels that can be modified:
+<br>
+  #   <b>red</b>, <b>green</b>, <b>blue</b>, <b>alpha</b>
+<br>
+  # there are 5 types of commands per channel:
+<br>
+  #   <b>limits</b>, <b>sinusoid</b>, <b>clampUp</b>, <b>clampDown</b>, <b>sequence</b>
+<br>
+  # except for "limits" and "sequence", the commands are <b>repeatable</b>
+<br>
+  # if a sequence is used, then clampUps and clampDowns have no effect
+<br>
+  # sequences can use three states (0, 1, 2).
+<br>
+  #   0 - equivalent to an active clampDown
+<br>
+  #   1 - equivalent to no clamps
+<br>
+  #   2 - equivalent to an active clampUp
+<br>
+  # if both clampUp and clampDown are active, the value is (min+max)/2
+<br>
+  # the sinusoid function starts at the max value
+<br>
+  # the sum of a channel's sinusoids is clamped between 0 and 1
+<br>
+<b>  red limits</b> 0 1               # min/max limits
+<br>
+<b>  green sinusoid</b> 0.1 0 0.25    # period, offset, weight
+<br>
+<b>  blue clampUp</b> 0.1 0 0.75      # period, offset, width
+<br>
+<b>  alpha clampDown</b> 0.2 0.5 0.5  # period, offset, width
+<br>
+<b>  red sequence</b> 0.0 0.0 2 0 1 1 2 0 ... # period, offset, list of states
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Texture</b> <b>Matrix</b> <b>object</b> 
+
+<p><b>textureMatrix</b>
+<br>
+<b>  name</b> example_texmat
+<br>
+<b>  scale</b> 0.0 0.0 1.0 1.0  # u/v freqs, u/v scales
+<br>
+<b>  spin</b> 0.0               # rotation freq
+<br>
+<b>  shift</b> 0.0 0.0          # u/v freqs
+<br>
+<b>  center</b> 0.5 0.5         # dynamic u/v center (for spin and scale)
+<br>
+<b>  fixedscale</b> 0.0 0.0     # time invariant u/v scale
+<br>
+<b>  fixedspin</b> 0.0          # time invariant rotation
+<br>
+<b>  fixedshift</b> 0.0 0.0     # time invariant u/v shift
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>Material</b> <b>Properties</b> 
+
+<p>Material properties may be set on several types of objects, including
+meshes, mesh faces, arcs, cones, spheres, and tetras. Here are the
+properties:
+<br>
+
+<p><b>material</b>
+<br>
+<b>  name</b> example_material
+<br>
+<b>  resetmat</b>                  # restore default values
+<br>
+<b>  matref</b> material_name      # copy another material's properties
+<br>
+<b>  ambient</b>  0.2 0.2 0.2 1.0  # ambient color
+<br>
+<b>  diffuse</b>  1.0 1.0 1.0 1.0  # diffuse color (<b>main color</b>)
+<br>
+<b>  color</b>    1.0 1.0 1.0 1.0  # synonym for 'diffuse'
+<br>
+<b>  specular</b> 0.0 0.0 0.0 1.0  # specular color
+<br>
+<b>  emission</b> 0.0 0.0 0.0 1.0  # emission color
+<br>
+<b>  shininess</b> 0.0             # shininess (0.0  128.0)
+<br>
+<b>  texture</b> filename     # set working texture
+<br>
+  # - non-interlaced PNG
+<br>
+  # - http:// or ftp:// hyperlinks can be used  (no spaces)
+<br>
+  # - BZFlag default texture names can be used  (.png not required)
+<br>
+<b>  addtexture</b> filename  # add texture
+<br>
+<b>  notextures</b>           # specify that no textures are to be used
+<br>
+<b>  notexalpha</b>           # don't use the texture's alpha channel
+<br>
+<b>  notexcolor</b>           # the color is not applied to the texture
+<br>
+  # if a texture is specified, but not found, the default texture
+<br>
+  # will be used. if the default texture is also not available, then
+<br>
+  # the color will be used (untextured)
+<br>
+<b>  spheremap</b>            # use spherical texture coordinate mapping
+<br>
+<b>  texmat</b> -1            # texture matrix  (-1 for none)
+<br>
+<b>  dyncol</b> -1            # dynamic color  (-1 for none)
+<br>
+<b>  noradar</b>              # do not display on radar  (except normal mode)
+<br>
+<b>  noshadow</b>             # do not render shadows
+<br>
+<b>  noculling</b>            # do not cull by face winding  (double-sided)
+<br>
+<b>  nosorting</b>            # do not do front-to-back alpha sorting
+<br>
+<b>  nolighting</b>           # disable lighting
+<br>
+<b>  alphathresh 0.0</b>      # alpha thresholding value
+<br>
+<b>  groupalpha</b>           # sort translucent faces as a group
+<br>
+<b>  occluder</b>             # faces with this material will occlude
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Physics</b> <b>Driver</b> <b>object</b> 
+
+<p><b>physics</b>
+<br>
+<b>  name</b> example_phydrv
+<br>
+<b>  linear</b>  0.0 0.0 0.0  # x/y/z linear velocities
+<br>
+<b>  angular</b> 0.0 0.0 0.0  # rotation freq, x/y coordinates
+<br>
+<b>  slide</b> 0.0            # time until max velocity  (&gt; 0.0 enables)
+<br>
+<b>  death</b> Message goes here.
+<br>
+  # the 'death' property requires a non-blank message
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Mesh</b> <b>object</b> 
+
+<p><b>mesh</b>
+<br>
+<b>  name</b> example_mesh
+<br>
+  # Material properties applied to a mesh apply to all faces
+<br>
+  # that follow the setting. Mesh faces will alter their own
+<br>
+  # properties without affecting the state of the mesh properties.
+<br>
+  # The same pattern is used to apply physics drivers.
+<br>
+<b>  vertex</b> 100 200 300  # add a vertex              (<b>repeatable</b>)
+<br>
+<b>  normal</b> 1.0 0 0      # add a normal              (<b>repeatable</b>)
+<br>
+<b>  texcoord</b> 0.1 0.75   # add a texture coordinate  (<b>repeatable</b>)
+<br>
+<b>  inside</b> 5.5 4.5 1.2  # add an inside point       (<b>repeatable</b>)
+<br>
+<b>  outside</b> 0 0 1000    # add an outside point      (<b>repeatable</b>)
+<br>
+<b>  shift</b> 0 0 0           # (<b>repeatable</b>)
+<br>
+<b>  scale</b> 1 1 1           # (<b>repeatable</b>)
+<br>
+<b>  shear</b> 0 0 0           # (<b>repeatable</b>)
+<br>
+<b>  spin</b> angle nx ny nz   # (<b>repeatable</b>)
+<br>
+<b>  phydrv</b> example_phydrv # assign a physics driver
+<br>
+<b>  smoothbounce</b>          # ricochets use normals
+<br>
+<b>  noclusters</b>            # render each mesh face individually
+<br>
+<b>  face</b>  # start a face   (<b>repeatable</b>)
+<br>
+    # the front-face winding is counter-clockwise
+<br>
+<b>    vertices</b> 1 4 0 3 5   # list of vertices (requires at least three)
+<br>
+<b>    normals</b> 2 6 0 4 7    # list of normals              (optional)
+<br>
+<b>    texcoords</b> 0 3 2 4 9  # list of texture coordinates  (optional)
+<br>
+<b>    phydrv</b> example_phydrv  # assign a physics driver
+<br>
+<b>  endface</b>  # end the face
+<br>
+  #
+<br>
+  #  This next element can be added to increase the rendering speed
+<br>
+  #  of the mesh object. If the client is capable of using this data,
+<br>
+  #  then it is used to draw the mesh instead of the face information.
+<br>
+  #
+<br>
+<b>  drawInfo</b>
+<br>
+<b>    dlist</b>                      # display list for all material sets
+<br>
+<b>    decorative</b>                 # older clients with not see this mesh
+<br>
+<b>    angvel</b> &lt;degrees/sec&gt;       # rotation about initial Z axis
+<br>
+<b>    extents</b> &lt;minX&gt; &lt;minY&gt; &lt;minZ&gt; &lt;maxX&gt; &lt;maxY&gt; &lt;maxZ&gt;
+<br>
+<b>    sphere</b> &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;radiusSquared&gt;
+<br>
+<b>    corner</b> &lt;v&gt; &lt;n&gt; &lt;t&gt;         (<b>repeatable</b>)
+<br>
+<b>    vertex</b> 0.0 0.0 0.0         (<b>repeatable</b>)
+<br>
+<b>    normal</b> 0.0 0.0 0.0         (<b>repeatable</b>)
+<br>
+<b>    texcoord</b> 0.0 0.0           (<b>repeatable</b>)
+<br>
+<b>    lod</b>                        (<b>repeatable</b>)
+<br>
+<b>      lengthPerPixel</b> &lt;value&gt;
+<br>
+<b>      matref</b> &lt;name&gt;            (<b>repeatable</b>)
+<br>
+<b>        dlist</b>                  # display list for this material set
+<br>
+<b>        sphere</b> &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;radiusSquared&gt;
+<br>
+<b>        points</b>    0            (<b>repeatable</b>)
+<br>
+<b>        lines</b>     0 1          (<b>repeatable</b>)
+<br>
+<b>        lineloop</b>  0 1          (<b>repeatable</b>)
+<br>
+<b>        linestrip</b> 0 1          (<b>repeatable</b>)
+<br>
+<b>        tris</b>      0 1 2        (<b>repeatable</b>)
+<br>
+<b>        tristrip</b>  0 1 2        (<b>repeatable</b>)
+<br>
+<b>        trifan</b>    0 1 2        (<b>repeatable</b>)
+<br>
+<b>        quads</b>     0 1 2 3      (<b>repeatable</b>)
+<br>
+<b>        quadstrip</b> 0 1 2 3      (<b>repeatable</b>)
+<br>
+<b>        polygon</b>   0 1 2        (<b>repeatable</b>)
+<br>
+<b>      end</b>  # matref
+<br>
+<b>    end</b>    # lod
+<br>
+<b>  end</b>      # drawInfo
+<br>
+<b>end</b>        # mesh
+<br>
+
+<p>
+<p><b>The</b> <b>Arc</b> <b>object</b> 
+
+<p><b>arc</b>
+<br>
+<b>  name</b> example_arc
+<br>
+<b>  divisions 16</b>   # number of subdivisions
+<br>
+<b>  flatshading</b>    # flat shading  (smooth is default)
+<br>
+<b>  angle 360</b>      # the sweep angle
+<br>
+<b>  ratio 1</b>        # (outrad - inrad) / outrad
+<br>
+<b>  position</b> 0.0 0.0 0.0
+<br>
+<b>  size</b> 10 10 10
+<br>
+<b>  rotation</b> 0.0
+<br>
+<b>  shift</b> 0 0 0            # (<b>repeatable</b>)
+<br>
+<b>  scale</b> 1 1 1            # (<b>repeatable</b>)
+<br>
+<b>  shear</b> 0 0 0            # (<b>repeatable</b>)
+<br>
+<b>  spin</b> angle nx ny nz    # (<b>repeatable</b>)
+<br>
+<b>  phydrv</b> example_phydrv  # assign a physics driver
+<br>
+<b>  smoothbounce</b>           # ricochets use normals
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Cone</b> <b>object</b> 
+
+<p><b>cone</b>
+<br>
+<b>  name</b> example_cone
+<br>
+<b>  divisions 16</b>   # number of subdivisions
+<br>
+<b>  flatshading</b>    # flat shading  (smooth is default)
+<br>
+<b>  angle 360</b>      # the sweep angle
+<br>
+<b>  position</b> 0.0 0.0 0.0
+<br>
+<b>  size</b> 10 10 10
+<br>
+<b>  rotation</b> 0.0
+<br>
+<b>  shift</b> 0 0 0            # (<b>repeatable</b>)
+<br>
+<b>  scale</b> 1 1 1            # (<b>repeatable</b>)
+<br>
+<b>  shear</b> 0 0 0            # (<b>repeatable</b>)
+<br>
+<b>  spin</b> angle nx ny nz    # (<b>repeatable</b>)
+<br>
+<b>  phydrv</b> example_phydrv  # assign a physics driver
+<br>
+<b>  smoothbounce</b>           # ricochets use normals
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Sphere</b> <b>object</b> 
+
+<p><b>sphere</b>
+<br>
+<b>  name</b> example_sphere
+<br>
+<b>  divisions 4</b>    # number of subdivisions
+<br>
+<b>  flatshading</b>    # flat shading  (smooth is default)
+<br>
+<b>  position</b> 0.0 0.0 10.0
+<br>
+<b>  size</b> 10 10 10
+<br>
+<b>  radius 10</b>      #  sets all size values to this value
+<br>
+<b>  rotation</b> 0.0
+<br>
+<b>  shift</b> 0 0 0            # (<b>repeatable</b>)
+<br>
+<b>  scale</b> 1 1 1            # (<b>repeatable</b>)
+<br>
+<b>  shear</b> 0 0 0            # (<b>repeatable</b>)
+<br>
+<b>  spin</b> angle nx ny nz    # (<b>repeatable</b>)
+<br>
+<b>  phydrv</b> example_phydrv  # assign a physics driver
+<br>
+<b>  smoothbounce</b>           # ricochets use normals
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Tetrahedron</b> <b>object</b> 
+
+<p><b>tetra</b>
+<br>
+<b>  name</b> example_tetra
+<br>
+# there must always be 4 vertices
+<br>
+<b>  vertex</b> -10.0 -5.0 0.0
+<br>
+<b>  vertex</b> +10.0 -5.0 0.0
+<br>
+<b>  vertex</b> 0.0 10.0 0.0
+<br>
+<b>  vertex</b> 0.0 5.0 10.0
+<br>
+<b>  shift</b> 0 0 0            # (<b>repeatable</b>)
+<br>
+<b>  scale</b> 1 1 1            # (<b>repeatable</b>)
+<br>
+<b>  shear</b> 0 0 0            # (<b>repeatable</b>)
+<br>
+<b>  spin</b> angle nx ny nz    # (<b>repeatable</b>)
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Box</b> <b>object</b> 
+<br>
+Adds a simple block.
+
+<p><b>box</b>
+<br>
+<b>  name</b> example_box
+<br>
+<b>  position</b> 0.0 0.0 0.0
+<br>
+<b>  size</b> 30.0 30.0 9.42
+<br>
+<b>  rotation</b> 0.0
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Pyramid</b> <b>object</b> 
+<br>
+Adds a triangular shaped object.
+
+<p><b>pyramid</b>
+<br>
+<b>  name</b> example_pyramid
+<br>
+<b>  position</b> 0.0 0.0 0.0
+<br>
+<b>  size</b> 8.2 8.2 10.25
+<br>
+<b>  rotation</b> 0.0
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Teleporter</b> <b>object</b> 
+<br>
+Adds an object that places a tank at another teleporter in a different area when ran through.
+
+<p><b>teleporter</b> [name]
+<br>
+# the [name] tag is used for linkage
+<br>
+<b>  name</b> example_teleporter
+<br>
+<b>  position</b> 0.0 0.0 0.0
+<br>
+<b>  size</b> 5.06 4.48 20.16
+<br>
+<b>  rotation</b> 0.0
+<br>
+<b>  border</b> 1.12
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Link</b> <b>object</b> 
+<br>
+Adds a route to teleport a tank between two teleporters.
+
+<p># Teleporter names are terminated with either :f (forward)
+<br>
+# or :b (backwards). The forwards link points to 0 degrees,
+<br>
+# and the backwards link points to 180. Links are made by
+<br>
+# pattern matching the teleporter names. The '*' and '?'
+<br>
+# globbing characters can be used to make multiple matches.
+<br>
+# If there are multiple matches for the "to" link, then the
+<br>
+# destination will be selected randomly between the matches.
+<br>
+# in-game.
+<br>
+
+<p># NOTE: bzfs -d -d -d -d will print the linkage table.
+
+<p><b>link</b>
+<br>
+<b>  name</b> example_link
+<br>
+# this will link all teleporters randomly to all other teleporters
+<br>
+<b>  from</b> *
+<br>
+<b>  to</b>   *
+<br>
+<b>end</b>
+<br>
+
+<p># or, to link  between known teleporters examp_tele1(front) and examp_tele2(back)
+
+<p><b>link</b>
+<br>
+<b>  name</b>  example_realLink
+<br>
+<b>  from</b> examp_tele1:f
+<br>
+<b>  to</b> examp_tele2:b
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Base</b> <b>object</b> 
+<br>
+Creates a team base where the corresponding team's flag is stored.
+The oncap option will fire a world weapon of the specified type when the team flag for this base is captured.
+
+<p><b>base</b>
+<br>
+<b>  name</b> example_base
+<br>
+<b>  position</b> 0.0 0.0 0.0
+<br>
+<b>  size</b> 60.0 60.0 0.0
+<br>
+<b>  rotation</b> 0.0
+<br>
+<b>  color</b> 0
+<br>
+<b>  oncap</b> V
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Weapon</b> <b>object</b> 
+<br>
+Creates a world weapon, or a weapon fired automatically by the world. The weapon can either be timed or be event driven.
+Timed weapons should use the initdelay and delay fields.
+Event driven weapons need to use the trigger option to define what the trigger event is.
+Valid trigger events are;
+OnCap, for flag capture events.
+OnSpawn, for player spawn events.
+OnDie, for player death events.
+If the weapon is to be triggered only for a specific team then the eventteam option should be used with a team number (1 to 4).
+An eventteam value of -1 will trigger this weapon for any team. -1 is the default eventteam value.
+
+<p><b>weapon</b>
+<br>
+<b>  name</b> example_weapon
+<br>
+<b>  position</b> 0.0 0.0 0.0
+<br>
+<b>  rotation</b> 0.0
+<br>
+<b>  tilt</b> 0.0
+<br>
+<b>  initdelay</b> 10.0
+<br>
+<b>  delay</b> 10.0 3.0 5.0 3.0
+<br>
+<b>  type</b> V
+<br>
+<b>  trigger</b> flagcap
+<br>
+<b>  eventteam</b> V
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p><b>The</b> <b>Zone</b> <b>object</b> 
+<br>
+Specifies a certain range in the world, and what attributes that range has.
+
+<p><b>zone</b>
+<br>
+<b>  name</b> example_zone
+<br>
+<b>  position</b> 0.0 0.0 0.0
+<br>
+<b>  size</b> 1.0 1.0 1.0
+<br>
+<b>  rotation</b> 0.0
+<br>
+# where players may spawn
+<br>
+<b>  team</b> 0 1 2 3 4
+<br>
+# where flag may spawn
+<br>
+<b>  flag</b> GM SW good bad
+<br>
+# dropped team flags will fly to the closest safety zone
+<br>
+<b>  safety</b> 1 2 3 4
+<br>
+# attach a flag to this zone (always spawn in this zone)
+<br>
+<b>  zoneflag</b> GM 3  # type, count (type can be a team flag, ex: R*)
+<br>
+<b>end</b>
+<br>
+
+<p>
+<p>
+</ul><H2>FILE SYNTAX </H2><ul>
+
+
+<p>
+The symbol '?' means that the item is optional.
+
+<p>
+The notation {a..b} means that the number of times the item can be present must
+be between 'a' and 'b', where '*' mean infinity. ('?' is equivalent to {0..1})
+<p><dl compact><dt>angle := &lt;float&gt;
+<dt>2dpoint := &lt;float&gt; &lt;float&gt;
+<dt>3dpoint := &lt;float&gt; &lt;float&gt; &lt;float&gt;
+<dt>rgbColor := &lt;float&gt; &lt;float&gt; &lt;float&gt;
+<dt>alpha := &lt;float&gt;
+<dt>rgbaColor := rgbColor alpha? | &lt;color_name&gt; alpha?
+<dt>channel := "red" | "green" | "blue" | "alpha"
+<dd>
+<p><dt><b>(BZWReader.cxx/parseNormalObject)</b> 
+<dt>allObjects :=
+</dl><br>
+<dd>	  "box"
+<br>
+	| "pyramid"
+<br>
+	| "base"
+<br>
+	| "link"
+<br>
+	| "teleporter"
+<br>
+	| "mesh"
+<br>
+	| "arc"
+<br>
+	| "meshbox"
+<br>
+	| "cone"
+<br>
+	| "meshpyr"
+<br>
+	| "sphere"
+<br>
+	| "tetra"
+<br>
+	| "weapon"
+<br>
+	| "zone"
+<br>
+	| "waterLevel"
+<br>
+	| "dynamicColor"
+<br>
+	| "textureMatrix"
+<br>
+	| "material"
+<br>
+	| "physics"
+<br>
+	| "transform"
+<br>
+<p><dl compact><dt><b>(BZWReader.cxx/BZWReader::readWorldStream)</b> 
+</dl><br>
+<dd>Note: Blank lines and lines starting with # are discarded.
+<br>
+<p><dl compact><dt>worldStream :=
+</dl><br>
+<dd>	  "end"
+<br>
+	| allObjects
+<br>
+	| "define" &lt;group_name&gt;
+<br>
+	| "enddef"
+<br>
+	| "group" &lt;group_name&gt;
+<br>
+	| "teleporter" &lt;name&gt;?
+<br>
+	| "options"
+<br>
+	| "include" &lt;filename&gt;
+<br>
+	| "world"
+<br>
+<p><dl compact><dt><b>(ParseMaterial.cxx/parseMaterials)</b> 
+</dl><br>
+<p><dl compact><dt>material :=
+</dl><br>
+<dd>	object
+<br>
+	| "matref" &lt;material_name&gt;
+<br>
+	| "resetmat"
+<br>
+	| "dyncol" &lt;dynamic_color_name&gt;
+<br>
+	| "ambient" rgbaColor
+<br>
+	| ("diffuse" | "color") rgbaColor
+<br>
+	| "specular" rgbaColor
+<br>
+	| "emission" rgbaColor
+<br>
+	| "shininess" &lt;float&gt;
+<br>
+	| "texture &lt;texture_name&gt;
+<br>
+	| "notextures"
+<br>
+	| "addtexture" &lt;texture_name&gt;
+<br>
+	| "texmat" &lt;matrix_name&gt;
+<br>
+	| "notexalpha"
+<br>
+	| "notexcolor"
+<br>
+	| "spheremap"
+<br>
+	| "noradar"
+<br>
+	| "noshadow"
+<br>
+	| "noculling"
+<br>
+	| "nosorting"
+<br>
+	| "nolighting"
+<br>
+	| "alphathresh" &lt;value&gt;
+<br>
+	| "groupalpha"
+<br>
+	| "occluder"
+<br>
+	| "shader" &lt;shader_name&gt;  # NOT IMPLEMENTED
+<br>
+	| "addshader" &lt;shader_name&gt;  # NOT IMPLEMENTED
+<br>
+	| "noshaders"  # NOT IMPLEMENTED
+<br>
+<p><dl compact><dt><b>(WorldFileObject:.cxx/WorldFileObject::read)</b> 
+</dl><br>
+<p><dl compact><dt>object := "name" &lt;name&gt;
+</dl><br>
+<p><dl compact><dt><b>(WorldFileLocation.cxx/readWorldFileLocation::read)</b> 
+</dl><br>
+<p><dl compact><dt>location :=
+</dl><br>
+<dd>	  ("pos" | "position") 3dpoint
+<br>
+	| "size" 3dpoint
+<br>
+	| ("rot" | "rotation") &lt;float&gt;
+<br>
+	| "shift" 3dpoint
+<br>
+	| "scale" 3dpoint
+<br>
+	| "shear" 3dpoint
+<br>
+	| "spin" angle 3dpoint
+<br>
+	| "xform" &lt;transform_name&gt;
+<br>
+	| object
+<br>
+<p><dl compact><dt><b>(WorldFileObstacle.cxx/WorldFileObstacle::read)</b> 
+</dl><br>
+<p><dl compact><dt>obstacle :=
+</dl><br>
+<dd>	  "drivethrough"
+<br>
+	| "shootthrough"
+<br>
+	| "passable"
+<br>
+	| "ricochet"
+<br>
+	| location
+<br>
+<p><dl compact><dt><b>(CustomArc.cxx/CustomArc::read)</b> 
+</dl><br>
+<p><dl compact><dt>meshbox :=
+</dl><br>
+<dd>	  "divisions" &lt;integer&gt;
+<br>
+	| "angle" angle
+<br>
+	| "ratio" &lt;float&gt;
+<br>
+	| "texsize" &lt;float&gt; &lt;float&gt; &lt;float&gt; &lt;float&gt;
+<br>
+	| "phydrv" &lt;physics_driver_name&gt;
+<br>
+	| "smoothbounce"
+<br>
+	| "flatshading"
+<br>
+	| material
+<br>
+	| ("top" | "bottom" | "inside" | "outside" | "startside" | "endside") material
+<br>
+	| obstacle
+<br>
+<p><dl compact><dt>arc :=
+</dl><br>
+<dd>	  "divisions" &lt;integer&gt;
+<br>
+	| "angle" angle
+<br>
+	| "ratio" &lt;float&gt;
+<br>
+	| "texsize" &lt;float&gt; &lt;float&gt; &lt;float&gt; &lt;float&gt;
+<br>
+	| "phydrv" &lt;physics_driver_name&gt;
+<br>
+	| "smoothbounce"
+<br>
+	| "flatshading"
+<br>
+	| material
+<br>
+	| ("top" | "bottom" | "inside" | "outside" | "startside" | "endside") material
+<br>
+	| obstacle
+<br>
+<p><dl compact><dt><b>(CustomBase.cxx/CustomBase::read)</b> 
+</dl><br>
+<p><dl compact><dt>base :=
+</dl><br>
+<dd>	  "color" &lt;integer&gt;
+<br>
+	| obstacle
+<br>
+<p><dl compact><dt><b>(CustomBox.cxx)</b> 
+</dl><br>
+<p><dl compact><dt>box := obstacle
+</dl><br>
+<p><dl compact><dt><b>(CustomCone.cxx/CustomCone::read)</b> 
+</dl><br>
+<p><dl compact><dt>meshpyr :=
+</dl><br>
+<dd>	  "divisions" &lt;integer&gt;
+<br>
+	| "angle" &lt;float&gt;
+<br>
+	| "texsize" &lt;float&gt; &lt;float&gt;
+<br>
+	| "phydrv" &lt;physics_driver_name&gt;
+<br>
+	| "smoothbounce"
+<br>
+	| "flatshading"
+<br>
+	| material
+<br>
+	| ("edge" | "bottom" | "startside" | "endside") material
+<br>
+	| "flipz"
+<br>
+	| obstacle
+<br>
+<p><dl compact><dt>cone :=
+</dl><br>
+<dd>	  "divisions" &lt;integer&gt;
+<br>
+	| "angle" &lt;float&gt;
+<br>
+	| "texsize" &lt;float&gt; &lt;float&gt;
+<br>
+	| "phydrv" &lt;physics_driver_name&gt;
+<br>
+	| "smoothbounce"
+<br>
+	| "flatshading"
+<br>
+	| material
+<br>
+	| ("edge" | "bottom" | "startside" | "endside") material
+<br>
+	| obstacle
+<br>
+<p><dl compact><dt><b>(CustomDynamicColor.cxx/CustomDynamicColor::read)</b> 
+</dl><br>
+<p><dl compact><dt>dynamicColor :=
+</dl><br>
+<dd>	  object
+<br>
+	| channel "limits" &lt;float&gt; &lt;float&gt;
+<br>
+	| channel "sinusoid" &lt;float&gt; &lt;float&gt; &lt;float&gt;
+<br>
+	| channel "clampup" &lt;float&gt; &lt;float&gt; &lt;float&gt;
+<br>
+	| channel "clampdown" &lt;float&gt; &lt;float&gt; &lt;float&gt;
+<br>
+	| channel "sequence" &lt;float&gt; &lt;float&gt; ("0" "1" "2"){1..*}
+<br>
+<p><dl compact><dt><b>(CustomGate.cxx/CustomGate::read)</b> 
+</dl><br>
+<p><dl compact><dt>teleporter :=
+</dl><br>
+<dd>	  "border" &lt;float&gt;
+<br>
+	| "horizontal"  # NOT IMPLEMENTED
+<br>
+	| obstacle
+<br>
+<p><dl compact><dt><b>(CustomGroup.cxx/CustomGroup::read)</b> 
+</dl><br>
+<p><dl compact><dt>group :=
+</dl><br>
+<dd>	  "team" &lt;integer&gt;
+<br>
+	| "tint" rgbaColor
+<br>
+	| "phydrv" &lt;physics_driver_name&gt;
+<br>
+	| "matref" &lt;material_name&gt;
+<br>
+	| obstacle
+<br>
+<p><dl compact><dt><b>(CustomLink.cxx/CustomLink::read)</b> 
+</dl><br>
+<p><dl compact><dt>teleporter_spec :=
+</dl><br>
+<dd>	  &lt;integer&gt;
+<br>
+	| &lt;teleporter_name_with_wildcards&gt; (":f" | ":b")?
+<br>
+<p><dl compact><dt>link :=
+</dl><br>
+<dd>	  "from" &lt;teleporter_spec&gt;
+<br>
+	| "to" &lt;teleporter_spec&gt;
+<br>
+	| object
+<br>
+<p><dl compact><dt><b>(MeshDrawInfo.cxx/MeshDrawInfo::parseDrawCmd)</b> 
+</dl><br>
+<p><dl compact><dt>drawInfoCmd :=
+</dl><br>
+<dd>	  "points"    &lt;integer&gt;+
+<br>
+	| "lines"     &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;{2}*
+<br>
+	| "lineloop"  &lt;integer&gt; &lt;integer&gt;+
+<br>
+	| "linestrip" &lt;integer&gt; &lt;integer&gt; &lt;integer{2}*
+<br>
+	| "tris"      &lt;integer&gt; &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;{3}*
+<br>
+	| "tristrip"  &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;+
+<br>
+	| "trifan"    &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;+
+<br>
+	| "quads"     &lt;integer&gt; &lt;integer&gt; &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;{4}*
+<br>
+	| "quadstrip" &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;{2}+
+<br>
+	| "polygon"   &lt;integer&gt; &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;{3}*
+<br>
+<p><dl compact><dt><b>(MeshDrawInfo.cxx/MeshDrawInfo::parseDrawSet)</b> 
+</dl><br>
+<p><dl compact><dt>drawInfoSet :=
+</dl><br>
+<dd>	  "matref" &lt;material_name&gt;
+<br>
+	| "dlist"
+<br>
+	| "sphere" 3dpoint &lt;float&gt;
+<br>
+	| drawInfoCmd
+<br>
+<p><dl compact><dt><b>(MeshDrawInfo.cxx/MeshDrawInfo::parseDrawLod)</b> 
+</dl><br>
+<p><dl compact><dt>drawInfoLod :=
+</dl><br>
+<dd>	  "lod"
+<br>
+	| "lengthPerPixel" &lt;float&gt;
+<br>
+	| drawInfoSet
+<br>
+<p><dl compact><dt><b>(MeshDrawInfo.cxx/MeshDrawInfo::parse)</b> 
+</dl><br>
+<p><dl compact><dt>drawInfo :=
+</dl><br>
+<dd>	  "drawInfo"
+<br>
+	| "dlist"
+<br>
+	| "decorative"
+<br>
+	| "angvel" &lt;float&gt;
+<br>
+	| "extents" 3dpoint 3dpoint
+<br>
+	| "sphere" 3dpoint &lt;float&gt;
+<br>
+	| "corner" &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;
+<br>
+	| "vertex" 3dpoint
+<br>
+	| "normal" 3dpoint
+<br>
+	| "texcoord" &lt;float&gt; &lt;float&gt;
+<br>
+	| drawInfoLod
+<br>
+<p><dl compact><dt><b>(CustomMesh.cxx/CustomMesh::read)</b> 
+</dl><br>
+<p><dl compact><dt>mesh :=
+</dl><br>
+<dd>	  "face"
+<br>
+	| face
+<br>
+	| "endface"
+<br>
+	| "inside" 3dpoint
+<br>
+	| "outside" 3dpoint
+<br>
+	| "vertex" 3dpoint
+<br>
+	| "normal" 3dpoint
+<br>
+	| "texcoord" &lt;float&gt; &lt;float&gt;
+<br>
+	| "phydrv" &lt;physics_driver_name&gt;
+<br>
+	| "smoothbounce"
+<br>
+	| "noclusters"
+<br>
+	| drawInfo
+<br>
+	| material
+<br>
+	| obstacle
+<br>
+<p><dl compact><dt><b>(CustomMeshFace.cxx/CustomMeshFace::read)</b> 
+</dl><br>
+<p><dl compact><dt>face :=
+</dl><br>
+<dd>	  "vertices" &lt;integer&gt;{3..*}
+<br>
+	| "normals" &lt;integer&gt;{3..*}
+<br>
+	| "texcoords" &lt;integer&gt;{3..*}
+<br>
+	| "phydrv" &lt;physics_driver_name&gt;
+<br>
+	| "smoothbounce"
+<br>
+	| "noclusters"
+<br>
+	| "drivethrough"
+<br>
+	| "shootthrough"
+<br>
+	| "ricochet"
+<br>
+	| "passable"
+<br>
+	| material
+<br>
+<p><dl compact><dt><b>(CustomMeshTransform.cxx/CustomMeshTransform::read)</b> 
+</dl><br>
+<p><dl compact><dt>transform :=
+</dl><br>
+<dd>	  "shift" 3dpoint
+<br>
+	| "scale" 3dpoint
+<br>
+	| "shear" 3dpoint
+<br>
+	| "spin" angle 3dpoint
+<br>
+	| "xform" &lt;transform_name&gt;
+<br>
+	| object
+<br>
+<p><dl compact><dt><b>(CustomPhysicsDriver.cxx/CustomPhysicsDriver::read)</b> 
+</dl><br>
+<p><dl compact><dt>physics :=
+</dl><br>
+<dd>	  "linear" 3dpoint
+<br>
+	| "angular" &lt;float&gt; 2dpoint
+<br>
+	| "radial" &lt;float&gt; 2dpoint  # NOT IMPLEMENTED
+<br>
+	| "slide" &lt;float&gt;
+<br>
+	| "death" &lt;string&gt;
+<br>
+	| object
+<br>
+<p><dl compact><dt><b>(CustomPyramid.cxx/CustomPyramid::read)</b> 
+</dl><br>
+<p><dl compact><dt>pyramid :=
+</dl><br>
+<dd>	  "flipz"
+<br>
+	| obstacle
+<br>
+<p><dl compact><dt><b>(CustomSphere.cxx/CustomSphere::read)</b> 
+</dl><br>
+<p><dl compact><dt>sphere :=
+</dl><br>
+<dd>	  "divisions" &lt;integer&gt;
+<br>
+	| "radius" &lt;float&gt;
+<br>
+	| ("hemi" | "hemisphere")
+<br>
+	| "texsize" &lt;float&gt; &lt;float&gt;
+<br>
+	| "phydrv" &lt;physics_driver_name&gt;
+<br>
+	| "smoothbounce"
+<br>
+	| "flatshading"
+<br>
+	| material
+<br>
+	| ("edge" | "bottom") material
+<br>
+	| obstacle
+<br>
+<p><dl compact><dt><b>(CustomTetra.cxx/CustomTetra::read)</b> 
+</dl><br>
+<dd>Note: At most 4 vertices can be specified.
+<br>
+Note2: material will apply to all vertices when specified first, otherwise like
+"normals" and "texcoords" they apply to the previous vertex.
+<br>
+<p><dl compact><dt>tetra :=
+</dl><br>
+<dd>	  "vertex" 3dpoint
+<br>
+	| "normals" 3dpoint
+<br>
+	| "texcoords" 2dpoint
+<br>
+	| material
+<br>
+	| obstacle
+<br>
+<p><dl compact><dt><b>(CustomTextureMatrix.cxx/CustomTextureMatrix::read)</b> 
+</dl><br>
+<p><dl compact><dt>textureMatrix :=
+</dl><br>
+<dd>	  "fixedshift" 2dpoint
+<br>
+	| "fixedscale" 2dpoint
+<br>
+	| "fixedspin" angle
+<br>
+	| "fixedcenter" 2dpoint
+<br>
+	| "shift" &lt;float&gt; &lt;float&gt;
+<br>
+	| "spin" &lt;float&gt;
+<br>
+	| "scale" &lt;float&gt; &lt;float&gt; &lt;float&gt; &lt;float&gt;
+<br>
+	| "center" 2dpoint
+<br>
+	| object
+<br>
+<p><dl compact><dt><b>(CustomWaterLevel.cxx/CustomWaterLevel::read)</b> 
+</dl><br>
+<p><dl compact><dt>waterLevel :=
+</dl><br>
+<dd>	  "height" &lt;float&gt;
+<br>
+	| material
+<br>
+	| object
+<br>
+<p><dl compact><dt><b>(CustomWeapon.cxx/CustomWeapon::read)</b> 
+</dl><br>
+<p><dl compact><dt>weapon :=
+</dl><br>
+<dd>	  "initdelay" &lt;float&gt;
+<br>
+	| "delay" &lt;float&gt;{1..*}
+<br>
+	| "type" &lt;flag_short_name&gt;
+<br>
+	| location
+<br>
+<p><dl compact><dt><b>(CustomWorld.cxx/CustomWorld::read)</b> 
+</dl><br>
+<p><dl compact><dt>world :=
+</dl><br>
+<dd>	  "size" &lt;float&gt;
+<br>
+	| "flagHeight" &lt;float&gt;
+<br>
+	| object
+<br>
+<p><dl compact><dt><b>(CustomZone.cxx/CustomZone::read)</b> 
+</dl><br>
+<p><dl compact><dt>zone :=
+</dl><br>
+<dd>	  "team" &lt;integer&gt;{1..*}
+<br>
+	  "flag" ("good" | "bad" | &lt;flag_short_name&gt;){1..*}
+<br>
+	| "safety" &lt;integer&gt;{1..*}
+<br>
+	| "zoneflag" &lt;flag_short_name&gt; &lt;integer&gt;?
+<br>
+	| location
+<br>
+
+<p>
+</ul><H2>SEE ALSO </H2><ul>
+
+bzflag(6), bzadmin(6), bzfs(6)
+</ul>
+<!--#exec cmd="trailer" -->
